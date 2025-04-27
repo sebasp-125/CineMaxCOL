@@ -1,0 +1,15 @@
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\bin\Debug\net9.0\CineMaxCOL_Entity.deps.json
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\bin\Debug\net9.0\CineMaxCOL_Entity.runtimeconfig.json
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\bin\Debug\net9.0\CineMaxCOL_Entity.dll
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\bin\Debug\net9.0\CineMaxCOL_Entity.pdb
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.csproj.AssemblyReference.cache
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.AssemblyInfoInputs.cache
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.AssemblyInfo.cs
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.csproj.CoreCompileInputs.cache
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.sourcelink.json
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.dll
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\refint\CineMaxCOL_Entity.dll
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.pdb
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\CineMaxCOL_Entity.genruntimeconfig.cache
+C:\Users\PERSONAL\Desktop\CineMaxCOL_Project\CineMaxCOL_Entity\obj\Debug\net9.0\ref\CineMaxCOL_Entity.dll

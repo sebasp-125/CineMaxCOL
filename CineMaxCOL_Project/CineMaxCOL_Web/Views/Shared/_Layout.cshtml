@@ -1,0 +1,165 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CineMaxColWeb</title>
+    <script type="importmap"></script>  
+    <link rel="stylesheet" href="~/css/output.css" />
+</head>
+
+<body>
+    <header class="sticky top-0 z-10 w-full overflow-x-hidden">
+        <div class="navbar bg-white shadow-sm border-y-3 border-[#55692d]">
+
+            <div class="ml-5 drawer w-50 ">
+                <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+                <div class="drawer-content">
+
+                    <label for="my-drawer"
+                        class="btn btn-primary shadow-none bg-transparent border-none swap swap-rotate drawer-button text-[#55692d]">
+                        <input type="checkbox" />
+                        <svg class="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="34" height="34"
+                            viewBox="0 0 512 512">
+                            <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
+                        </svg>
+                    </label>
+
+                </div>
+                <div class="drawer-side">
+                    <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+                    <ul class="menu bg-[#55692d] text-base-content min-h-full w-80 p-4">
+                        <li><a>Sidebar Item 1</a></li>
+                        <li><a>Sidebar Item 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex-1 flex">
+                <a class="bg-gray-300 relative right-11 rounded-xl text-black text-xl">(LOGO)</a>
+                <a class="text-black font-bold">CINEMAXCOL</a>
+
+                <div class="relative left-20 w-190 flex justify-evenly">
+                    <a class="text-[#55692d] text-xl font-bold">Cartelera</a>
+                    <a class="text-[#55692d] text-xl font-bold">Salas</a>
+                    <a class="text-[#55692d] text-xl font-bold">Comida</a>
+                </div>
+            </div>
+
+            <div class="w-13">
+                <div class="relative right-5">
+                    <img alt="Tailwind" class="rounded-full hover:cursor-pointer"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="bg-[#55692d] grid grid-cols-4 h-50 w-full">
+
+        <div class="col-span-1 flex flex-col justify-center items-center">
+            <h1>INFORMACION LEGAL</h1>
+            <h1 class="mt-10">COMUNICATE</h1>
+            <h2>Soporte.cmc@gmail.com</h2>
+            <h2>300-949 23 23</h2>
+        </div>
+
+        <div class="col-span-2">
+
+            <div class="grid grid-cols-2 h-20">
+                <div class="flex justify-center items-center">
+                    CONTACTANOS(PQRS)
+                </div>
+                <div class="flex justify-center items-center">
+                    NOSOTROS (LOGO)
+                </div>
+            </div>
+
+            <div class="h-30 flex justify-center items-center">
+                <h2>©2025 CINEMAXCOL</h2>
+            </div>
+
+        </div>
+
+        <div class="col-span-1 flex flex-col justify-center items-center">
+            <h1 class="relative bottom-6">SIGUENOS EN:</h1>
+
+            <div class="flex justify-evenly relative bottom-6">
+                @* @FACEBOOK@ *@
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256"
+                    style="fill:#FFFFFF;">
+                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                        stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                        font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                        style="mix-blend-mode: normal">
+                        <g transform="scale(5.12,5.12)">
+                            <path
+                                d="M25,3c-12.15,0 -22,9.85 -22,22c0,11.03 8.125,20.137 18.712,21.728v-15.897h-5.443v-5.783h5.443v-3.848c0,-6.371 3.104,-9.168 8.399,-9.168c2.536,0 3.877,0.188 4.512,0.274v5.048h-3.612c-2.248,0 -3.033,2.131 -3.033,4.533v3.161h6.588l-0.894,5.783h-5.694v15.944c10.738,-1.457 19.022,-10.638 19.022,-21.775c0,-12.15 -9.85,-22 -22,-22z">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+
+                @* @TWITTER@ *@
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256"
+                    style="fill:#FFFFFF;">
+                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                        stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                        font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                        style="mix-blend-mode: normal">
+                        <g transform="scale(5.12,5.12)">
+                            <path
+                                d="M6.91992,6l14.2168,20.72656l-14.9082,17.27344h3.17773l13.13867,-15.22266l10.44141,15.22266h10.01367l-14.87695,-21.6875l14.08008,-16.3125h-3.17578l-12.31055,14.26172l-9.7832,-14.26172z">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+
+                @* @INSTAGRAM@ *@
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256"
+                    style="fill:#FFFFFF;">
+                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                        stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                        font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                        style="mix-blend-mode: normal">
+                        <g transform="scale(5.12,5.12)">
+                            <path
+                                d="M16,3c-7.17,0 -13,5.83 -13,13v18c0,7.17 5.83,13 13,13h18c7.17,0 13,-5.83 13,-13v-18c0,-7.17 -5.83,-13 -13,-13zM37,11c1.1,0 2,0.9 2,2c0,1.1 -0.9,2 -2,2c-1.1,0 -2,-0.9 -2,-2c0,-1.1 0.9,-2 2,-2zM25,14c6.07,0 11,4.93 11,11c0,6.07 -4.93,11 -11,11c-6.07,0 -11,-4.93 -11,-11c0,-6.07 4.93,-11 11,-11zM25,16c-4.96,0 -9,4.04 -9,9c0,4.96 4.04,9 9,9c4.96,0 9,-4.04 9,-9c0,-4.96 -4.04,-9 -9,-9z">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+
+                @* @TIKTOK@ *@
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256"
+                    style="fill:#FFFFFF;">
+                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                        stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                        font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                        style="mix-blend-mode: normal">
+                        <g transform="scale(5.12,5.12)">
+                            <path
+                                d="M41,4h-32c-2.757,0 -5,2.243 -5,5v32c0,2.757 2.243,5 5,5h32c2.757,0 5,-2.243 5,-5v-32c0,-2.757 -2.243,-5 -5,-5zM37.006,22.323c-0.227,0.021 -0.457,0.035 -0.69,0.035c-2.623,0 -4.928,-1.349 -6.269,-3.388c0,5.349 0,11.435 0,11.537c0,4.709 -3.818,8.527 -8.527,8.527c-4.709,0 -8.527,-3.818 -8.527,-8.527c0,-4.709 3.818,-8.527 8.527,-8.527c0.178,0 0.352,0.016 0.527,0.027v4.202c-0.175,-0.021 -0.347,-0.053 -0.527,-0.053c-2.404,0 -4.352,1.948 -4.352,4.352c0,2.404 1.948,4.352 4.352,4.352c2.404,0 4.527,-1.894 4.527,-4.298c0,-0.095 0.042,-19.594 0.042,-19.594h4.016c0.378,3.591 3.277,6.425 6.901,6.685z">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <button
+                class="hover:cursor-pointer hover:bg-[#cbcb05] bg-[#808000] relative top-2 w-40 rounded-xl text-black">PREGUNTAS</button>
+        </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
