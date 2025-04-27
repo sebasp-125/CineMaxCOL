@@ -1,6 +1,8 @@
 using CineMaxCOL_BILL.Service;
 using CineMaxCOL_DAL.Repository.Implimentation;
 using CineMaxCOL_DAL.Repository.Interface;
+using CineMaxCOL_DAL.UnitOfWork.Implementation;
+using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// This is register the Repository
+// This is register the UnitOfWork
+// builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 //This is register  Application Services
 builder.Services.AddScoped<DiferentsServices>();
 

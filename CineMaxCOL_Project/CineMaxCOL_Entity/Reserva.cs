@@ -24,4 +24,6 @@ public partial class Reserva
     public virtual Funcion? IdFuncionNavigation { get; set; }
 
     public virtual ICollection<Pago> Pagos { get; set; } = new List<Pago>();
+
+    public virtual ICollection<ReservaPuesto> ReservaPuestos { get; set; } = new List<ReservaPuesto>();
 }

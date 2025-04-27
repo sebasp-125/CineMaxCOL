@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\CineMaxCOL_Web.csproj": {}
+    "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCol_Web\\CineMaxCOL_Web.csproj": {}
   },
   "projects": {
     "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_BILL\\CineMaxCOL_BILL.csproj": {
@@ -225,14 +225,14 @@
         }
       }
     },
-    "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\CineMaxCOL_Web.csproj": {
+    "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCol_Web\\CineMaxCOL_Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\CineMaxCOL_Web.csproj",
+        "projectUniqueName": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCol_Web\\CineMaxCOL_Web.csproj",
         "projectName": "CineMaxCOL_Web",
-        "projectPath": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\CineMaxCOL_Web.csproj",
+        "projectPath": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCol_Web\\CineMaxCOL_Web.csproj",
         "packagesPath": "C:\\Users\\PERSONAL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\",
+        "outputPath": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCol_Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

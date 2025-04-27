@@ -1,7 +1,7 @@
 <div class="p-6 bg-gray-100 text-gray-800 font-sans">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="flex gap-4">
-            <img src="https://back.procinal.com/imagenes/banners/346_BANNER%20WEB.jpg" alt="Pecadores"
+            <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg" alt="Pecadores"
                 class="min-w-20 w-auto h-auto object-cover rounded shadow-lg" />
             <div class="">
                 <h2 class="text-2xl font-semibold text-green-900">Sinners</h2>
@@ -68,7 +68,6 @@
                         <p class="font-semibold text-lg  text-gray-500"">The Batman</p>
                         <p class=" text-sm text-gray-500">Sala 1</p>
                         <p class="text-sm text-gray-400">Español</p>
-                        <button class="btn btn-success">Seleccionar</button>
                     </div>
                 </div>
 
@@ -79,41 +78,13 @@
                         <p class="font-semibold text-lg  text-gray-500"">Spiderman: No Way Home</p>
                         <p class=" text-sm text-gray-500">Sala 2</p>
                         <p class="text-sm text-gray-400">Inglés</p>
-                        <button class="btn btn-success">Seleccionar</button>
+                        <form asp-action="Index" asp-controller="SelectingPositions" method="get">
+                            <button type="submit" class="btn btn-success">Comprar</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="collapse collapse-arrow bg-base-100 border border-base-300 rounded-box shadow-md">
-        <input type="checkbox" />
-        <div class="collapse-title text-xl font-semibold">
-            Niquía
-        </div>
-        <div class="collapse-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Película 1 -->
-                <div class="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow-sm">
-                    <div class="text-lg font-bold text-primary mb-2">6:30 PM</div>
-                    <div class="text-center">
-                        <p class="font-semibold text-lg  text-gray-500"">The Batman</p>
-                        <p class=" text-sm text-gray-500">Sala 1</p>
-                        <p class="text-sm text-gray-400">Español</p>
-                        <button class="btn btn-success">Seleccionar</button>
-                    </div>
-                </div>
 
-                <!-- Película 2 -->
-                <div class="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow-sm">
-                    <div class="text-lg font-bold text-primary mb-2">6:30 PM</div>
-                    <div class="text-center">
-                        <p class="font-semibold text-lg  text-gray-500"">Spiderman: No Way Home</p>
-                        <p class=" text-sm text-gray-500">Sala 2</p>
-                        <p class="text-sm text-gray-400">Inglés</p>
-                        <button class="btn btn-success">Seleccionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </main>
