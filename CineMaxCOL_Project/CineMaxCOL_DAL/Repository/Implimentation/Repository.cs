@@ -17,6 +17,22 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
             _context = Context;
             _dbSet = _context.Set<T>();
         }
+
+        public async Task<bool> Add(T t)
+        {
+            try
+            {
+                await _dbSet.AddAsync(t);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
         public async Task<List<T>> GetAll()
         {
             return await _dbSet.ToListAsync();

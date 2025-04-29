@@ -15,10 +15,9 @@ public class HomeController : Controller
         _Services = Services;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        var response = await _Services.GetAll_Servies();
-        return View(response);
+        return View();
     }
 
     

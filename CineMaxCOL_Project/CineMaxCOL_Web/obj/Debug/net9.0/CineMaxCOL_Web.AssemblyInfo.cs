@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CineMaxCOL_Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efa550b596a7d1a54eae5685bcc1c6b6e169afa8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3eefc6f7ed4e8b63a93cdee99823ec462722bbee")]
 [assembly: System.Reflection.AssemblyProductAttribute("CineMaxCOL_Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CineMaxCOL_Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

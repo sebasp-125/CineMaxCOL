@@ -1,56 +1,120 @@
-﻿
-<div class="carousel w-full h-screen">
+﻿<div class="carousel w-full h-screen">
     <div id="slide1" class="carousel-item relative w-full h-full">
-        <div class="hero bg-white min-h-screen w-180 border-r-3 border-[#55692d]">
+        <div class="hero bg-white min-h-screen w-full border-r-3 border-[#55692d]">
             <div class="hero-content text-center relative bottom-10">
-                <div class="max-w-xl">
-                    <h1 class="text-5xl text-black font-bold">INTERESTELAR</h1>
-                    <p class="py-6 text-xl text-black px-16">
-                        Gracias a un descubrimiento,
-                        un grupo de científicos y
-                        exploradores, encabezados
-                        por Cooper, se embarcan en
-                        un viaje espacial para
-                        encontrar un lugar con las
-                        condiciones necesarias para
-                        reemplazar a la Tierra y
-                        comenzar una nueva vida allí.
+                <div class="max-w-xl px-4">
+                    <h1 class="text-3xl sm:text-5xl text-black font-bold">INTERESTELAR</h1>
+                    <p class="py-6 text-lg sm:text-xl text-black">
+                        Gracias a un descubrimiento, un grupo de científicos y exploradores, encabezados por Cooper,
+                        se embarcan en un viaje espacial para encontrar un lugar con las condiciones necesarias para
+                        reemplazar a la Tierra y comenzar una nueva vida allí.
                     </p>
-                    <a href="@Url.Action("Index" , "DetailsSelectedMovie" , new {id = 2})" class="btn btn-primary border-none relative top-10 bg-[#55692d]">Ver Pelicula</a>
+                    <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 2 })"
+                        class="btn btn-primary border-none relative top-10 bg-[#55692d]">Ver Pelicula</a>
                 </div>
             </div>
         </div>
 
         <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
-            class="w-245 object-cover" />
-        <div class="absolute left-140 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            class="w-full object-cover" />
+        <div class="absolute left-5 right-5 top-1/2 transform -translate-y-1/2 flex justify-between">
             <a href="#slide4" class="btn btn-circle">❮</a>
             <a href="#slide2" class="btn btn-circle">❯</a>
         </div>
     </div>
 
-    <div id="slide2" class="carousel-item relative w-full">
-        <img src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp" class="w-full" />
-        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide1" class="btn btn-circle">❮</a>
-            <a href="#slide3" class="btn btn-circle">❯</a>
+</div>
+
+<div class="bg-white">
+    <div class="flex justify-end w-full h-20 gap-3 items-center px-4">
+        <a href="" class="hover:bg-[#445424] h-8 w-28 rounded-xl text-center bg-[#55692d] font-bold">Estrenos</a>
+        <a href="" class="hover:bg-[#445424] h-8 w-28 rounded-xl mr-5 text-center bg-[#55692d] font-bold">Pronto</a>
+    </div>
+
+    <div
+        class="p-3 overflow-hidden overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+        <div class="w-full p-2">
+            <div class="card w-full sm:w-80 shadow-sm">
+                <div class="card-actions bg-[#e3e5e8] rounded-t-xl flex justify-center items-center">
+                    <h1 class="text-xl mt-6 text-center text-[#55692d] font-bold">INTERESTELAR</h1>
+                </div>
+                <figure class="border-none">
+                    <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
+                        alt="Shoes" class="px-5 py-3 h-56 object-cover" />
+                </figure>
+                <div class="card-body w-full flex justify-center items-center bg-[#e3e5e8] rounded-b-xl">
+                    <button
+                        class="hover:bg-[#445424] border-none bg-[#55692d] text-sm rounded-md p-2 w-48 font-bold hover:bg-[#55692d]">VER
+                        HORARIOS</button>
+                </div>
+            </div>
+        </div>
+        <div class="w-full p-2">
+            <div class="card w-full sm:w-80 shadow-sm">
+                <div class="card-actions bg-[#e3e5e8] rounded-t-xl flex justify-center items-center">
+                    <h1 class="text-xl mt-6 text-center text-[#55692d] font-bold">INTERESTELAR</h1>
+                </div>
+                <figure class="border-none">
+                    <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
+                        alt="Shoes" class="px-5 py-3 h-56 object-cover" />
+                </figure>
+                <div class="card-body w-full flex justify-center items-center bg-[#e3e5e8] rounded-b-xl">
+                    <button
+                        class="hover:bg-[#445424] border-none bg-[#55692d] text-sm rounded-md p-2 w-48 font-bold hover:bg-[#55692d]">VER
+                        HORARIOS</button>
+                </div>
+            </div>
+        </div>
+        <div class="w-full p-2">
+            <div class="card w-full sm:w-80 shadow-sm">
+                <div class="card-actions bg-[#e3e5e8] rounded-t-xl flex justify-center items-center">
+                    <h1 class="text-xl mt-6 text-center text-[#55692d] font-bold">INTERESTELAR</h1>
+                </div>
+                <figure class="border-none">
+                    <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
+                        alt="Shoes" class="px-5 py-3 h-56 object-cover" />
+                </figure>
+                <div class="card-body w-full flex justify-center items-center bg-[#e3e5e8] rounded-b-xl">
+                    <button
+                        class="hover:bg-[#445424] border-none bg-[#55692d] text-sm rounded-md p-2 w-48 font-bold hover:bg-[#55692d]">VER
+                        HORARIOS</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="slide3" class="carousel-item relative w-full">
-        <img src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp" class="w-full" />
-        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide2" class="btn btn-circle">❮</a>
-            <a href="#slide4" class="btn btn-circle">❯</a>
+    <div class="bg-[#e3e5e8] w-full mt-15 p-4">
+        <div class="flex flex-col items-center">
+            <h1 class="text-center text-3xl font-bold">¡UNETE A CMC CLUB!</h1>
+            <h2 class="text-center text-xl px-8 mt-4">OBTEN UN 20% DE DESCUENTO EN BOLETOS, CONFITERIA Y CAFETERIA</h2>
+        </div>
+
+        <div class="w-full mt-6 sm:w-80 md:w-96 lg:w-120 flex justify-between relative mx-auto">
+            <button class="hover:bg-[#545402] p-2 w-full sm:w-40 bg-[#808000] rounded-md text-white">INICIAR
+                SESIÓN</button>
+            <button
+                class="hover:bg-[#545402] p-2 w-full sm:w-40 bg-[#808000] rounded-md text-white">REGISTRARSE</button>
+        </div>
+
+        <div class="bg-[#808000] p-4 mt-10 sm:w-80 lg:w-120 mx-auto">
+            <div class="flex flex-col gap-4 px-8">
+                <button
+                    class="hover:cursor-pointer hover:bg-[#b6b7ba] text-center text-black flex justify-between w-full items-center bg-gray-200 px-4 py-2">
+                    ¿CMC CLUB? <span>▾</span>
+                </button>
+                <button
+                    class="hover:cursor-pointer hover:bg-[#b6b7ba] text-center text-black flex justify-between items-center bg-gray-200 px-4 py-2">
+                    PUNTOS CMC <span>▾</span>
+                </button>
+                <button
+                    class="hover:cursor-pointer hover:bg-[#b6b7ba] text-center text-black flex justify-between items-center bg-gray-200 px-4 py-2">
+                    OBTEN BONOS <span>▾</span>
+                </button>
+                <button
+                    class="hover:cursor-pointer hover:bg-[#b6b7ba] text-center text-black flex justify-between items-center bg-gray-200 px-4 py-2">
+                    PROMOCIONES RELÁMPAGO <span>▾</span>
+                </button>
+            </div>
         </div>
     </div>
-
-    <div id="slide4" class="carousel-item relative w-full">
-        <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp" class="w-full" />
-        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide3" class="btn btn-circle">❮</a>
-            <a href="#slide1" class="btn btn-circle">❯</a>
-        </div>
-    </div>
-
 </div>

@@ -33,7 +33,11 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<Pelicula> Peliculas { get; set; }
 
+    public virtual DbSet<Puesto> Puestos { get; set; }
+
     public virtual DbSet<Reserva> Reservas { get; set; }
+
+    public virtual DbSet<ReservaPuesto> ReservaPuestos { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -45,7 +49,9 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-CJE8DS1\\SQLEXPRESS;Database=CineMaxCOL;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -224,6 +230,20 @@ public partial class CineMaxColContext : DbContext
                 .HasConstraintName("FK__Pelicula__Id_Cin__59063A47");
         });
 
+        modelBuilder.Entity<Puesto>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Puestos__3214EC075D1E2403");
+
+            entity.Property(e => e.Fila)
+                .HasMaxLength(2)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.IdSalaNavigation).WithMany(p => p.Puestos)
+                .HasForeignKey(d => d.IdSala)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Puestos_Sala");
+        });
+
         modelBuilder.Entity<Reserva>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Reserva__3214EC0754C5C7FA");
@@ -251,6 +271,21 @@ public partial class CineMaxColContext : DbContext
                 .HasForeignKey(d => d.IdFuncion)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Reserva__Id_Func__7D439ABD");
+        });
+
+        modelBuilder.Entity<ReservaPuesto>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ReservaP__3214EC07C7A255D9");
+
+            entity.HasOne(d => d.IdPuestoNavigation).WithMany(p => p.ReservaPuestos)
+                .HasForeignKey(d => d.IdPuesto)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservaPuestos_Puesto");
+
+            entity.HasOne(d => d.IdReservaNavigation).WithMany(p => p.ReservaPuestos)
+                .HasForeignKey(d => d.IdReserva)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservaPuestos_Reserva");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -333,13 +368,14 @@ public partial class CineMaxColContext : DbContext
             entity.Property(e => e.FullName)
                 .HasMaxLength(150)
                 .IsUnicode(false);
-            entity.Property(e => e.IdHorario).HasColumnName("Id_Horario");
             entity.Property(e => e.IdMunicipio).HasColumnName("Id_Municipio");
-            entity.Property(e => e.IdRol).HasColumnName("Id_Rol");
-
-            entity.HasOne(d => d.IdHorarioNavigation).WithMany(p => p.Usuarios)
-                .HasForeignKey(d => d.IdHorario)
-                .HasConstraintName("FK__Usuarios__Id_Hor__656C112C");
+            entity.Property(e => e.IdRol)
+                .HasDefaultValue(2)
+                .HasColumnName("Id_Rol");
+            entity.Property(e => e.IsActivated).HasDefaultValue(true);
+            entity.Property(e => e.Password)
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdMunicipio)

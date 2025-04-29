@@ -19,6 +19,7 @@
                         <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M3 5h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2z"
+    using CineMaxCOL_Web.Controllers;
                                 clip-rule="evenodd" />
                         </svg>
                     </label>
@@ -30,8 +31,9 @@
                         <li><a href="#">Películas</a></li>
                         <li><a href="@Url.Action("Index" , "Food")">Comidas</a></li>
                         <li><a href="#">Mi Perfil</a></li>
-                        <li><a href="#">Configuración</a></li>
-                        <li><a href="#">Cerrar sesión</a></li>
+                        <li><a href="@Url.Action("LogIn" , "Account")">Iniciar Sesion</a></li>
+                        <li><a href="@Url.Action("Register", "Account")">Registrase</a></li>
+                        <li><a href="@Url.Action("LogOut" , "Account")">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -118,5 +120,35 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>
+
+@if (TempData["success"] != null)
+{
+    <div class="toast toast-top toast-end z-50">
+        <div class="alert alert-success">
+            <span>@TempData["success"]</span>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.querySelector('.toast')?.remove();
+        }, 4000);
+    </script>
+}
+
+@if (TempData["error"] != null)
+{
+    <div class="toast toast-top toast-end z-50">
+        <div class="alert alert-error">
+            <span>@TempData["error"]</span>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.querySelector('.toast')?.remove();
+        }, 4000);
+    </script>
+}
+

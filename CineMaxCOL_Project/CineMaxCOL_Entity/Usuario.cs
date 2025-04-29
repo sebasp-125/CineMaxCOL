@@ -19,13 +19,11 @@ public partial class Usuario
 
     public int? IdRol { get; set; }
 
-    public int? IdHorario { get; set; }
-
     public DateTime? CreatedAt { get; set; }
 
-    public virtual ICollection<HistorialCompra> HistorialCompras { get; set; } = new List<HistorialCompra>();
+    public string? Password { get; set; }
 
-    public virtual Horario? IdHorarioNavigation { get; set; }
+    public virtual ICollection<HistorialCompra> HistorialCompras { get; set; } = new List<HistorialCompra>();
 
     public virtual Municipio? IdMunicipioNavigation { get; set; }
 
