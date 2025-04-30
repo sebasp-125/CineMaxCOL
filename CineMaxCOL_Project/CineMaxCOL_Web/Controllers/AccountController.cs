@@ -61,7 +61,7 @@ namespace CineMaxCOL_Web.Controllers
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                TempData["success"] = "Bienvenido!";
+                TempData["success"] = "Bienvenido a CineMaxCOL!";
                 return RedirectToAction("Index", "Home");
             }
             TempData["error"] = "Credenciales Incorrectas!";
@@ -72,7 +72,7 @@ namespace CineMaxCOL_Web.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             TempData["success"] = "Adios..";
-            return RedirectToAction("Index");
+            return RedirectToAction("LogIn");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

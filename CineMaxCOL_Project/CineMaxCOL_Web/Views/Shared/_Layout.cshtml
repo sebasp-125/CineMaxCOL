@@ -19,8 +19,7 @@
                         <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M3 5h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2z"
-    using CineMaxCOL_Web.Controllers;
-                                clip-rule="evenodd" />
+                                using CineMaxCOL_Web.Controllers; clip-rule="evenodd" />
                         </svg>
                     </label>
                 </div>
@@ -29,11 +28,11 @@
                     <ul class="menu p-4 w-64 min-h-full bg-gradient-to-b from-[#55692d] to-[#cad395] text-white">
                         <li><a href="#">Inicio</a></li>
                         <li><a href="#">Películas</a></li>
-                        <li><a href="@Url.Action("Index" , "Food")">Comidas</a></li>
+                        <li><a href="@Url.Action("Index", "Food")">Comidas</a></li>
                         <li><a href="#">Mi Perfil</a></li>
-                        <li><a href="@Url.Action("LogIn" , "Account")">Iniciar Sesion</a></li>
+                        <li><a href="@Url.Action("LogIn", "Account")">Iniciar Sesion</a></li>
                         <li><a href="@Url.Action("Register", "Account")">Registrase</a></li>
-                        <li><a href="@Url.Action("LogOut" , "Account")">Cerrar sesión</a></li>
+                        <li><a href="@Url.Action("LogOut", "Account")">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -49,8 +48,14 @@
             </div>
 
             <div class="flex-none mr-4">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Perfil" class="w-10 h-10 rounded-full cursor-pointer" />
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <img src="https://w7.pngwing.com/pngs/946/556/png-transparent-computer-icons-login-user-profile-client-smiley-%D0%B7%D0%BD%D0%B0%D1%87%D0%BA%D0%B8-windows-10-thumbnail.png"
+                        alt="Perfil" class="w-10 h-10 rounded-full cursor-pointer" />
+                }else{
+                <img src="https://avatars.githubusercontent.com/u/134357858?v=4" alt="Perfil"
+                    class="w-10 h-10 rounded-full cursor-pointer" />
+                }
             </div>
         </div>
     </header>
@@ -103,8 +108,7 @@
                     </svg>
                     <!-- TikTok -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="white" viewBox="0 0 24 24">
-                        <path
-                            d="M9 3h6v2h-4v12a4 4 0 11-4-4h2a2 2 0 102 2V3z" />
+                        <path d="M9 3h6v2h-4v12a4 4 0 11-4-4h2a2 2 0 102 2V3z" />
                     </svg>
                 </div>
                 <button class="mt-4 bg-[#808000] hover:bg-[#cbcb05] text-black font-semibold py-2 px-4 rounded-full">
@@ -120,6 +124,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
 
 @if (TempData["success"] != null)
@@ -151,4 +156,3 @@
         }, 4000);
     </script>
 }
-

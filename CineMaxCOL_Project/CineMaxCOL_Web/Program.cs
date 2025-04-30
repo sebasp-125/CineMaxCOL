@@ -13,12 +13,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // This is register the UnitOfWork
-// builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
 //This is register  Application Services
-builder.Services.AddScoped<DiferentsServices>();
 builder.Services.AddScoped<AuthService>();
+
+
+
+
+
+
+
+
+
+
+
 
 
 builder.Services.AddDbContext<CineMaxColContext>(opc =>
@@ -40,7 +49,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     //COOKIES - SESIONS
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.IdleTimeout = TimeSpan.FromMinutes(2);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

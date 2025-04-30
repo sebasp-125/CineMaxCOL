@@ -8,12 +8,6 @@ namespace CineMaxCOL_Web.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly DiferentsServices _Services;
-
-    public HomeController(DiferentsServices Services)
-    {
-        _Services = Services;
-    }
 
     public IActionResult Index()
     {

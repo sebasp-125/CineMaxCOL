@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CineMaxCOL_BILL.Helpers;
 using CineMaxCOL_DAL.Repository.Interface;
+using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,11 +13,11 @@ namespace CineMaxCOL_BILL.Service
 {
     public class AuthService
     {
-        private readonly IRepository<Usuario> _Repository;
+        private readonly IUnitOfWork _Unit;
         private readonly CineMaxColContext _context;
-        public AuthService(IRepository<Usuario> Repository, CineMaxColContext context)
+        public AuthService(IUnitOfWork Unit, CineMaxColContext context)
         {
-            _Repository = Repository;
+            _Unit = Unit;
             _context = context;
         }
         public async Task<(bool isValid, List<Claim> claims)> ValidateUser(string email, string password)
@@ -50,8 +51,6 @@ namespace CineMaxCOL_BILL.Service
                     return false;
 
                 var passwordHasheada = PasswordHasher.HashPassword(usuario.Password);
-                Console.WriteLine(passwordHasheada);
-
                 var newUser = new Usuario
                 {
                     IdMunicipio = usuario.IdMunicipio,
@@ -61,7 +60,7 @@ namespace CineMaxCOL_BILL.Service
                     Password = passwordHasheada,
                 };
 
-                return await _Repository.Add(newUser);
+                return await _Unit._UnitUserRepository.Add(newUser);
             }
             catch
             {
