@@ -14,9 +14,15 @@ public class HomeController : Controller
         return View();
     }
 
-    
+
 
     public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    //Food
+    public IActionResult Comidas()
     {
         return View();
     }

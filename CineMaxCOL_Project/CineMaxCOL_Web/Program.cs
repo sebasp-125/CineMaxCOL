@@ -18,18 +18,6 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 //This is register  Application Services
 builder.Services.AddScoped<AuthService>();
 
-
-
-
-
-
-
-
-
-
-
-
-
 builder.Services.AddDbContext<CineMaxColContext>(opc =>
 {
     opc.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -62,7 +50,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();

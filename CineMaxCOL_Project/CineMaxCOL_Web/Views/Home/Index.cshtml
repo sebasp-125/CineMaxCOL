@@ -1,105 +1,154 @@
-﻿<div class="carousel w-full h-screen">
-    <div id="slide1" class="carousel-item relative w-full h-full">
-        <div class="hero bg-white min-h-screen w-full border-r-3 border-[#55692d]">
-            <div class="hero-content text-center relative bottom-10">
-                <div class="max-w-xl px-4">
-                    <h1 class="text-3xl sm:text-5xl text-black font-bold">INTERESTELAR</h1>
-                    <p class="py-6 text-lg sm:text-xl text-black">
-                        Gracias a un descubrimiento, un grupo de científicos y exploradores, encabezados por Cooper,
-                        se embarcan en un viaje espacial para encontrar un lugar con las condiciones necesarias para
-                        reemplazar a la Tierra y comenzar una nueva vida allí.
-                    </p>
-                    <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 2 })"
-                        class="btn btn-primary border-none relative top-10 bg-[#55692d]">Ver Pelicula</a>
-                </div>
+﻿<div class="carousel w-full h-auto md:h-screen">
+    <div id="slide1" class="carousel-item relative w-full grid grid-cols-1 md:grid-cols-2">
+        <div class="flex items-center justify-center bg-white p-6">
+            <div class="text-center md:text-left max-w-md">
+                <h1 class="text-4xl md:text-5xl text-black font-bold">INTERESTELAR</h1>
+                <p class="py-4 text-base md:text-lg text-black">
+                    Un grupo de exploradores se embarca en una misión interestelar para encontrar un nuevo hogar para la humanidad, enfrentando desafíos más allá del tiempo y el espacio.
+                </p>
+                <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 1 })"
+                    class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
             </div>
         </div>
-
-        <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
-            class="w-full object-cover" />
-        <div class="absolute left-5 right-5 top-1/2 transform -translate-y-1/2 flex justify-between">
-            <a href="#slide4" class="btn btn-circle">❮</a>
-            <a href="#slide2" class="btn btn-circle">❯</a>
+        <!-- Imagen -->
+        <div>
+            <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
+                class="w-full h-full object-cover" />
+        </div>
+        <!-- Flechas -->
+        <div class="absolute flex justify-between transform -translate-y-1/2 left-4 right-4 top-1/2">
+            <a href="#slide4" class="btn btn-circle bg-[#445424] border-none text-white">❮</a>
+            <a href="#slide2" class="btn btn-circle bg-[#445424] border-none text-white">❯</a>
         </div>
     </div>
 
+    <!-- Slide 2: Duna -->
+    <div id="slide2" class="carousel-item relative w-full grid grid-cols-1 md:grid-cols-2">
+        <div class="flex items-center justify-center bg-white p-6">
+            <div class="text-center md:text-left max-w-md">
+                <h1 class="text-4xl md:text-5xl text-black font-bold">DUNA</h1>
+                <p class="py-4 text-base md:text-lg text-black">
+                    En un futuro lejano, Paul Atreides debe proteger el planeta más importante del universo mientras enfrenta visiones de su destino y guerras interplanetarias.
+                </p>
+                <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 2 })"
+                    class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
+            </div>
+        </div>
+        <div>
+            <img src="https://lumiere-a.akamaihd.net/v1/images/p_dune2_19751_11f2d7c8.jpeg"
+                class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute flex justify-between transform -translate-y-1/2 left-4 right-4 top-1/2">
+            <a href="#slide1" class="btn btn-circle bg-[#445424] border-none text-white">❮</a>
+            <a href="#slide3" class="btn btn-circle bg-[#445424] border-none text-white">❯</a>
+        </div>
+    </div>
+
+    <!-- Slide 3: Oppenheimer -->
+    <div id="slide3" class="carousel-item relative w-full grid grid-cols-1 md:grid-cols-2">
+        <div class="flex items-center justify-center bg-white p-6">
+            <div class="text-center md:text-left max-w-md">
+                <h1 class="text-4xl md:text-5xl text-black font-bold">OPPENHEIMER</h1>
+                <p class="py-4 text-base md:text-lg text-black">
+                    La historia del físico J. Robert Oppenheimer y su papel en el desarrollo de la bomba atómica durante la Segunda Guerra Mundial. Ciencia, dilemas éticos y consecuencias.
+                </p>
+                <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 3 })"
+                    class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
+            </div>
+        </div>
+        <div>
+            <img src="https://pics.filmaffinity.com/Oppenheimer-920699981-mmed.jpg"
+                class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute flex justify-between transform -translate-y-1/2 left-4 right-4 top-1/2">
+            <a href="#slide2" class="btn btn-circle bg-[#445424] border-none text-white">❮</a>
+            <a href="#slide4" class="btn btn-circle bg-[#445424] border-none text-white">❯</a>
+        </div>
+    </div>
+
+    <!-- Slide 4: Avatar -->
+    <div id="slide4" class="carousel-item relative w-full grid grid-cols-1 md:grid-cols-2">
+        <div class="flex items-center justify-center bg-white p-6">
+            <div class="text-center md:text-left max-w-md">
+                <h1 class="text-4xl md:text-5xl text-black font-bold">AVATAR</h1>
+                <p class="py-4 text-base md:text-lg text-black">
+                    En Pandora, un ex-marine se une a una misión de exploración y termina involucrado en una batalla por el futuro del planeta y su gente, los Na'vi.
+                </p>
+                <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 4 })"
+                    class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
+            </div>
+        </div>
+        <div>
+            <img src="https://m.media-amazon.com/images/I/81QZa36yiOL._AC_UF1000,1000_QL80_.jpg"
+                class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute flex justify-between transform -translate-y-1/2 left-4 right-4 top-1/2">
+            <a href="#slide3" class="btn btn-circle bg-[#445424] border-none text-white">❮</a>
+            <a href="#slide1" class="btn btn-circle bg-[#445424] border-none text-white">❯</a>
+        </div>
+    </div>
 </div>
 
-<div class="bg-white">
-    <div class="flex justify-end w-full h-20 gap-3 items-center px-4">
-        <a href="" class="hover:bg-[#445424] h-8 w-28 rounded-xl text-center bg-[#55692d] font-bold">Estrenos</a>
-        <a href="" class="hover:bg-[#445424] h-8 w-28 rounded-xl mr-5 text-center bg-[#55692d] font-bold">Pronto</a>
+<!-- Navegación inferior -->
+<div class="bg-white py-4">
+    <div class="flex justify-center md:justify-end w-full gap-3 px-6 items-center">
+        <a href="#estrenos"
+            class="text-white h-10 w-28 rounded-xl text-center flex items-center justify-center bg-[#55692d] font-bold hover:bg-[#445424]">Estrenos</a>
+        <a href="#proximamente"
+            class="text-white h-10 w-28 rounded-xl text-center flex items-center justify-center bg-[#55692d] font-bold hover:bg-[#445424]">Pronto</a>
     </div>
+</div>
 
-    <div
-        class="p-3 overflow-hidden overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
-        <div class="w-full p-2">
-            <div class="card w-full sm:w-80 shadow-sm">
-                <div class="card-actions bg-[#e3e5e8] rounded-t-xl flex justify-center items-center">
-                    <h1 class="text-xl mt-6 text-center text-[#55692d] font-bold">INTERESTELAR</h1>
+
+<div class="p-3 overflow-hidden overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    @for (int i = 0; i <= 5; i++)
+    {
+        <div class="flex justify-center">
+            <div class="card w-72 bg-base-100 shadow-xl rounded-xl">
+                <div class="bg-[#e3e5e8] text-center py-4 rounded-t-xl">
+                    <h1 class="text-xl font-bold text-[#55692d]">INTERESTELAR</h1>
                 </div>
-                <figure class="border-none">
+
+                <figure class="px-4 pt-4">
                     <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
-                        alt="Shoes" class="px-5 py-3 h-56 object-cover" />
+                        alt="Interestelar"
+                        class="rounded-lg shadow-md object-cover w-full h-48 sm:h-56 md:h-64" />
                 </figure>
-                <div class="card-body w-full flex justify-center items-center bg-[#e3e5e8] rounded-b-xl">
-                    <button
-                        class="hover:bg-[#445424] border-none bg-[#55692d] text-sm rounded-md p-2 w-48 font-bold hover:bg-[#55692d]">VER
-                        HORARIOS</button>
+
+                <div class="card-body py-4 bg-[#e3e5e8] rounded-b-xl flex justify-center items-center">
+                    <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 2 })"
+                        class="btn w-48 bg-[#445424] hover:bg-[#55692d] text-white font-bold border-none">
+                        Ver Película
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="w-full p-2">
-            <div class="card w-full sm:w-80 shadow-sm">
-                <div class="card-actions bg-[#e3e5e8] rounded-t-xl flex justify-center items-center">
-                    <h1 class="text-xl mt-6 text-center text-[#55692d] font-bold">INTERESTELAR</h1>
-                </div>
-                <figure class="border-none">
-                    <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
-                        alt="Shoes" class="px-5 py-3 h-56 object-cover" />
-                </figure>
-                <div class="card-body w-full flex justify-center items-center bg-[#e3e5e8] rounded-b-xl">
-                    <button
-                        class="hover:bg-[#445424] border-none bg-[#55692d] text-sm rounded-md p-2 w-48 font-bold hover:bg-[#55692d]">VER
-                        HORARIOS</button>
-                </div>
+    }
+</div>
+
+</div>
+<div class="bg-[#e3e5e8] w-full mt-15">
+    <div class="flex w-full h-85">
+        <div class="w-full text-black flex flex-col justify-center items-center">
+            <div>
+                <h1 class="text-center text-3xl font-bold">¡UNETE A CMC CLUB!</h1>
+                <h2 class="text-center text-xl px-8 whitespace-pre-line">OBTEN UN 20% DE DESCUENTO EN
+                    BOLETOS, CONFITERIA Y CAFETERIA</h2>
             </div>
-        </div>
-        <div class="w-full p-2">
-            <div class="card w-full sm:w-80 shadow-sm">
-                <div class="card-actions bg-[#e3e5e8] rounded-t-xl flex justify-center items-center">
-                    <h1 class="text-xl mt-6 text-center text-[#55692d] font-bold">INTERESTELAR</h1>
-                </div>
-                <figure class="border-none">
-                    <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
-                        alt="Shoes" class="px-5 py-3 h-56 object-cover" />
-                </figure>
-                <div class="card-body w-full flex justify-center items-center bg-[#e3e5e8] rounded-b-xl">
-                    <button
-                        class="hover:bg-[#445424] border-none bg-[#55692d] text-sm rounded-md p-2 w-48 font-bold hover:bg-[#55692d]">VER
-                        HORARIOS</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="bg-[#e3e5e8] w-full mt-15 p-4">
-        <div class="flex flex-col items-center">
-            <h1 class="text-center text-3xl font-bold">¡UNETE A CMC CLUB!</h1>
-            <h2 class="text-center text-xl px-8 mt-4">OBTEN UN 20% DE DESCUENTO EN BOLETOS, CONFITERIA Y CAFETERIA</h2>
-        </div>
-
-        <div class="w-full mt-6 sm:w-80 md:w-96 lg:w-120 flex justify-between relative mx-auto">
-            <button class="hover:bg-[#545402] p-2 w-full sm:w-40 bg-[#808000] rounded-md text-white">INICIAR
-                SESIÓN</button>
-            <button
-                class="hover:bg-[#545402] p-2 w-full sm:w-40 bg-[#808000] rounded-md text-white">REGISTRARSE</button>
-        </div>
-
-        <div class="bg-[#808000] p-4 mt-10 sm:w-80 lg:w-120 mx-auto">
-            <div class="flex flex-col gap-4 px-8">
+            <div class="w-120 mt-18 flex justify-between relative">
                 <button
-                    class="hover:cursor-pointer hover:bg-[#b6b7ba] text-center text-black flex justify-between w-full items-center bg-gray-200 px-4 py-2">
+                    class="hover:bg-[#545402] hover:cursor-pointer p-2 w-40 bg-[#808000] rounded-md text-white">INICIAR
+                    SESIÓN</button>
+                <button
+                    class="hover:bg-[#545402] hover:cursor-pointer p-2 w-40 bg-[#808000] rounded-md text-white">REGISTRARSE</button>
+            </div>
+        </div>
+
+        <div class="bg-[#808000] w-280 p-4 flex justify-center items-center">
+            <div class="flex flex-col gap-4 px-15">
+                <button
+                    class="hover:cursor-pointer hover:bg-[#b6b7ba] text-center text-black flex justify-between w-85 items-center bg-gray-200 px-4 py-2">
                     ¿CMC CLUB? <span>▾</span>
                 </button>
                 <button
@@ -112,9 +161,9 @@
                 </button>
                 <button
                     class="hover:cursor-pointer hover:bg-[#b6b7ba] text-center text-black flex justify-between items-center bg-gray-200 px-4 py-2">
-                    PROMOCIONES RELÁMPAGO <span>▾</span>
+                    PROMOCIONES RELAMPAGO <span>▾</span>
                 </button>
             </div>
         </div>
+
     </div>
-</div>

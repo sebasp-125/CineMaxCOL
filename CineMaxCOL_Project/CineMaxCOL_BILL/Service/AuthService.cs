@@ -32,6 +32,7 @@ namespace CineMaxCOL_BILL.Service
             {
                 var claims = new List<Claim>
         {
+
             new Claim(ClaimTypes.Name, user.FullName),
             new Claim(ClaimTypes.Email, user.Email ?? ""),
             new Claim(ClaimTypes.Role, user.IdRolNavigation.TipoRol ?? "Cliente")
