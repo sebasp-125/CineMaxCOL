@@ -27,6 +27,8 @@ public partial class Pelicula
 
     public DateTime? CreatedAt { get; set; }
 
+    public string? ImagenUrl { get; set; }
+
     public virtual ICollection<Funcion> Funcions { get; set; } = new List<Funcion>();
 
     public virtual Cine? IdCineNavigation { get; set; }

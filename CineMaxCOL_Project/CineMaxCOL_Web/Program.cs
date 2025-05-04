@@ -4,8 +4,12 @@ using CineMaxCOL_DAL.Repository.Interface;
 using CineMaxCOL_DAL.UnitOfWork.Implementation;
 using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
+using CineMaxCOL_Web.Profiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using CineMaxCOL_Entity;
+using CineMaxCOL_Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,13 +21,17 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
 //This is register  Application Services
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<MovieService>();
 
 builder.Services.AddDbContext<CineMaxColContext>(opc =>
 {
     opc.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-    //CLAIMS
+//AutoMapperProfile
+builder.Services.AddAutoMapper(typeof(ContractProfile));
+
+//CLAIMS
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -43,6 +51,8 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

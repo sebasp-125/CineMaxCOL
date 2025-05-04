@@ -38,7 +38,7 @@ namespace CineMaxCOL_BILL.Service
             new Claim(ClaimTypes.Role, user.IdRolNavigation.TipoRol ?? "Cliente")
         };
                 return (true, claims);
-            }
+            }   
 
             return (false, new List<Claim>());
         }

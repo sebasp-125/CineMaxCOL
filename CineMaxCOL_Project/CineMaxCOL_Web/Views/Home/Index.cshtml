@@ -1,10 +1,13 @@
-﻿<div class="carousel w-full h-auto md:h-screen">
+﻿@model List<CineMaxCOL_Web.Models.PeliculaViewModel>
+
+<div class="carousel w-full h-auto md:h-screen">
     <div id="slide1" class="carousel-item relative w-full grid grid-cols-1 md:grid-cols-2">
         <div class="flex items-center justify-center bg-white p-6">
             <div class="text-center md:text-left max-w-md">
                 <h1 class="text-4xl md:text-5xl text-black font-bold">INTERESTELAR</h1>
                 <p class="py-4 text-base md:text-lg text-black">
-                    Un grupo de exploradores se embarca en una misión interestelar para encontrar un nuevo hogar para la humanidad, enfrentando desafíos más allá del tiempo y el espacio.
+                    Un grupo de exploradores se embarca en una misión interestelar para encontrar un nuevo hogar para la
+                    humanidad, enfrentando desafíos más allá del tiempo y el espacio.
                 </p>
                 <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 1 })"
                     class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
@@ -28,7 +31,8 @@
             <div class="text-center md:text-left max-w-md">
                 <h1 class="text-4xl md:text-5xl text-black font-bold">DUNA</h1>
                 <p class="py-4 text-base md:text-lg text-black">
-                    En un futuro lejano, Paul Atreides debe proteger el planeta más importante del universo mientras enfrenta visiones de su destino y guerras interplanetarias.
+                    En un futuro lejano, Paul Atreides debe proteger el planeta más importante del universo mientras
+                    enfrenta visiones de su destino y guerras interplanetarias.
                 </p>
                 <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 2 })"
                     class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
@@ -50,7 +54,8 @@
             <div class="text-center md:text-left max-w-md">
                 <h1 class="text-4xl md:text-5xl text-black font-bold">OPPENHEIMER</h1>
                 <p class="py-4 text-base md:text-lg text-black">
-                    La historia del físico J. Robert Oppenheimer y su papel en el desarrollo de la bomba atómica durante la Segunda Guerra Mundial. Ciencia, dilemas éticos y consecuencias.
+                    La historia del físico J. Robert Oppenheimer y su papel en el desarrollo de la bomba atómica durante
+                    la Segunda Guerra Mundial. Ciencia, dilemas éticos y consecuencias.
                 </p>
                 <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 3 })"
                     class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
@@ -72,7 +77,8 @@
             <div class="text-center md:text-left max-w-md">
                 <h1 class="text-4xl md:text-5xl text-black font-bold">AVATAR</h1>
                 <p class="py-4 text-base md:text-lg text-black">
-                    En Pandora, un ex-marine se une a una misión de exploración y termina involucrado en una batalla por el futuro del planeta y su gente, los Na'vi.
+                    En Pandora, un ex-marine se une a una misión de exploración y termina involucrado en una batalla por
+                    el futuro del planeta y su gente, los Na'vi.
                 </p>
                 <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 4 })"
                     class="btn btn-primary bg-[#55692d] border-none hover:bg-[#445424]">Ver Película</a>
@@ -99,32 +105,48 @@
     </div>
 </div>
 
+@if (!Model.Any())
+{
+    <h1>TENEMOS PROBLEMAS CON LAS PELICULAS</h1>
+}
+else
+{
+    <div class="p-3 overflow-hidden overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @foreach (var item in Model)
+        {
+            <div class="flex justify-center">
+                <div class="card w-72 bg-base-100 shadow-xl rounded-xl">
+                    <div class="bg-[#e3e5e8] text-center py-4 rounded-t-xl">
+                        <h1 class="text-xl font-bold text-[#55692d]">@item.Titulo</h1>
+                    </div>
 
-<div class="p-3 overflow-hidden overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    @for (int i = 0; i <= 5; i++)
-    {
-        <div class="flex justify-center">
-            <div class="card w-72 bg-base-100 shadow-xl rounded-xl">
-                <div class="bg-[#e3e5e8] text-center py-4 rounded-t-xl">
-                    <h1 class="text-xl font-bold text-[#55692d]">INTERESTELAR</h1>
-                </div>
+                    @if (string.IsNullOrEmpty(item.ImagenUrl))
+                        {
+                            <div class="flex w-52 flex-col gap-4">
+                            <div class="skeleton h-32 w-full"></div>
+                            <div class="skeleton h-4 w-28"></div>
+                            <div class="skeleton h-4 w-full"></div>
+                            <div class="skeleton h-4 w-full"></div>
+                            </div>
+                        }
+                    <figure class="px-4 pt-4">
+                        <img src="@item.ImagenUrl"
+                            alt="@item.Titulo" class="rounded-lg shadow-md object-cover w-full h-48 sm:h-56 md:h-64" />
+                    </figure>
 
-                <figure class="px-4 pt-4">
-                    <img src="https://megustaelcine.com/wp-content/uploads/2025/01/Interestelar-6-1024x665.jpg"
-                        alt="Interestelar"
-                        class="rounded-lg shadow-md object-cover w-full h-48 sm:h-56 md:h-64" />
-                </figure>
-
-                <div class="card-body py-4 bg-[#e3e5e8] rounded-b-xl flex justify-center items-center">
-                    <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = 2 })"
-                        class="btn w-48 bg-[#445424] hover:bg-[#55692d] text-white font-bold border-none">
-                        Ver Película
-                    </a>
+                    <div class="card-body py-4 bg-[#e3e5e8] rounded-b-xl flex justify-center items-center">
+                        <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = @item.Id })"
+                            class="btn w-48 bg-[#445424] hover:bg-[#55692d] text-white font-bold border-none">
+                            Ver Película
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+
+}
+
 
 </div>
 <div class="bg-[#e3e5e8] w-full mt-15">

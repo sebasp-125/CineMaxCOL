@@ -14,4 +14,6 @@ public partial class Horario
     public TimeOnly? PuertasCerradas { get; set; }
 
     public virtual Cine? IdCineNavigation { get; set; }
+
+    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }

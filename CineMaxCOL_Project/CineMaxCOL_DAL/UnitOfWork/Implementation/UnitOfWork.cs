@@ -13,6 +13,7 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
     {
         //Here defined differents methods, Like. Interfaces and Implementation in especially about repository.
         private IUserRepository _UserRepository;
+        private ILandingRepository<Pelicula> _LandingMovies;
         private CineMaxColContext _context;
         public UnitOfWork(CineMaxColContext context)
         {
@@ -20,5 +21,7 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
         }
 
         public IUserRepository _UnitUserRepository => _UserRepository ??= new UserRepository(_context);
+
+        public ILandingRepository<Pelicula> PeliculaRepository => _LandingMovies ??= new LandingRepository<Pelicula>(_context);
     }
 }

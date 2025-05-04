@@ -3,18 +3,26 @@ using Microsoft.AspNetCore.Mvc;
 using CineMaxCOL_Web.Models;
 using CineMaxCOL_BILL.Service;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace CineMaxCOL_Web.Controllers;
 
 public class HomeController : Controller
 {
-
-    public IActionResult Index()
+    private readonly MovieService _ServiceMovie;
+    private readonly IMapper _map;
+    public HomeController(MovieService ServiceMovie, IMapper mapper)
     {
-        return View();
+        _ServiceMovie = ServiceMovie;
+        _map = mapper;
     }
 
-
+    public async Task<IActionResult> Index()
+    {
+        var peliculas = await _ServiceMovie.BringMovies();
+        var PeliculasModel = _map.Map<IEnumerable<PeliculaViewModel>>(peliculas);
+        return View(PeliculasModel);
+    }
 
     public IActionResult Privacy()
     {
