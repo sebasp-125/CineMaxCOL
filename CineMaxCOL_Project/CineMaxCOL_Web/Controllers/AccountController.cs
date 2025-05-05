@@ -48,12 +48,13 @@ namespace CineMaxCOL_Web.Controllers
             }
             
             TempData["success"] = "Bienvenido a CineMaxCOL";
-            return RedirectToAction("Index" , "Home");
+            return View("LogIn");
         }
 
         [HttpPost]
         public async Task<IActionResult> ProccesLogIn(string email, string password)
         {
+            Console.WriteLine(email + password);
             var (isValid, claims) = await _authService.ValidateUser(email, password);
             
             if (isValid)

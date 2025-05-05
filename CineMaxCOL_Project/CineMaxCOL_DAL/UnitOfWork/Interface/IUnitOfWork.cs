@@ -10,7 +10,7 @@ namespace CineMaxCOL_DAL.UnitOfWork.Interface
     public interface IUnitOfWork
     {
         IUserRepository _UnitUserRepository {get;}
-        ILandingRepository<Pelicula> PeliculaRepository { get; }
+        ILandingRepository<T> GetLandingRepository<T>() where T : class;
 
     }
 }

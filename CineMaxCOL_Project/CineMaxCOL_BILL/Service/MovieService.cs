@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CineMaxCOL_BILL.Service
 {
@@ -17,8 +18,25 @@ namespace CineMaxCOL_BILL.Service
             _context = context;
         }
 
-        public async Task<List<Pelicula>> BringMovies(){
-            return await _Unit.PeliculaRepository.GetAll();
+        public async Task<List<Pelicula>> BringMovies_Service(){
+            return await _Unit.GetLandingRepository<Pelicula>().GetAll();
         }
+
+        public async Task<Pelicula> BrindSelectedMovie(int id){
+            var pelicula = await _Unit.GetLandingRepository<Pelicula>().GetByIdMovie(id);
+            if(pelicula == null)
+                return null;
+            return pelicula;        
+        }
+
+        public async Task<List<Pelicula>> BringMovieByMunicipality(int id){
+            return await _Unit.GetLandingRepository<Pelicula>().GetMovieByMunicipality(id);
+        }
+
+        public async Task<List<Municipio>> GetMunicipalitiesAsync()
+        {
+            return await _Unit.GetLandingRepository<Municipio>().GetAll();
+        }
+
     }
 }

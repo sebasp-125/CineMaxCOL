@@ -1,4 +1,4 @@
-﻿@model List<CineMaxCOL_Web.Models.PeliculaViewModel>
+﻿@model CineMaxCOL_Web.Models.FunctionalityDrawer.DTO_ToLandingPage
 
 <div class="carousel w-full h-auto md:h-screen">
     <div id="slide1" class="carousel-item relative w-full grid grid-cols-1 md:grid-cols-2">
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div>
-            <img src="https://lumiere-a.akamaihd.net/v1/images/p_dune2_19751_11f2d7c8.jpeg"
+            <img src="https://back.procinal.com/imagenes/banners/330_banner%20home.jpg"
                 class="w-full h-full object-cover" />
         </div>
         <div class="absolute flex justify-between transform -translate-y-1/2 left-4 right-4 top-1/2">
@@ -95,8 +95,27 @@
     </div>
 </div>
 
-<!-- Navegación inferior -->
-<div class="bg-white py-4">
+@if (!Model.DTO_ToLandingPage_AllMovies.Any())
+{
+    <h1>TENEMOS PROBLEMAS CON LAS PELICULAS</h1>
+}
+else
+{
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center items-start">
+    <fieldset class="fieldset">
+        <legend class="fieldset-legend">Selecciona tu municipio</legend>
+        <form asp-action="NewInformationByFilterMunicipality" asp-controller="Home" method="post" id="municipalityForm">
+            <select name="id" class="select" onchange="document.getElementById('municipalityForm').submit();">
+                <option disabled selected>Selecciona el Municipio</option>
+                @foreach (var item in Model.DTO_ToLandingPage_AllMunicipality)
+                {
+                    <option value="@item.Id">@item.NombreMunicipio</option>
+                }
+            </select>
+        </form>
+    </fieldset>
+
+    <div class="bg-white py-4">
     <div class="flex justify-center md:justify-end w-full gap-3 px-6 items-center">
         <a href="#estrenos"
             class="text-white h-10 w-28 rounded-xl text-center flex items-center justify-center bg-[#55692d] font-bold hover:bg-[#445424]">Estrenos</a>
@@ -105,16 +124,34 @@
     </div>
 </div>
 
-@if (!Model.Any())
-{
-    <h1>TENEMOS PROBLEMAS CON LAS PELICULAS</h1>
-}
-else
-{
+    <div class="col-span-full flex justify-center">
+        <div class="flex flex-wrap justify-center bg-white rounded-full shadow-lg px-4 py-2 gap-3 sm:gap-4">
+            <button class="btn btn-sm rounded-full border-2 border-cyan-300 text-cyan-500 bg-white">Todas</button>
+            <button class="btn btn-sm rounded-full bg-transparent hover:bg-cyan-100">Preventa</button>
+            <button class="btn btn-sm rounded-full bg-transparent hover:bg-cyan-100">Estrenos</button>
+            <button class="btn btn-sm rounded-full bg-transparent hover:bg-cyan-100">Cartelera</button>
+            <button class="btn btn-sm rounded-full bg-transparent hover:bg-cyan-100">Pronto</button>
+        </div>
+        </div>
+
+            <fieldset class="fieldset">
+        <legend class="fieldset-legend">Selecciona tu Cine</legend>
+        <form asp-action="NewInformationByFilterMunicipality" asp-controller="Home" method="post" id="municipalityForm">
+            <select name="id" class="select" onchange="document.getElementById('municipalityForm').submit();">
+                <option disabled selected>Selecciona el Cine</option>
+                @foreach (var item in Model.DTO_ToLandingPage_AllMunicipality)
+                {
+                    <option value="@item.Id">@item.NombreMunicipio</option>
+                }
+            </select>
+        </form>
+    </fieldset>
+
+    </div>
     <div class="p-3 overflow-hidden overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        @foreach (var item in Model)
+        @foreach (var item in Model.DTO_ToLandingPage_AllMovies)
         {
-            <div class="flex justify-center">
+            <div id="peliculas" class="flex justify-center">
                 <div class="card w-72 bg-base-100 shadow-xl rounded-xl">
                     <div class="bg-[#e3e5e8] text-center py-4 rounded-t-xl">
                         <h1 class="text-xl font-bold text-[#55692d]">@item.Titulo</h1>
@@ -135,7 +172,7 @@ else
                     </figure>
 
                     <div class="card-body py-4 bg-[#e3e5e8] rounded-b-xl flex justify-center items-center">
-                        <a href="@Url.Action("Index", "DetailsSelectedMovie", new { id = @item.Id })"
+                        <a href="@Url.Action("Index", "DetailsSelectedMovie", new { SelectId = @item.Id })"
                             class="btn w-48 bg-[#445424] hover:bg-[#55692d] text-white font-bold border-none">
                             Ver Película
                         </a>
@@ -189,3 +226,18 @@ else
         </div>
 
     </div>
+
+
+<script>
+    window.addEventListener('beforeunload', () => {
+        localStorage.setItem('scrollPos', window.scrollY);
+    });
+
+    window.addEventListener('load', () => {
+        const pos = localStorage.getItem('scrollPos');
+        if (pos) {
+            window.scrollTo(0, parseInt(pos));
+            localStorage.removeItem('scrollPos');
+        }
+    });
+</script>

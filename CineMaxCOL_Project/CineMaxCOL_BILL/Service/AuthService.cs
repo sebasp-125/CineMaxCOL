@@ -22,6 +22,8 @@ namespace CineMaxCOL_BILL.Service
         }
         public async Task<(bool isValid, List<Claim> claims)> ValidateUser(string email, string password)
         {
+            Console.WriteLine("SERVICE" + email + password);
+
             var passwordHasheada = PasswordHasher.HashPassword(password);
 
             var user = await _context.Usuarios
@@ -31,12 +33,12 @@ namespace CineMaxCOL_BILL.Service
             if (user != null)
             {
                 var claims = new List<Claim>
-        {
+            {
 
-            new Claim(ClaimTypes.Name, user.FullName),
-            new Claim(ClaimTypes.Email, user.Email ?? ""),
-            new Claim(ClaimTypes.Role, user.IdRolNavigation.TipoRol ?? "Cliente")
-        };
+            new Claim(ClaimTypes.Name, user?.FullName ?? "Error"),
+            new Claim(ClaimTypes.Email, user?.Email ?? "Error"),
+            new Claim(ClaimTypes.Role, user?.IdRolNavigation?.TipoRol ?? "Error")
+            };
                 return (true, claims);
             }   
 
@@ -59,6 +61,7 @@ namespace CineMaxCOL_BILL.Service
                     Dni = usuario.Dni,
                     Email = usuario.Email,
                     Password = passwordHasheada,
+                    IdHorario = 1
                 };
 
                 return await _Unit._UnitUserRepository.Add(newUser);

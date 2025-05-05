@@ -22,6 +22,8 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 //This is register  Application Services
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MovieService>();
+builder.Services.AddScoped<SendEmails>();
+
 
 builder.Services.AddDbContext<CineMaxColContext>(opc =>
 {

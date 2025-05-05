@@ -11,17 +11,25 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {
-        //Here defined differents methods, Like. Interfaces and Implementation in especially about repository.
-        private IUserRepository _UserRepository;
-        private ILandingRepository<Pelicula> _LandingMovies;
-        private CineMaxColContext _context;
+        private readonly CineMaxColContext _context;
+        private IUserRepository _userRepository;
+
         public UnitOfWork(CineMaxColContext context)
         {
             _context = context;
         }
 
-        public IUserRepository _UnitUserRepository => _UserRepository ??= new UserRepository(_context);
+        public IUserRepository _UnitUserRepository => _userRepository ??= new UserRepository(_context);
 
-        public ILandingRepository<Pelicula> PeliculaRepository => _LandingMovies ??= new LandingRepository<Pelicula>(_context);
+        public ILandingRepository<T> GetLandingRepository<T>() where T : class
+        {
+            return new LandingRepository<T>(_context);
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
+
 }
