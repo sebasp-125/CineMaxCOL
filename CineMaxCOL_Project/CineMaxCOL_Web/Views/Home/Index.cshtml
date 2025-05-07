@@ -172,10 +172,10 @@ else
                     </figure>
 
                     <div class="card-body py-4 bg-[#e3e5e8] rounded-b-xl flex justify-center items-center">
-                        <a href="@Url.Action("Index", "DetailsSelectedMovie", new { SelectId = @item.Id })"
-                            class="btn w-48 bg-[#445424] hover:bg-[#55692d] text-white font-bold border-none">
-                            Ver Película
-                        </a>
+                    <a href="@Url.Action("Index", "DetailsSelectedMovie", new { SelectId = item.Id, Identificate = item.Identificador })"
+                    class="btn w-48 bg-[#445424] hover:bg-[#55692d] text-white font-bold border-none">
+                        Ver Película
+                    </a>
                     </div>
                 </div>
             </div>

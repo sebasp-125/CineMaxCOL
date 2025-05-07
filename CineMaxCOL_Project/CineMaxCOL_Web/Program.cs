@@ -23,6 +23,8 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MovieService>();
 builder.Services.AddScoped<SendEmails>();
+builder.Services.AddScoped<DetailsMovieService>();
+
 
 
 builder.Services.AddDbContext<CineMaxColContext>(opc =>

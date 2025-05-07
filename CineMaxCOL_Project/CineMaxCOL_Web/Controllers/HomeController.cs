@@ -23,6 +23,7 @@ public class HomeController : Controller
     {
         var BringMovies = await _ServiceMovie.BringMovies_Service();
         var GetMunicipalitys = await _ServiceMovie.GetMunicipalitiesAsync();
+        
         var PeliculasModel_Mapper = _map.Map<List<PeliculaViewModel>>(BringMovies);
         var drawer = new DTO_ToLandingPage{
             DTO_ToLandingPage_AllMovies = PeliculasModel_Mapper,

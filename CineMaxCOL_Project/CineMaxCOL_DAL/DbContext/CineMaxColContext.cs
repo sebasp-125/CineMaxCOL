@@ -19,6 +19,8 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<ConfiguracionCloud> ConfiguracionClouds { get; set; }
 
+    public virtual DbSet<DiasSemana> DiasSemanas { get; set; }
+
     public virtual DbSet<Funcion> Funcions { get; set; }
 
     public virtual DbSet<HistorialCompra> HistorialCompras { get; set; }
@@ -30,6 +32,8 @@ public partial class CineMaxColContext : DbContext
     public virtual DbSet<Pago> Pagos { get; set; }
 
     public virtual DbSet<Pelicula> Peliculas { get; set; }
+
+    public virtual DbSet<Precio> Precios { get; set; }
 
     public virtual DbSet<Reserva> Reservas { get; set; }
 
@@ -82,6 +86,17 @@ public partial class CineMaxColContext : DbContext
             entity.Property(e => e.ApiSecret).HasMaxLength(255);
             entity.Property(e => e.CloudName).HasMaxLength(100);
             entity.Property(e => e.Folder).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<DiasSemana>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__DiasSema__3214EC0702173A08");
+
+            entity.ToTable("DiasSemana");
+
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(20)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Funcion>(entity =>
@@ -182,6 +197,9 @@ public partial class CineMaxColContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.IdCine).HasColumnName("Id_Cine");
+            entity.Property(e => e.Identificador)
+                .HasMaxLength(5)
+                .IsUnicode(false);
             entity.Property(e => e.ImagenUrl)
                 .HasMaxLength(300)
                 .IsUnicode(false);
@@ -196,6 +214,22 @@ public partial class CineMaxColContext : DbContext
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.Peliculas)
                 .HasForeignKey(d => d.IdCine)
                 .HasConstraintName("FK__Pelicula__Id_Cin__6A30C649");
+        });
+
+        modelBuilder.Entity<Precio>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Precios__3214EC07422FD1DF");
+
+            entity.Property(e => e.HoraFin).HasColumnName("Hora_Fin");
+            entity.Property(e => e.HoraInicio).HasColumnName("Hora_Inicio");
+            entity.Property(e => e.IdDiaSemana).HasColumnName("Id_DiaSemana");
+            entity.Property(e => e.Precio1)
+                .HasColumnType("decimal(6, 2)")
+                .HasColumnName("Precio");
+
+            entity.HasOne(d => d.IdDiaSemanaNavigation).WithMany(p => p.Precios)
+                .HasForeignKey(d => d.IdDiaSemana)
+                .HasConstraintName("FK_PreciosTO_DiaSemana");
         });
 
         modelBuilder.Entity<Reserva>(entity =>
@@ -294,9 +328,11 @@ public partial class CineMaxColContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.IdHorario).HasColumnName("Id_Horario");
             entity.Property(e => e.IdMunicipio).HasColumnName("Id_Municipio");
-            entity.Property(e => e.IdRol).HasColumnName("Id_Rol");
+            entity.Property(e => e.IdRol)
+                .HasDefaultValue(2)
+                .HasColumnName("Id_Rol");
             entity.Property(e => e.Password)
-                .HasMaxLength(20)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             entity.HasOne(d => d.IdHorarioNavigation).WithMany(p => p.Usuarios)

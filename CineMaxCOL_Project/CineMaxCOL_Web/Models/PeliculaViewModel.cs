@@ -30,6 +30,6 @@ namespace CineMaxCOL_Web.Models
         public DateTime? CreatedAt { get; set; }
 
         public string? ImagenUrl { get; set; }
-
+        public string? Identificador { get; set; }
     }
 }

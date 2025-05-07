@@ -12,5 +12,7 @@ namespace CineMaxCOL_DAL.UnitOfWork.Interface
         IUserRepository _UnitUserRepository {get;}
         ILandingRepository<T> GetLandingRepository<T>() where T : class;
 
+        IDetailsSelectedMovie<T> GetDetailsMoviesAndCine<T>() where T : class;
+
     }
 }

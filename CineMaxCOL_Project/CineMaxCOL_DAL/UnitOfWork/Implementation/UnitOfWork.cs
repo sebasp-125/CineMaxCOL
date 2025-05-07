@@ -21,6 +21,11 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
 
         public IUserRepository _UnitUserRepository => _userRepository ??= new UserRepository(_context);
 
+        public IDetailsSelectedMovie<T> GetDetailsMoviesAndCine<T>() where T : class
+        {
+            return new DetailsSelectedMovie<T>(_context);
+        }
+
         public ILandingRepository<T> GetLandingRepository<T>() where T : class
         {
             return new LandingRepository<T>(_context);
