@@ -14,8 +14,13 @@ namespace CineMaxCOL_Web.Profiles
         {
             CreateMap<Pelicula, PeliculaViewModel>();
             CreateMap<PeliculaViewModel, Pelicula>();
-            CreateMap<Pelicula , DTO_SpeacillyMovieCines>();
-            CreateMap<DTO_SpeacillyMovieCines , Pelicula>();
+            CreateMap<Cine, DTO_Cine>();
+            CreateMap<Ubicacion, DTO_Ubicacion>();
+
+            CreateMap<Pelicula, DtoSpeciallyMovieCines>()
+                .ForMember(dest => dest.Cine, opt => opt.MapFrom(src => src.IdCineNavigation));
+
         }
     }
-}
+    }
+    

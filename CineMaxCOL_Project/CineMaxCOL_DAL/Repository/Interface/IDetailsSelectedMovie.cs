@@ -9,6 +9,6 @@ namespace CineMaxCOL_DAL.Repository.Interface
 {
     public interface IDetailsSelectedMovie<T>
     {
-        Task<List<Pelicula>> GetCinesWithMovies(string Identificador);
+        Task<List<Funcion>> GetCinesWithMovies(string Identificador);
     }
 }

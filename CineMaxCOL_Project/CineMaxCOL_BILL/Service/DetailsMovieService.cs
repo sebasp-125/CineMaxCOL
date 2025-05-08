@@ -16,9 +16,9 @@ namespace CineMaxCOL_BILL.Service
             _Unit = Unit;
             _context = context;
         }
-        public async Task<List<Pelicula>> GetCinesAboutMoviesAsync(string Indentificate)
+        public async Task<List<Funcion>> GetCinesAboutMoviesAsync(string Indentificate)
         {
-            return await _Unit.GetDetailsMoviesAndCine<Pelicula>().GetCinesWithMovies(Indentificate);
+            return await _Unit.GetDetailsMoviesAndCine<Funcion>().GetCinesWithMovies(Indentificate);
         }
     }
 }

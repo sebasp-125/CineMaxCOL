@@ -19,9 +19,10 @@ namespace CineMaxCOL_Web.Controllers
         private readonly DetailsMovieService _authService_DetailsMovieService;
 
 
-        public DetailsSelectedMovieController(MovieService authService , IMapper mapper)
+        public DetailsSelectedMovieController(MovieService authService , IMapper mapper , DetailsMovieService authService_DetailsMovieService)
         {
             _authService = authService;
+            _authService_DetailsMovieService = authService_DetailsMovieService;
             _map = mapper;
         }
 
@@ -30,13 +31,12 @@ namespace CineMaxCOL_Web.Controllers
         {
             var responseFromService = await _authService.BrindSelectedMovie(SelectId);
             var BringCinesAboutMovie = await _authService_DetailsMovieService.GetCinesAboutMoviesAsync(Identificate);
-            var CinesAboutMovies_Mapper = _map.Map<List<DTO_SpeacillyMovieCines>>(BringCinesAboutMovie);
 
-            var asignInformation = new DTO_ToSpeacllyCinesAboutMovies{
-                To_CinesWithMovies = CinesAboutMovies_Mapper,
+            // var CinesAboutMovies_Mapper = _map.Map<List<DtoSpeciallyMovieCines>>(BringCinesAboutMovie);
+            var AsignInformation = new DTO_ToSpeacllyCinesAboutMovies{
                 To_SpeciallyMovie = responseFromService
             };
-            return View(asignInformation);
+            return View(AsignInformation);
         }
 
 

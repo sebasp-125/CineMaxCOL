@@ -8,7 +8,7 @@ namespace CineMaxCOL_Web.Models.FunctionalityDrawer
 {
     public class DTO_ToSpeacllyCinesAboutMovies
     {
-        public List<DTO_SpeacillyMovieCines> To_CinesWithMovies { get; set; }
+        public List<DtoSpeciallyMovieCines> DtoSpeciallyMovieCines { get; set; }
         public Pelicula To_SpeciallyMovie {get; set;}
     }
 }

@@ -1,16 +1,28 @@
-@model CineMaxCOL_Entity.Pelicula
+@model CineMaxCOL_Web.Models.FunctionalityDrawer.DTO_ToSpeacllyCinesAboutMovies
 
+<!-- CONTENEDOR PRINCIPAL -->
 <div class="p-6 bg-gray-100 text-gray-800 font-sans">
+
+    <!-- ENCABEZADO DE LA PELÍCULA Y VIDEO -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- INFORMACIÓN PRINCIPAL DE LA PELÍCULA -->
         <div class="flex gap-4">
-            <img src="@Model.ImagenUrl" alt="@Model.Titulo"
-                class="min-w-20 w-auto h-auto object-cover rounded shadow-lg" />
+            <img src="@Model.To_SpeciallyMovie.ImagenUrl" 
+                    alt="@Model.To_SpeciallyMovie.Titulo"
+                    class="min-w-20 w-auto h-auto object-cover rounded shadow-lg" />
+            
             <div>
-                <h2 class="text-2xl font-semibold text-green-900">@Model.Titulo</h2>
-                <p class="text-sm"><strong>Estreno:</strong> @Model.CreatedAt?.ToString("dd/MM/yyyy")</p>
+                <h2 class="text-2xl font-semibold text-green-900">
+                    @Model.To_SpeciallyMovie.Titulo
+                </h2>
+                <p class="text-sm">
+                    <strong>Estreno:</strong> @Model.To_SpeciallyMovie.CreatedAt?.ToString("dd/MM/yyyy")
+                </p>
             </div>
         </div>
 
+        <!-- VIDEO TRAILER -->
         <div class="w-full">
             <video controls class="w-full rounded shadow-lg">
                 <source src="https://youtu.be/sG29yJH-5wc" type="video/mp4" />
@@ -19,12 +31,16 @@
         </div>
     </div>
 
+    <!-- SECCIONES ADICIONALES DE LA PELÍCULA -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        
+        <!-- SINOPSIS -->
         <div>
             <h3 class="text-xl font-semibold text-green-900 border-b pb-1 mb-2">SINOPSIS</h3>
-            <p class="text-sm">@Model.Sinopsis</p>
+            <p class="text-sm">@Model.To_SpeciallyMovie.Sinopsis</p>
         </div>
 
+        <!-- REPARTO (ESTÁTICO) -->
         <div>
             <h3 class="text-xl font-semibold text-green-900 border-b pb-1 mb-2">REPARTO</h3>
             <ul class="list-disc list-inside text-sm">
@@ -34,42 +50,48 @@
             </ul>
         </div>
 
+        <!-- INFORMACIÓN DETALLADA -->
         <div>
             <h3 class="text-xl font-semibold text-green-900 border-b pb-1 mb-2">INFORMACIÓN</h3>
-            <p class="text-sm"><strong>Clasificación:</strong> @Model.Clasificacion</p>
-            <p class="text-sm"><strong>Duración:</strong> @Model.Duracion</p>
-            <p class="text-sm"><strong>Género:</strong> @Model.Genero</p>
-            <p class="text-sm"><strong>País:</strong> @Model.Pais</p>
-            <p class="text-sm"><strong>Director:</strong> @Model.Director</p>
+            <p class="text-sm"><strong>Clasificación:</strong> @Model.To_SpeciallyMovie.Clasificacion</p>
+            <p class="text-sm"><strong>Duración:</strong> @Model.To_SpeciallyMovie.Duracion</p>
+            <p class="text-sm"><strong>Género:</strong> @Model.To_SpeciallyMovie.Genero</p>
+            <p class="text-sm"><strong>País:</strong> @Model.To_SpeciallyMovie.Pais</p>
+            <p class="text-sm"><strong>Director:</strong> @Model.To_SpeciallyMovie.Director</p>
         </div>
     </div>
 </div>
 
+<!-- FUNCIONES DISPONIBLES -->
 <main class="bg-gray-100 min-h-screen p-8">
     <div class="text-center my-12">
         <h2 class="text-4xl font-bold text-[#55692d]">FUNCIONES</h2>
     </div>
-
+    @* @if(!Model.DtoSpeciallyMovieCines.Any()){
+        <h2 class="bg-red-600">TENEMOS PROBLEMAS</h2>
+    } 
+    @foreach (var item in Model.DtoSpeciallyMovieCines)
+        { *@
     <div class="collapse collapse-arrow bg-base-100 border border-base-300 rounded-box shadow-md">
-        <input type="checkbox" />
-        <div class="collapse-title text-xl font-semibold">
-            Niquía
-        </div>
-        <div class="collapse-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow-sm">
-                    <div class="text-lg font-bold text-primary mb-2">6:30 PM</div>
-                    <div class="text-center">
-                        <p class="font-semibold text-lg  text-gray-500"">Spiderman: No Way Home</p>
-                        <p class=" text-sm text-gray-500">Sala 2</p>
-                        <p class="text-sm text-gray-400">Inglés</p>
-                        <form asp-action="Index" asp-controller="SelectingPositions" method="get">
-                            <button type="submit" class="btn btn-success">Comprar</button>
-                        </form>
-                    </div>
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-semibold">
+                @* <p>@item.Cine.Nombre</p> *@
+            </div>
+            <div class="collapse-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- CARD DE FUNCIÓN -->
+                    @* <div class="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <div class="text-lg font-bold text-primary mb-2">@item.Titulo</div>
+                        <div class="text-center">
+                            <p class="font-semibold text-lg text-gray-500">@item.Titulo</p>
+                            <p class="text-sm text-gray-500">@item.Duracion</p>
+                            <form asp-action="Index" asp-controller="SelectingPositions" method="get">
+                                <button type="submit" class="btn btn-success">Comprar</button>
+                            </form>
+                        </div>
+                    </div> *@
                 </div>
             </div>
-        </div>
     </div>
-
+        @* } *@
 </main>

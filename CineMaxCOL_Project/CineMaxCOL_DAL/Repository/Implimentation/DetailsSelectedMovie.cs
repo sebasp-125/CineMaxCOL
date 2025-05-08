@@ -21,20 +21,22 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
             _dbSet = _context.Set<T>();
 
         }
-        public async Task<List<Pelicula>> GetCinesWithMovies(string Identificador)
+        public async Task<List<Funcion>> GetCinesWithMovies(string Identificador)
         {
             try
             {
-                var feelding = await _context.Peliculas
-                    .Include(x => x.IdCineNavigation)
-                        .ThenInclude(x => x.IdUbicacionNavigation)
-                        .Where(x => x.Identificador == Identificador)
-                        .ToListAsync();           
-                        return feelding;
+                var test_two = await _context.Funcions
+                .Include(f => f.IdPeliculaNavigation)
+                .Include(f => f.IdSalaNavigation)
+                    .ThenInclude(s => s.IdCineNavigation)
+                .Where(f => f.IdPeliculaNavigation.Identificador == Identificador)
+                        .ToListAsync();
+
+                        return test_two;
             }
             catch
             {
-                return new List<Pelicula>();
+                return new List<Funcion>();
             }
         }
     }
