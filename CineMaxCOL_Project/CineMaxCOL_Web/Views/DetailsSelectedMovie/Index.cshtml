@@ -5,13 +5,12 @@
 
     <!-- ENCABEZADO DE LA PELÍCULA Y VIDEO -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
+
         <!-- INFORMACIÓN PRINCIPAL DE LA PELÍCULA -->
         <div class="flex gap-4">
-            <img src="@Model.To_SpeciallyMovie.ImagenUrl" 
-                    alt="@Model.To_SpeciallyMovie.Titulo"
-                    class="min-w-20 w-auto h-auto object-cover rounded shadow-lg" />
-            
+            <img src="@Model.To_SpeciallyMovie.ImagenUrl" alt="@Model.To_SpeciallyMovie.Titulo"
+                class="min-w-20 w-auto h-auto object-cover rounded shadow-lg" />
+
             <div>
                 <h2 class="text-2xl font-semibold text-green-900">
                     @Model.To_SpeciallyMovie.Titulo
@@ -33,7 +32,7 @@
 
     <!-- SECCIONES ADICIONALES DE LA PELÍCULA -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-        
+
         <!-- SINOPSIS -->
         <div>
             <h3 class="text-xl font-semibold text-green-900 border-b pb-1 mb-2">SINOPSIS</h3>
@@ -67,31 +66,33 @@
     <div class="text-center my-12">
         <h2 class="text-4xl font-bold text-[#55692d]">FUNCIONES</h2>
     </div>
-    @* @if(!Model.DtoSpeciallyMovieCines.Any()){
+    @if (!Model.DtoSpeciallyMovieCines.Any())
+    {
         <h2 class="bg-red-600">TENEMOS PROBLEMAS</h2>
-    } 
+    }
     @foreach (var item in Model.DtoSpeciallyMovieCines)
-        { *@
-    <div class="collapse collapse-arrow bg-base-100 border border-base-300 rounded-box shadow-md">
+    {
+        <div class="collapse collapse-arrow bg-base-100 border border-base-300 rounded-box shadow-md">
             <input type="checkbox" />
             <div class="collapse-title text-xl font-semibold">
-                @* <p>@item.Cine.Nombre</p> *@
+                <p>@item.IdSalaNavigation.IdCineNavigation.Nombre</p>
             </div>
             <div class="collapse-content">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- CARD DE FUNCIÓN -->
-                    @* <div class="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <div class="text-lg font-bold text-primary mb-2">@item.Titulo</div>
+                    <div class="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <div class="text-lg font-bold text-primary mb-2">@item.IdPeliculaNavigation.Titulo</div>
+                        <div class="text-lg font-bold text-primary mb-2">@item.Precio</div>
                         <div class="text-center">
-                            <p class="font-semibold text-lg text-gray-500">@item.Titulo</p>
-                            <p class="text-sm text-gray-500">@item.Duracion</p>
-                            <form asp-action="Index" asp-controller="SelectingPositions" method="get">
-                                <button type="submit" class="btn btn-success">Comprar</button>
-                            </form>
+                            <p class="font-semibold text-lg text-gray-500">@item.IdSalaNavigation.Nombre</p>
+                            <p class="text-sm text-gray-500">@item.IdPeliculaNavigation.Duracion</p>
+                            <a href="@Url.Action("Index", "SelectingPositions", new { SalaId = item.IdSala, IdPelicula = item.IdPelicula , identificador = item.IdPeliculaNavigation.Identificador})"
+                                class="btn w-48 bg-[#445424] hover:bg-[#55692d] text-white font-bold border-none">
+                                Ver Película
+                            </a>
                         </div>
-                    </div> *@
+                    </div>
                 </div>
             </div>
-    </div>
-        @* } *@
+        </div>
+    }
 </main>

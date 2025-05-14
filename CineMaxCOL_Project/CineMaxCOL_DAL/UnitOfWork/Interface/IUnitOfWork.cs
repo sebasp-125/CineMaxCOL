@@ -9,9 +9,9 @@ namespace CineMaxCOL_DAL.UnitOfWork.Interface
 {
     public interface IUnitOfWork
     {
+        ISelectingPositions<Funcion> _UnitSelectingPositions {get;}
         IUserRepository _UnitUserRepository {get;}
         ILandingRepository<T> GetLandingRepository<T>() where T : class;
-
         IDetailsSelectedMovie<T> GetDetailsMoviesAndCine<T>() where T : class;
 
     }

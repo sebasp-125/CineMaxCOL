@@ -32,9 +32,10 @@ namespace CineMaxCOL_Web.Controllers
             var responseFromService = await _authService.BrindSelectedMovie(SelectId);
             var BringCinesAboutMovie = await _authService_DetailsMovieService.GetCinesAboutMoviesAsync(Identificate);
 
-            // var CinesAboutMovies_Mapper = _map.Map<List<DtoSpeciallyMovieCines>>(BringCinesAboutMovie);
             var AsignInformation = new DTO_ToSpeacllyCinesAboutMovies{
-                To_SpeciallyMovie = responseFromService
+                To_SpeciallyMovie = responseFromService,
+                DtoSpeciallyMovieCines = BringCinesAboutMovie
+                
             };
             return View(AsignInformation);
         }

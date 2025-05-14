@@ -17,6 +17,8 @@ public partial class Funcion
 
     public DateTime? CreatedAt { get; set; }
 
+    public string? IdentificadorMovies { get; set; }
+
     public virtual Pelicula? IdPeliculaNavigation { get; set; }
 
     public virtual Sala? IdSalaNavigation { get; set; }

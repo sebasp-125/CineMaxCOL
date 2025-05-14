@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using CineMaxCOL_BILL.Service;
+using CineMaxCOL_DAL.UnitOfWork.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,17 +12,24 @@ namespace CineMaxCOL_Web.Controllers
 {
     public class SelectingPositionsController : Controller
     {
-        private readonly ILogger<SelectingPositionsController> _logger;
+        private readonly SelectingPositionsServices _selectingPositionsServices;
 
-        public SelectingPositionsController(ILogger<SelectingPositionsController> logger)
+        public SelectingPositionsController(SelectingPositionsServices authServices)
         {
-            _logger = logger;
+            _selectingPositionsServices = authServices;
         }
-
-        [HttpGet]
-        public IActionResult Index()
+    
+        public async Task<IActionResult> Index(string SalaId , string IdPelicula , string identificador)
         {
-            return View();
+            Console.WriteLine($"SalaId: {SalaId}, IdPelicula: {IdPelicula}, Identificador: {identificador}");
+
+            var response = await _selectingPositionsServices.Service_SelectedFuncionMovieAndMoreThings(SalaId , IdPelicula , identificador);
+                if(response == null){
+                TempData["error"] = "error";
+                }
+            Console.WriteLine("POSITIONS: " , response.IdPeliculaNavigation.Titulo);
+
+            return View(response);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

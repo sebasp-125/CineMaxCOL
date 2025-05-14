@@ -13,13 +13,10 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
     public class DetailsSelectedMovie<T>  : IDetailsSelectedMovie<T> where T : class
     {
         private readonly CineMaxColContext _context;
-        private readonly DbSet<T> _dbSet;
         
         public DetailsSelectedMovie(CineMaxColContext context)
         {
             _context = context;
-            _dbSet = _context.Set<T>();
-
         }
         public async Task<List<Funcion>> GetCinesWithMovies(string Identificador)
         {

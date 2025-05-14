@@ -24,6 +24,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MovieService>();
 builder.Services.AddScoped<SendEmails>();
 builder.Services.AddScoped<DetailsMovieService>();
+builder.Services.AddScoped<SelectingPositionsServices>();
 
 
 

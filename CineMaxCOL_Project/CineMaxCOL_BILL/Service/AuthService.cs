@@ -22,8 +22,6 @@ namespace CineMaxCOL_BILL.Service
         }
         public async Task<(bool isValid, List<Claim> claims)> ValidateUser(string email, string password)
         {
-            Console.WriteLine("SERVICE" + email + password);
-
             var passwordHasheada = PasswordHasher.HashPassword(password);
 
             var user = await _context.Usuarios

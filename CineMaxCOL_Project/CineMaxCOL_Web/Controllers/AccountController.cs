@@ -54,7 +54,6 @@ namespace CineMaxCOL_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ProccesLogIn(string email, string password)
         {
-            Console.WriteLine(email + password);
             var (isValid, claims) = await _authService.ValidateUser(email, password);
             
             if (isValid)
