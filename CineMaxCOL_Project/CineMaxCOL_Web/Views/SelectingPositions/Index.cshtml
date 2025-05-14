@@ -1,59 +1,69 @@
 @model CineMaxCOL_Entity.Funcion
 
-    <div class="flex flex-col items-center p-4 max-w-6xl mx-auto">
+@{
+    int capacidad = Model.IdSalaNavigation?.Capacidad ?? 0;
+}
+
+<div class="bg-gray-100 min-h-screen py-10">
+    <div class="bg-white max-w-4xl mx-auto p-6 rounded-lg shadow-md">
+                <div class="w-full h-6 bg-gray-400 mt-8 text-center font-semibold flex items-center justify-center rounded">
+            Pantalla
+        </div>
+
+        <div class="flex space-x-6 mt-4 justify-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                <span>Disponible</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+                <span>Seleccionado</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                <span>Ocupado</span>
+            </div>
+        </div>
         <h2 class="text-2xl font-bold mb-6 text-center">Selecciona tu silla</h2>
 
-        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 w-full">
-            {
-                var estadoClase = silla.Ocupada ? "bg-red-500 cursor-not-allowed" : "bg-green-500 hover:bg-green-600 cursor-pointer";
-                <div class="text-white font-semibold p-4 rounded-lg text-center shadow transition duration-200 ease-in-out ">
-                </div>
-        </div>
-    </div>
+        @if (capacidad > 0)
+        {
+            <div class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2 w-full justify-center">
+                @for (int i = 0; i < capacidad; i++)
+                {
+                    <form asp-action="AddSeatList" asp-controller="SelectingPositions" method="post">
+                        <button type="submit" class="w-6 h-6 rounded-full bg-yellow-700 hover:bg-yellow-600">Fk1</button>
+                    </form>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-red-600 font-semibold">No hay información de capacidad de la sala.</p>
+        }
 
-    <div class="w-full h-6 bg-gray-400 mt-8 text-center font-semibold flex items-center justify-center">
-        Pantalla
-    </div>
+        <div class="overflow-x-auto mt-8 w-full">
+            <table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>Nombre de la Película</th>
+                        <th>Asientos seleccionados</th>
+                        <th>Precio</th>
+                        <th>Total a pagar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.IdPeliculaNavigation.Titulo</td>
+                        <td>@Model.Precio</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Leyenda -->
-    <div class="flex space-x-6 mt-4">
-        <div class="flex items-center space-x-2">
-            <div class="w-4 h-4 bg-gray-300 rounded-full"></div>
-            <span>Disponible</span>
-        </div>
-        <div class="flex items-center space-x-2">
-            <div class="w-4 h-4 bg-black rounded-full"></div>
-            <span>Seleccionado</span>
-        </div>
-        <div class="flex items-center space-x-2">
-            <div class="w-4 h-4 bg-teal-300 rounded-full"></div>
-            <span>Ocupado</span>
+        <div class="mt-10 w-full space-y-2">
+            <button class="btn btn-success w-full">Pagar</button>
+            <button class="btn btn-error w-full">Abandonar</button>
         </div>
     </div>
-    <div>
-        <div class="overflow-x-auto">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre de la Pelicula</th>
-                    <th>Asientos seleccionados</th>
-                    <th>Precio</th>
-                    <th>Total a pagar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>F12</td>
-                    <td>@Model.Precio</td>
-                    <td>@Model.Precio</td>
-                    <td>@Model.IdPeliculaNavigation.Titulo</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mt-20">
-        <button class="btn btn-success w-full">Pagar</button>
-        <button class="btn btn-error w-full">Abandonar</button>
-    </div>
-</div>
 </div>

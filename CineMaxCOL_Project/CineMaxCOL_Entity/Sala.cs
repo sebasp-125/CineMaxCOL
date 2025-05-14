@@ -17,9 +17,11 @@ public partial class Sala
 
     public DateTime? CreatedAt { get; set; }
 
+    public int? IdSilla { get; set; }
+
     public virtual ICollection<Funcion> Funcions { get; set; } = new List<Funcion>();
 
     public virtual Cine? IdCineNavigation { get; set; }
 
-    public virtual ICollection<Silla> Sillas { get; set; } = new List<Silla>();
+    public virtual Silla? IdSillaNavigation { get; set; }
 }

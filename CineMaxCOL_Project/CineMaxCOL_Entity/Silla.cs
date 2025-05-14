@@ -11,7 +11,5 @@ public partial class Silla
 
     public bool Ocupado { get; set; }
 
-    public int SalaId { get; set; }
-
-    public virtual Sala Sala { get; set; } = null!;
+    public virtual ICollection<Sala> Salas { get; set; } = new List<Sala>();
 }

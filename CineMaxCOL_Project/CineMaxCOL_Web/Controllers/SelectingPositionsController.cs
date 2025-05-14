@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CineMaxCOL_BILL.Service;
 using CineMaxCOL_DAL.UnitOfWork.Interface;
+using CineMaxCOL_Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -27,9 +28,13 @@ namespace CineMaxCOL_Web.Controllers
                 if(response == null){
                 TempData["error"] = "error";
                 }
-            Console.WriteLine("POSITIONS: " , response.IdPeliculaNavigation.Titulo);
-
             return View(response);
+        }
+
+        [HttpPost]
+        public async Task<Funcion> AddSeatList(int NumberSelected){
+            Console.WriteLine(NumberSelected);
+            return new Funcion();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

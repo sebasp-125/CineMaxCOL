@@ -317,4 +317,4 @@ C:\Users\PERSONAL\Desktop\CineMaxCOL\CineMaxCOL_Project\CineMaxCOL_Web\obj\Debug
 C:\Users\PERSONAL\Desktop\CineMaxCOL\CineMaxCOL_Project\CineMaxCol_Web\obj\Debug\net9.0\compressed\5vky8pxrai-ob7umt2q4t.gz
 C:\Users\PERSONAL\Desktop\CineMaxCOL\CineMaxCOL_Project\CineMaxCOL_Web\bin\Debug\net9.0\AutoMapper.dll
 C:\Users\PERSONAL\Desktop\CineMaxCOL\CineMaxCOL_Project\CineMaxCOL_Web\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\PERSONAL\Desktop\CineMaxCOL\CineMaxCOL_Project\CineMaxCOL_Web\obj\Debug\net9.0\compressed\a67jaq1b33-rndaisnxg1.gz
+C:\Users\PERSONAL\Desktop\CineMaxCOL\CineMaxCOL_Project\CineMaxCOL_Web\obj\Debug\net9.0\compressed\a67jaq1b33-1runtyh2s8.gz

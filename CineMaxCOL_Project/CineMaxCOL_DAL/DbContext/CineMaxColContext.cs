@@ -41,6 +41,8 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<Sala> Salas { get; set; }
 
+    public virtual DbSet<Silla> Sillas { get; set; }
+
     public virtual DbSet<TipoPago> TipoPagos { get; set; }
 
     public virtual DbSet<Ubicacion> Ubicacions { get; set; }
@@ -111,6 +113,10 @@ public partial class CineMaxColContext : DbContext
                 .HasColumnName("Fecha_Hora");
             entity.Property(e => e.IdPelicula).HasColumnName("Id_Pelicula");
             entity.Property(e => e.IdSala).HasColumnName("Id_Sala");
+            entity.Property(e => e.IdentificadorMovies)
+                .HasMaxLength(5)
+                .IsUnicode(false)
+                .HasColumnName("Identificador_Movies");
             entity.Property(e => e.Precio).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.IdPeliculaNavigation).WithMany(p => p.Funcions)
@@ -281,6 +287,21 @@ public partial class CineMaxColContext : DbContext
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.Salas)
                 .HasForeignKey(d => d.IdCine)
                 .HasConstraintName("FK__Sala__Id_Cine__6D0D32F4");
+
+            entity.HasOne(d => d.IdSillaNavigation).WithMany(p => p.Salas)
+                .HasForeignKey(d => d.IdSilla)
+                .HasConstraintName("FK_SalaToSilla");
+        });
+
+        modelBuilder.Entity<Silla>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Silla__3214EC07A2745690");
+
+            entity.ToTable("Silla");
+
+            entity.Property(e => e.Codigo)
+                .HasMaxLength(10)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<TipoPago>(entity =>
@@ -334,6 +355,10 @@ public partial class CineMaxColContext : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdFuncionNavigation).WithMany(p => p.Usuarios)
+                .HasForeignKey(d => d.IdFuncion)
+                .HasConstraintName("FKUsuarioToFuncion");
 
             entity.HasOne(d => d.IdHorarioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdHorario)

@@ -28,7 +28,6 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
                     .ThenInclude(s => s.IdCineNavigation)
                 .Where(f => f.IdPeliculaNavigation.Identificador == Identificador)
                         .ToListAsync();
-
                         return test_two;
             }
             catch

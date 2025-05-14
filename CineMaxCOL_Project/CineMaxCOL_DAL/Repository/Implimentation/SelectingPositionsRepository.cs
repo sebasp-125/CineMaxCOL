@@ -20,9 +20,11 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
             try
             {
                 var test_two = await _context.Funcions
-                        .Include(f => f.IdPeliculaNavigation)
-                        .Include(f => f.IdSalaNavigation)
-                            .ThenInclude(s => s.IdCineNavigation)
+                    .Include(d => d.IdSalaNavigation)
+                        .ThenInclude(d => d.IdSillaNavigation)
+                    .Include(f => f.IdPeliculaNavigation)
+                    .Include(f => f.IdSalaNavigation)
+                        .ThenInclude(d => d.IdSillaNavigation)
                         .Where(f =>
                             f.IdPeliculaNavigation.Identificador == identificador &&
                             f.IdSala == int.Parse(salaId) &&
