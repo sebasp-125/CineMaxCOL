@@ -15,6 +15,9 @@ namespace CineMaxCOL_BILL.Service
     {
         private readonly IUnitOfWork _Unit;
         private readonly CineMaxColContext _context;
+
+        public object HttpContext { get; private set; }
+
         public AuthService(IUnitOfWork Unit, CineMaxColContext context)
         {
             _Unit = Unit;
@@ -35,8 +38,10 @@ namespace CineMaxCOL_BILL.Service
 
             new Claim(ClaimTypes.Name, user?.FullName ?? "Error"),
             new Claim(ClaimTypes.Email, user?.Email ?? "Error"),
+            new Claim(ClaimTypes.NameIdentifier , user?.Id.ToString() ?? "0"),
             new Claim(ClaimTypes.Role, user?.IdRolNavigation?.TipoRol ?? "Error")
             };
+
                 return (true, claims);
             }   
 

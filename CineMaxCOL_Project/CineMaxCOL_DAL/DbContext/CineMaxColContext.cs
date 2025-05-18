@@ -19,6 +19,8 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<ConfiguracionCloud> ConfiguracionClouds { get; set; }
 
+    public virtual DbSet<ConfiguracionEmail> ConfiguracionEmails { get; set; }
+
     public virtual DbSet<DiasSemana> DiasSemanas { get; set; }
 
     public virtual DbSet<Funcion> Funcions { get; set; }
@@ -88,6 +90,23 @@ public partial class CineMaxColContext : DbContext
             entity.Property(e => e.ApiSecret).HasMaxLength(255);
             entity.Property(e => e.CloudName).HasMaxLength(100);
             entity.Property(e => e.Folder).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<ConfiguracionEmail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("ConfiguracionEmail");
+
+            entity.Property(e => e.Propiedad)
+                .HasMaxLength(100)
+                .HasColumnName("propiedad");
+            entity.Property(e => e.Recurso)
+                .HasMaxLength(100)
+                .HasColumnName("recurso");
+            entity.Property(e => e.Valor)
+                .HasMaxLength(255)
+                .HasColumnName("valor");
         });
 
         modelBuilder.Entity<DiasSemana>(entity =>
@@ -355,10 +374,6 @@ public partial class CineMaxColContext : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(200)
                 .IsUnicode(false);
-
-            entity.HasOne(d => d.IdFuncionNavigation).WithMany(p => p.Usuarios)
-                .HasForeignKey(d => d.IdFuncion)
-                .HasConstraintName("FKUsuarioToFuncion");
 
             entity.HasOne(d => d.IdHorarioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdHorario)

@@ -1,0 +1,73 @@
+@model CineMaxCOL_Entity.Funcion
+
+<div class="container mx-auto p-4 space-y-4 bg-white rounded-xl">
+    <div class="flex justify-center">
+        <img src="https://res.cloudinary.com/dkykp6eya/image/upload/v1746027655/1Logo1-removebg-preview_dbmsqo.png"
+            width="300px" />
+    </div>
+    <!-- Tarjeta Crédito y Débito -->
+    <form asp-action="RegistersPay" asp-controller="PaymentdGetAway">
+    <div class="collapse collapse-arrow border border-[#55692d] bg-white rounded-xl">
+        <input type="radio" name="pago" checked />
+        <div class="collapse-title text-[#55692d] font-semibold flex justify-between items-center">
+            Tarjeta Crédito y Débito
+            <img src="/ruta-icono-tarjeta.svg" alt="tarjeta" class="w-6 h-6" />
+        </div>
+            <div class="collapse-content space-y-3">
+                <input type="email" placeholder="Correo Electrónico" class="input input-bordered w-full border-black" />
+                <input type="text" placeholder="Nombre del propietario" class="input input-bordered w-full border-black" />
+                <input type="text" placeholder="Número de la tarjeta" class="input input-bordered w-full border-black" />
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="text" placeholder="Fecha de expiración" class="input input-bordered w-full border-black" />
+                    <input type="text" placeholder="CVC" class="input input-bordered w-full border-purple-500" />
+                </div>
+                <button type="submit" class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">Continuar</button>
+            </div>
+    </div>
+    </form>
+
+
+<!-- Cuenta de ahorros y corriente (PSE) -->
+<div class="collapse collapse-arrow border border-[#55692d] bg-white rounded-xl">
+    <input type="radio" name="pago" />
+    <div class="collapse-title text-[#55692d] font-semibold flex justify-between items-center">
+        Cuenta de ahorros y corriente
+        <img src="/ruta-icono-pse.svg" alt="PSE" class="w-6 h-6" />
+    </div>
+    <div class="collapse-content space-y-3">
+        <input type="email" placeholder="Correo Electrónico" class="input input-bordered w-full border-black" />
+        <input type="text" placeholder="Nombre completo" class="input input-bordered w-full border-black" />
+        <input type="text" placeholder="Número de cédula" class="input input-bordered w-full border-black" />
+        <select class="select select-bordered w-full border-black">
+            <option disabled selected>Selecciona tu banco</option>
+            <option>Bancolombia</option>
+            <option>Davivienda</option>
+            <option>Nequi</option>
+        </select>
+        <button class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">Continuar</button>
+    </div>
+</div>
+
+<!-- DaviPlata -->
+<div class="collapse collapse-arrow border border-[#55692d] bg-white rounded-xl">
+    <input type="radio" name="pago" />
+    <div class="collapse-title text-[#55692d] font-semibold flex justify-between items-center">
+        DaviPlata
+        <img src="/ruta-icono-daviplata.svg" alt="Daviplata" class="w-6 h-6" />
+    </div>
+    <div class="collapse-content space-y-3">
+        <input type="email" placeholder="Correo Electrónico" class="input input-bordered w-full border-black" />
+        <input type="text" placeholder="Número de celular registrado"
+            class="input input-bordered w-full border-black" />
+        <button class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">Continuar</button>
+    </div>
+</div>
+<section>
+    <div class="text-center">
+        <strong>
+            Toda su compra sera registrada tanto en su correo brindado como en nuestros sistemas internos de
+            CineMaxCOL.
+        </strong>
+    </div>
+</section>
+</div>

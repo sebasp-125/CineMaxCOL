@@ -40,12 +40,20 @@ builder.Services.AddAutoMapper(typeof(ContractProfile));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/CredentialUser/Index";
-        options.LogoutPath = "/CredentialUser/LogOut";
-        options.AccessDeniedPath = "/Home/Privacy";
+        options.LoginPath = "/Account/LogIn";
+        options.LogoutPath = "/Home/Index";
+        options.AccessDeniedPath = "/Account/LogIn";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
         options.SlidingExpiration = true;
     });
+
+//COOKIES - SESIONS
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
     //COOKIES - SESIONS
 builder.Services.AddSession(options =>

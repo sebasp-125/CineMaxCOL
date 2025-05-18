@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Fwlw/B+1XwtGmwU9Z3PT25m9QXidlbOa2UyQU/CH1OY=",
+  "Hash": "0fk9aPROPJD04sQNkF7anp6Tb/bFPVXqxvsm4KTjTl0=",
   "Source": "CineMaxCOL_Web",
   "BasePath": "_content/CineMaxCOL_Web",
   "Mode": "Default",
@@ -500,12 +500,12 @@
       "OriginalItemSpec": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-1runtyh2s8.gz",
+      "Identity": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-2e86jh3jkl.gz",
       "SourceId": "CineMaxCOL_Web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/CineMaxCOL_Web",
-      "RelativePath": "css/output#[.{fingerprint=1runtyh2s8}]?.css.gz",
+      "RelativePath": "css/output#[.{fingerprint=2e86jh3jkl}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -514,8 +514,8 @@
       "RelatedAsset": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\wwwroot\\css\\output.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "0tc4e35uqg",
-      "Integrity": "LFzlLj9wtjvRDaZMv50d6djbhVmbKsIfsszbiGlt4qI=",
+      "Fingerprint": "0mecx6zktq",
+      "Integrity": "+J3X1tY/4wF60gNlqfIN9iOXYbTMDajqWAweK1M2N4w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\wwwroot\\css\\output.css"
@@ -1438,8 +1438,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1runtyh2s8",
-      "Integrity": "bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A=",
+      "Fingerprint": "2e86jh3jkl",
+      "Integrity": "+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\output.css"
@@ -3366,13 +3366,13 @@
       ]
     },
     {
-      "Route": "css/output.1runtyh2s8.css",
-      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-1runtyh2s8.gz",
+      "Route": "css/output.2e86jh3jkl.css",
+      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-2e86jh3jkl.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000047589587"
+          "Quality": "0.000045281652"
         }
       ],
       "ResponseHeaders": [
@@ -3382,15 +3382,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21012"
+          "Value": "22083"
         },
         {
           "Name": "ETag",
-          "Value": "\"LFzlLj9wtjvRDaZMv50d6djbhVmbKsIfsszbiGlt4qI=\""
+          "Value": "\"+J3X1tY/4wF60gNlqfIN9iOXYbTMDajqWAweK1M2N4w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 20:50:15 GMT"
+          "Value": "Sun, 18 May 2025 03:02:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3410,13 +3410,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A=\""
+          "Value": "W/\"+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1runtyh2s8"
+          "Value": "2e86jh3jkl"
         },
         {
           "Name": "label",
@@ -3424,12 +3424,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A="
+          "Value": "sha256-+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0="
         }
       ]
     },
     {
-      "Route": "css/output.1runtyh2s8.css",
+      "Route": "css/output.2e86jh3jkl.css",
       "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\wwwroot\\css\\output.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3439,7 +3439,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "137509"
+          "Value": "143476"
         },
         {
           "Name": "Content-Type",
@@ -3447,11 +3447,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A=\""
+          "Value": "\"+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 20:50:15 GMT"
+          "Value": "Sun, 18 May 2025 03:02:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3461,7 +3461,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1runtyh2s8"
+          "Value": "2e86jh3jkl"
         },
         {
           "Name": "label",
@@ -3469,13 +3469,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A="
+          "Value": "sha256-+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0="
         }
       ]
     },
     {
-      "Route": "css/output.1runtyh2s8.css.gz",
-      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-1runtyh2s8.gz",
+      "Route": "css/output.2e86jh3jkl.css.gz",
+      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-2e86jh3jkl.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3484,7 +3484,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21012"
+          "Value": "22083"
         },
         {
           "Name": "Content-Type",
@@ -3492,11 +3492,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LFzlLj9wtjvRDaZMv50d6djbhVmbKsIfsszbiGlt4qI=\""
+          "Value": "\"+J3X1tY/4wF60gNlqfIN9iOXYbTMDajqWAweK1M2N4w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 20:50:15 GMT"
+          "Value": "Sun, 18 May 2025 03:02:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3514,7 +3514,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1runtyh2s8"
+          "Value": "2e86jh3jkl"
         },
         {
           "Name": "label",
@@ -3522,18 +3522,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-LFzlLj9wtjvRDaZMv50d6djbhVmbKsIfsszbiGlt4qI="
+          "Value": "sha256-+J3X1tY/4wF60gNlqfIN9iOXYbTMDajqWAweK1M2N4w="
         }
       ]
     },
     {
       "Route": "css/output.css",
-      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-1runtyh2s8.gz",
+      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-2e86jh3jkl.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000047589587"
+          "Quality": "0.000045281652"
         }
       ],
       "ResponseHeaders": [
@@ -3543,15 +3543,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21012"
+          "Value": "22083"
         },
         {
           "Name": "ETag",
-          "Value": "\"LFzlLj9wtjvRDaZMv50d6djbhVmbKsIfsszbiGlt4qI=\""
+          "Value": "\"+J3X1tY/4wF60gNlqfIN9iOXYbTMDajqWAweK1M2N4w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 20:50:15 GMT"
+          "Value": "Sun, 18 May 2025 03:02:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3571,13 +3571,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A=\""
+          "Value": "W/\"+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A="
+          "Value": "sha256-+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0="
         }
       ]
     },
@@ -3592,7 +3592,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "137509"
+          "Value": "143476"
         },
         {
           "Name": "Content-Type",
@@ -3600,11 +3600,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A=\""
+          "Value": "\"+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 20:50:15 GMT"
+          "Value": "Sun, 18 May 2025 03:02:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3614,13 +3614,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bZB6sjpaUEB9bMrCh2AUFh8DgpFKU9ugruhGR70Up9A="
+          "Value": "sha256-+jbUx4EomYJrHH+smKIOUJd9viypgJHezbGtFJq5Ok0="
         }
       ]
     },
     {
       "Route": "css/output.css.gz",
-      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-1runtyh2s8.gz",
+      "AssetFile": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Web\\obj\\Debug\\net9.0\\compressed\\a67jaq1b33-2e86jh3jkl.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3629,7 +3629,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21012"
+          "Value": "22083"
         },
         {
           "Name": "Content-Type",
@@ -3637,11 +3637,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LFzlLj9wtjvRDaZMv50d6djbhVmbKsIfsszbiGlt4qI=\""
+          "Value": "\"+J3X1tY/4wF60gNlqfIN9iOXYbTMDajqWAweK1M2N4w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 20:50:15 GMT"
+          "Value": "Sun, 18 May 2025 03:02:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3659,7 +3659,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LFzlLj9wtjvRDaZMv50d6djbhVmbKsIfsszbiGlt4qI="
+          "Value": "sha256-+J3X1tY/4wF60gNlqfIN9iOXYbTMDajqWAweK1M2N4w="
         }
       ]
     },

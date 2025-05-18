@@ -19,7 +19,7 @@ namespace CineMaxCOL_BILL.Service
         }
 
         public async Task<Funcion> Service_SelectedFuncionMovieAndMoreThings(string SalaId , string IdPelicula , string identificador){
-            return await _Unit._UnitSelectingPositions.SelectedFuncionAndMoreThings(SalaId , IdPelicula ,identificador);
+            return await _Unit._UnitSelectingPositions.SelectedFuncionAndMoreThings(SalaId , IdPelicula  ,identificador);
         }
         
     }

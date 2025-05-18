@@ -65,7 +65,7 @@ namespace CineMaxCOL_Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
             TempData["error"] = "Credenciales Incorrectas!";
-            return View("LogIn");
+            return Redirect("LogIn");
         }
 
         public async Task<IActionResult> LogOut()

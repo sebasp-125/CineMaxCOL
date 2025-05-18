@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +10,6 @@
 <body>
     <header class="sticky top-0 z-10 w-full overflow-x-hidden">
         <div class="navbar bg-white shadow-sm border-y-4 border-[#55692d]">
-            <!-- Menú hamburguesa -->
             <div class="ml-5 drawer">
                 <input id="my-drawer" type="checkbox" class="drawer-toggle" />
                 <div class="drawer-content">
@@ -22,11 +20,12 @@
                     </label>
                 </div>
                 <div class="drawer-side z-50">
-                    <label for="my-drawer" class="drawer-overlay"></label>
+                    <label for="my-drawer" class="drawer-overlay">
                     <ul class="menu p-4 w-80 min-h-full bg-gradient-to-b from-[#55692d] to-[#cad395] text-white">
                         <li><a href="@Url.Action("LogIn", "Account")">Iniciar Sesión</a></li>
                         <li><a href="@Url.Action("Register", "Account")">Registrarse</a></li>
                         <li><a href="@Url.Action("LogOut", "Account")">Cerrar Sesión</a></li>
+                        <li><a href="@Url.Action("Index", "Ceo")">ADMINISTRAR</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +40,6 @@
             </div>
 
             <div class="flex items-center gap-4 pr-5">
-                <!-- Perfil -->
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
@@ -68,7 +66,6 @@
     <main>
         @RenderBody()
     </main>
-
     <footer class="bg-[#55692d] p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-white">
         <div class="flex flex-col items-center">
             <h1 class="font-bold">INFORMACIÓN LEGAL</h1>
@@ -91,6 +88,9 @@
             </div>
         </div>
     </footer>
+    <footer class="bg-white text-center text-sm text-gray-500 py-4 border-t">
+                Copyright © Your Website 2025
+            </footer>  
 </body>
 </html>
 

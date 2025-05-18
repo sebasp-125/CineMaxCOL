@@ -1,18 +1,18 @@
 @model CineMaxCOL_Entity.Funcion
 
 @{
-    int capacidad = Model.IdSalaNavigation?.Capacidad ?? 0;
+    int capacidad = 20;
 }
 
 <div class="bg-gray-100 min-h-screen py-10">
     <div class="bg-white max-w-4xl mx-auto p-6 rounded-lg shadow-md">
-                <div class="w-full h-6 bg-gray-400 mt-8 text-center font-semibold flex items-center justify-center rounded">
+        <div class="w-full h-6 bg-gray-400 mt-8 text-center font-semibold flex items-center justify-center rounded">
             Pantalla
         </div>
 
         <div class="flex space-x-6 mt-4 justify-center">
             <div class="flex items-center space-x-2">
-                <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
                 <span>Disponible</span>
             </div>
             <div class="flex items-center space-x-2">
@@ -31,9 +31,10 @@
             <div class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2 w-full justify-center">
                 @for (int i = 0; i < capacidad; i++)
                 {
-                    <form asp-action="AddSeatList" asp-controller="SelectingPositions" method="post">
-                        <button type="submit" class="w-6 h-6 rounded-full bg-yellow-700 hover:bg-yellow-600">Fk1</button>
-                    </form>
+                    <button type="submit" id="seat-@i" onclick="Selecting(@i)"
+                        class="w-6 h-6 rounded-full bg-gray-500 hover:bg-gray-200 text-xs text-white flex items-center justify-center">
+                        @i
+                    </button>
                 }
             </div>
         }
@@ -42,28 +43,92 @@
             <p class="text-red-600 font-semibold">No hay información de capacidad de la sala.</p>
         }
 
-        <div class="overflow-x-auto mt-8 w-full">
-            <table class="table w-full">
-                <thead>
-                    <tr>
-                        <th>Nombre de la Película</th>
-                        <th>Asientos seleccionados</th>
-                        <th>Precio</th>
-                        <th>Total a pagar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@Model.IdPeliculaNavigation.Titulo</td>
-                        <td>@Model.Precio</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="mt-10 w-full space-y-2">
+            <a href="@Url.Action("RecoletInformation_ProccessPayment", "PaymentdGetAway" , new {idfuction = @Model.Id , numbersOftickets = 2})" class="btn btn-success w-full">Pagar</a>
+            <button class="btn btn-error w-full" onclick="Abandonar()">Abandonar</button>
         </div>
 
-        <div class="mt-10 w-full space-y-2">
-            <button class="btn btn-success w-full">Pagar</button>
-            <button class="btn btn-error w-full">Abandonar</button>
+        <div class="collapse bg-base-100 border border-base-300">
+        <input type="radio" name="my-accordion-1" checked="checked" />
+        <div class="collapse-title font-semibold text-center">Información sobre @Model.IdPeliculaNavigation?.Titulo</div>
+        <div class="collapse-content text-sm">
+            <div class="max-w-md mx-auto my-6">
+                <div class="card shadow-xl bg-base-100">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl font-bold">Función #@Model.Id</h2>
+                        <div class="space-y-2">
+                            <p><span class="font-semibold">Sala:</span> @Model.IdSalaNavigation?.Nombre</p>
+                            <p><span class="font-semibold">Película:</span> @Model.IdPeliculaNavigation?.Titulo</p>
+                            <p><span class="font-semibold">Fecha y hora:</span> @Model.FechaHora?.ToString("g")</p>
+                            <p><span class="font-semibold">Precio:</span> $@Model.Precio?.ToString("F2")</p>
+                            <p><span class="font-semibold">Identificador:</span> @Model.IdentificadorMovies</p>
+                            <p><span class="font-semibold">Creado el:</span> @Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
+                            <p>
+                                <span>Seleccionadas: </span>
+                                <span id="reservesAccount"></span>
+                            </p>
+                            <p>
+                                <span>Total a pagar: </span>
+                                <span id="AllPayme"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
 </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectedSeats = JSON.parse(localStorage.getItem("SelectedSeats")) || [];
+
+        selectedSeats.forEach(id => {
+            const btn = document.getElementById("seat-" + id);
+            if (btn) {
+                btn.classList.remove("bg-gray-500");
+                btn.classList.add("bg-blue-600");
+            }
+        });
+
+        updateSeatList(selectedSeats);
+    });
+
+    function Selecting(id) {
+        let selectedSeats = JSON.parse(localStorage.getItem("SelectedSeats")) || [];
+        const btn = document.getElementById("seat-" + id);
+
+        if (!selectedSeats.includes(id)) {
+            selectedSeats.push(id);
+            btn.classList.remove("bg-gray-500");
+            btn.classList.add("bg-blue-600");
+        } else {
+            selectedSeats = selectedSeats.filter(item => item !== id);
+            btn.classList.remove("bg-blue-600");
+            btn.classList.add("bg-gray-500");
+        }
+
+        localStorage.setItem("SelectedSeats", JSON.stringify(selectedSeats));
+        updateSeatList(selectedSeats);
+    }
+
+    function updateSeatList(seats) {
+        const seatDisplay = document.getElementById("reservesAccount");
+        seatDisplay.textContent = seats.join(", ");
+
+        const precio = parseFloat('@Model.Precio'.replace(',', '.'));
+        const total = seats.length * precio;
+        document.getElementById("AllPayme").textContent = "$" + total.toFixed(2);
+    }
+
+    function Abandonar() {
+        localStorage.removeItem("SelectedSeats");
+        location.reload();
+    }
+
+</script>

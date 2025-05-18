@@ -25,11 +25,7 @@ public partial class Usuario
 
     public string? Password { get; set; }
 
-    public int? IdFuncion { get; set; }
-
     public virtual ICollection<HistorialCompra> HistorialCompras { get; set; } = new List<HistorialCompra>();
-
-    public virtual Funcion? IdFuncionNavigation { get; set; }
 
     public virtual Horario? IdHorarioNavigation { get; set; }
 
