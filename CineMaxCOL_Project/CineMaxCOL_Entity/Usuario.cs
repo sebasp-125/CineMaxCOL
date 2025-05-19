@@ -34,4 +34,6 @@ public partial class Usuario
     public virtual Role? IdRolNavigation { get; set; }
 
     public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();
+
+    public virtual ICollection<Tarjeta> Tarjeta { get; set; } = new List<Tarjeta>();
 }

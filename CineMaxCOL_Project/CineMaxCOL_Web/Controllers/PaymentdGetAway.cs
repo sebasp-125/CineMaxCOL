@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using CineMaxCOL_BILL.Service;
 using CineMaxCOL_DAL.UnitOfWork.Interface;
+using CineMaxCOL_Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,11 +14,12 @@ namespace CineMaxCOL_Web.Controllers
 {
     public class PaymentdGetAway : Controller
     {
-        private readonly IUnitOfWork _logger;
+        private readonly PaymentBuyTickets _authService;
+        private readonly IUnitOfWork _Unit;
 
-        public PaymentdGetAway(IUnitOfWork  logger)
+        public PaymentdGetAway(PaymentBuyTickets service)
         {
-            _logger = logger;
+            _authService = service;
         }
 
         public IActionResult Index()
@@ -23,20 +27,53 @@ namespace CineMaxCOL_Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> RegistersPay()
+        [HttpPost]
+        public async Task<IActionResult> RegistersPay(Tarjeta tarjeta)
         {
-            var response = await _logger._UnitSendEmail.ExtractInformationAboutEmail();
-            if (!response) {
-                Console.WriteLine("Error");
-                return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Por favor completa todos los campos obligatorios correctamente.";
+                return View("Index", tarjeta);
             }
-            return View("Index");
+
+            // var BrinfInformationLogInUser = 
+
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            int? idUsuario = null;
+            if (int.TryParse(userId, out var parsedId))
+            {
+                idUsuario = parsedId;
+            }
+
+            var response = new Tarjeta
+            {
+                IdUsuario = idUsuario,
+                NombreTitular = tarjeta.NombreTitular,
+                CorreoElectronico = tarjeta.CorreoElectronico,
+                NumeroTarjeta = tarjeta.NumeroTarjeta,
+                FechaExpiracion = tarjeta.FechaExpiracion,
+                TipoTarjeta = tarjeta.TipoTarjeta
+            };
+
+            var responsePayRegister = await _authService.RegisterCardUsServices(response);
+            if (!responsePayRegister)
+            {
+                TempData["error"] = "Tenemos problemas al registrar la tarjeta.";
+                return View("Index");
+            }
+
+            return View("~/Views/SummaryBuy/Index.cshtml", response);
         }
+
 
         public IActionResult RecoletInformation_ProccessPayment(string idfuction, int numbersOftickets)
         {
-            return View("Index");
-        } 
+            return Redirect("Index");
+        }
+        public async Task<IActionResult> RegisterInformationOurSystems()
+        {
+            return Ok();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

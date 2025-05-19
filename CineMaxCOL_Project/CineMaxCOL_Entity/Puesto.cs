@@ -15,5 +15,4 @@ public partial class Puesto
 
     public virtual Sala IdSalaNavigation { get; set; } = null!;
 
-    public virtual ICollection<ReservaPuesto> ReservaPuestos { get; set; } = new List<ReservaPuesto>();
 }

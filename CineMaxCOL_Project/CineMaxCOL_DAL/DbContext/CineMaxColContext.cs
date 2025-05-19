@@ -45,6 +45,8 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<Silla> Sillas { get; set; }
 
+    public virtual DbSet<Tarjeta> Tarjetas { get; set; }
+
     public virtual DbSet<TipoPago> TipoPagos { get; set; }
 
     public virtual DbSet<Ubicacion> Ubicacions { get; set; }
@@ -321,6 +323,29 @@ public partial class CineMaxColContext : DbContext
             entity.Property(e => e.Codigo)
                 .HasMaxLength(10)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Tarjeta>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Tarjetas__3214EC07B6F40070");
+
+            entity.Property(e => e.CorreoElectronico)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.NombreTitular)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.NumeroTarjeta)
+                .HasMaxLength(19)
+                .IsUnicode(false);
+            entity.Property(e => e.TipoTarjeta)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Tarjeta)
+                .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Tarjetas_Usuario");
         });
 
         modelBuilder.Entity<TipoPago>(entity =>

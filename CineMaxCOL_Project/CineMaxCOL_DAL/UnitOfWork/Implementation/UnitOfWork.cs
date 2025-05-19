@@ -36,6 +36,10 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
         {
             return new LandingRepository<T>(_context);
         }
+        public IPaymentBuyTickets<T> _UnitPaymentBuyTicktes<T>() where T : class
+        {
+            return new PaymentBuyTickets<T>(_context);
+        }
 
         public async Task SaveAsync()
         {

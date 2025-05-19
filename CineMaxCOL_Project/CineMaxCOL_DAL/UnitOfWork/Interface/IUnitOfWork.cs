@@ -15,5 +15,8 @@ namespace CineMaxCOL_DAL.UnitOfWork.Interface
         IDetailsSelectedMovie<T> GetDetailsMoviesAndCine<T>() where T : class;
         ISendEmail _UnitSendEmail { get; }
 
+        //All relacionated Payment/BuyTickets
+        IPaymentBuyTickets<T> _UnitPaymentBuyTicktes<T>() where T : class;
+
     }
 }
