@@ -20,7 +20,7 @@ public partial class Tarjeta
     public string NumeroTarjeta { get; set; }
 
     [Required(ErrorMessage = "La fecha de expiración es obligatoria.")]
-    public string FechaExpiracion { get; set; }
+    public DateTime  FechaExpiracion { get; set; }
 
     [Required(ErrorMessage = "El tipo de tarjeta es obligatorio.")]
     public string TipoTarjeta { get; set; }

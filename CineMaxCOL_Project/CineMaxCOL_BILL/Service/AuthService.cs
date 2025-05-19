@@ -38,7 +38,7 @@ namespace CineMaxCOL_BILL.Service
 
             new Claim(ClaimTypes.Name, user?.FullName ?? "Error"),
             new Claim(ClaimTypes.Email, user?.Email ?? "Error"),
-            new Claim(ClaimTypes.NameIdentifier , user?.Id.ToString() ?? null),
+            new Claim(ClaimTypes.NameIdentifier , user?.Id.ToString() ?? Convert.ToString(0)),
             new Claim(ClaimTypes.Role, user?.IdRolNavigation?.TipoRol ?? "Error")
             };
 

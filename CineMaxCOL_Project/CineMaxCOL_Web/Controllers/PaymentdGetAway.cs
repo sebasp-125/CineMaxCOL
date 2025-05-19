@@ -17,13 +17,30 @@ namespace CineMaxCOL_Web.Controllers
         private readonly PaymentBuyTickets _authService;
         private readonly IUnitOfWork _Unit;
 
-        public PaymentdGetAway(PaymentBuyTickets service)
+        public PaymentdGetAway(PaymentBuyTickets service, IUnitOfWork Unit)
         {
             _authService = service;
+            _Unit = Unit;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
+            int idUsuario = 0;
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var parsedId))
+            {
+                idUsuario = parsedId;
+            }
+
+            var BrinfInformationLogInUser = await _authService.BringInformationLogInUserServices(idUsuario);
+            if (BrinfInformationLogInUser != null)
+            {
+                return View(BrinfInformationLogInUser);
+            }
+
+
             return View();
         }
 
@@ -35,9 +52,6 @@ namespace CineMaxCOL_Web.Controllers
                 TempData["error"] = "Por favor completa todos los campos obligatorios correctamente.";
                 return View("Index", tarjeta);
             }
-
-            // var BrinfInformationLogInUser = 
-
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             int? idUsuario = null;
             if (int.TryParse(userId, out var parsedId))
@@ -65,14 +79,11 @@ namespace CineMaxCOL_Web.Controllers
             return View("~/Views/SummaryBuy/Index.cshtml", response);
         }
 
-
-        public IActionResult RecoletInformation_ProccessPayment(string idfuction, int numbersOftickets)
+        //To Page Summary
+        public async Task<IActionResult> RightPersonLogIn(int idUser)
         {
-            return Redirect("Index");
-        }
-        public async Task<IActionResult> RegisterInformationOurSystems()
-        {
-            return Ok();
+            var BrinfInformationLogInUser = await _authService.BringInformationLogInUserServices(idUser);
+            return View("~/Views/SummaryBuy/Index.cshtml", BrinfInformationLogInUser);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

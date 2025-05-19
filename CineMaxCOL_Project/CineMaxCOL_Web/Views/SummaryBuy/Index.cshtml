@@ -1,60 +1,87 @@
 @model CineMaxCOL_Entity.Tarjeta
 
-    <div class="max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md border border-olive-700">
-    <h2 class="text-2xl font-semibold text-olive-900 mb-6 text-center">Titular</h2>
+<div class="max-w-6xl mx-auto bg-white shadow-lg border border-[#55692d] rounded-xl p-8 space-y-6">
 
-    <div class="space-y-4">
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Nombre Titular:</span>
-        <span class="text-olive-700">@Model.NombreTitular</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Correo Electrónico:</span>
-        <span class="text-olive-700">@Model.CorreoElectronico</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Número Tarjeta:</span>
-        <span class="text-olive-700">@Model.NumeroTarjeta</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Fecha Expiración:</span>
-        <span class="text-olive-700">@Model.FechaExpiracion</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Tipo Tarjeta:</span>
-        <span class="text-olive-700">@Model.TipoTarjeta</span>
-        </div>
-    </div>
-    <div class="max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md border border-olive-700">
-    <h2 class="text-2xl font-semibold text-olive-900 mb-6 text-center">Funcion Y demas</h2>
-
-    <div class="space-y-4">
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Nombre Titular:</span>
-        <span class="text-olive-700">@Model.NombreTitular</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Correo Electrónico:</span>
-        <span class="text-olive-700">@Model.CorreoElectronico</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Número Tarjeta:</span>
-        <span class="text-olive-700">@Model.NumeroTarjeta</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Fecha Expiración:</span>
-        <span class="text-olive-700">@Model.FechaExpiracion</span>
-        </div>
-        <div class="flex justify-between border-b border-olive-300 pb-2">
-        <span class="font-medium text-olive-800">Tipo Tarjeta:</span>
-        <span class="text-olive-700">@Model.TipoTarjeta</span>
-        </div>
+    <!-- Encabezado -->
+    <div class="text-center border-b border-gray-300 pb-4">
+        <h1 class="text-3xl font-bold text-[#55692d]">Factura Detallada - CineMaxCOL</h1>
+        <p class="text-sm text-gray-500">Resumen de Facturación por Compra en Línea</p>
     </div>
 
-    <button class="mt-6 w-full bg-[#55692d] hover:bg-olive-800 text-white font-semibold py-2 rounded-lg transition-colors">
-        Confirmar Compra
-    </button>
+    <!-- Cuerpo Horizontal -->
+    <div class="grid grid-cols-2 gap-8">
 
+        <!-- Columna: Información de la Tarjeta -->
+        <div>
+            <h2 class="text-xl font-semibold text-[#55692d] mb-4 border-b border-gray-200 pb-1">Información de la Tarjeta</h2>
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Nombre Titular:</span>
+                    <span class="text-gray-600">@Model.NombreTitular</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Correo Electrónico:</span>
+                    <span class="text-gray-600">@Model.CorreoElectronico</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Número Tarjeta:</span>
+                    <span class="text-gray-600">@Model.NumeroTarjeta</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Fecha Expiración:</span>
+                    <span class="text-gray-600">@Model.FechaExpiracion.ToString("yyyy-MM-dd")</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Tipo Tarjeta:</span>
+                    <span class="text-gray-600">@Model.TipoTarjeta</span>
+                </div>
+            </div>
+        </div>
 
+        <!-- Columna: Información del Usuario -->
+        <div>
+            <h2 class="text-xl font-semibold text-[#55692d] mb-4 border-b border-gray-200 pb-1">Datos del Usuario</h2>
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Nombre Completo:</span>
+                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.FullName</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Correo:</span>
+                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.Email</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Documento:</span>
+                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.Dni</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Rol:</span>
+                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.IdRolNavigation?.TipoRol</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-800">Registro:</span>
+                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.CreatedAt?.ToString("yyyy-MM-dd")</span>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Película -->
+    <div>
+        <h2 class="text-xl font-semibold text-[#55692d] mb-4">Película y Función</h2>
+        <div class="p-4 border border-dashed border-gray-300 rounded-lg text-center text-gray-500 italic">
+            Información de la película aquí...
+            <!-- Ejemplo:
+            <p><strong>Título:</strong> Avengers: Endgame</p>
+            <p><strong>Horario:</strong> 7:30 PM - Sala 2</p>
+            -->
+        </div>
+    </div>
+
+    <!-- Botón Confirmar -->
+    <div class="text-right">
+        <button class="btn bg-[#55692d] hover:bg-[#44571c] text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-300">
+            Confirmar Compra
+        </button>
+    </div>
+</div>

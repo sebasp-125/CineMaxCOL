@@ -24,15 +24,22 @@ namespace CineMaxCOL_BILL.Service
             return true;
         }
 
-        public async Task<Tarjeta> BringInformationLogInUserServices(int id)
+        public async Task<Tarjeta> BringInformationLogInUserServices(int iduser)
         {
-            var response = await _Unit._UnitPaymentBuyTicktes<Tarjeta>().BringInformationLogInUser(id);
+            var service = _Unit._UnitPaymentBuyTicktes<Tarjeta>();
+
+            if (service == null)
+            {
+                return new Tarjeta();
+            }
+            var response = await service.BringInformationLogInUser(iduser);
             if (response == null)
             {
-                return null;
+                return new Tarjeta();
             }
             return response;
         }
+
 
         //This is a rule or Services, which will for a save PAyMethod but will aplicate in other moment. 18/05/2025
         public async Task<bool> SavePayMethod(TipoPago tipoPago)

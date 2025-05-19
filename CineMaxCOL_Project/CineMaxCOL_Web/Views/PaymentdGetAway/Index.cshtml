@@ -1,9 +1,30 @@
 @model CineMaxCOL_Entity.Tarjeta
-
+@{
+    bool validatorStatus = (Model != null && Model.Id > 0);
+}
 <div class="container mx-auto p-4 space-y-4 bg-white rounded-xl">
     <div class="flex justify-center">
-        <img src="https://res.cloudinary.com/dkykp6eya/image/upload/v1746027655/1Logo1-removebg-preview_dbmsqo.png" width="300px" />
+        <img src="https://res.cloudinary.com/dkykp6eya/image/upload/v1746027655/1Logo1-removebg-preview_dbmsqo.png"
+            width="300px" />
     </div>
+
+    @if (!validatorStatus)
+    {
+        <p class="text-center">Rellena esta Información</p>
+    }
+    else
+    {
+        <div class="flex justify-center">
+            <div class="tooltip tooltip-bottom"
+                data-tip="Para agregar o cambiar esta información, debes registrar una nueva tarjeta.">
+                <button class="btn bg-[#55692d] text-white hover:bg-[#6a8035]">
+                    Hola @Model.NombreTitular 👋
+                </button>
+            </div>
+        </div>
+    }
+
+
 
     <form asp-action="RegistersPay" asp-controller="PaymentdGetAway" method="post">
         <div class="collapse collapse-arrow border border-[#55692d] bg-white rounded-xl">
@@ -13,22 +34,40 @@
                 <img src="/ruta-icono-tarjeta.svg" alt="tarjeta" class="w-6 h-6" />
             </div>
             <div class="collapse-content space-y-3">
-                <input asp-for="CorreoElectronico" placeholder="Correo Electrónico" class="input input-bordered w-full border-black" />
+                <input asp-for="CorreoElectronico" placeholder="Correo Electrónico"
+                    class="input input-bordered w-full border-black" />
                 <span asp-validation-for="CorreoElectronico" class="text-red-600 text-sm"></span>
-
-                <input asp-for="NombreTitular" placeholder="Nombre del titular" class="input input-bordered w-full border-black" />
+                <p class="text-center">Este correo sera utilizado para enviar tu factura de compra</p>
+                <input asp-for="NombreTitular" placeholder="Nombre del titular"
+                    class="input input-bordered w-full border-black" />
                 <span asp-validation-for="NombreTitular" class="text-red-600 text-sm"></span>
 
-                <input asp-for="NumeroTarjeta" placeholder="Número de la tarjeta" class="input input-bordered w-full border-black" />
+                <input asp-for="NumeroTarjeta" placeholder="Número de la tarjeta"
+                    class="input input-bordered w-full border-black" />
                 <span asp-validation-for="NumeroTarjeta" class="text-red-600 text-sm"></span>
 
-                <input asp-for="FechaExpiracion" type="date" placeholder="Fecha de expiración" class="input input-bordered w-full border-black" />
+                <input asp-for="FechaExpiracion" type="date" placeholder="Fecha de expiración"
+                    class="input input-bordered w-full border-black" />
                 <span asp-validation-for="FechaExpiracion" class="text-red-600 text-sm"></span>
 
-                <input asp-for="TipoTarjeta" placeholder="Tipo de tarjeta (crédito o débito)" class="input input-bordered w-full border-black" />
+                <input asp-for="TipoTarjeta" placeholder="Tipo de tarjeta (crédito o débito)"
+                    class="input input-bordered w-full border-black" />
                 <span asp-validation-for="TipoTarjeta" class="text-red-600 text-sm"></span>
+                <div class="flex flex-col gap-2">
+                    <button type="submit"
+                        class="btn w-full
+            @(validatorStatus ? "btn-disabled bg-gray-300 text-gray-600 cursor-not-allowed" : "bg-[#55692d] text-white hover:bg-[#6a8035]")"
+                        @(validatorStatus ? "disabled" : "")>
+                        Agregar nueva tarjeta
+                    </button>
 
-                <button type="submit" class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">Continuar</button>
+                    @if (validatorStatus)
+                    {
+                        <a href="@Url.Action("RightPersonLogIn" , "PaymentdGetAway" , new { idUser = @Model?.IdUsuario ?? 0})" class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">
+                            Continuar con el proceso
+                        </a>
+                    }
+                </div>
             </div>
         </div>
     </form>
@@ -36,9 +75,9 @@
     <section>
         <div class="text-center">
             <strong>
-                Toda su compra sera registrada tanto en su correo brindado como en nuestros sistemas internos de CineMaxCOL.
+                Toda su compra sera registrada tanto en su correo brindado como en nuestros sistemas internos de
+                CineMaxCOL.
             </strong>
         </div>
     </section>
 </div>
-

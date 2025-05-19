@@ -6,7 +6,7 @@ using CineMaxCOL_Entity;
 
 namespace CineMaxCOL_DAL.Repository.Interface
 {
-    public interface IPaymentBuyTickets<T>
+    public interface IPaymentBuyTickets<T> where T : class
     {
         //Here is everithing related about Buy or Shopping Tickes
         //All relacionated Payment/BuyTickets
@@ -14,6 +14,6 @@ namespace CineMaxCOL_DAL.Repository.Interface
 
         //This is a specially fuction, It's about user information when heir is LogIn.
         //Just is for the user LogIn asociate information...
-        Task<Tarjeta> BringInformationLogInUser(int id);
+        Task<Tarjeta> BringInformationLogInUser(int iduser);
     }
 }
