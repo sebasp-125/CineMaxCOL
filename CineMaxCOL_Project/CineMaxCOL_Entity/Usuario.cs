@@ -25,6 +25,8 @@ public partial class Usuario
 
     public string? Password { get; set; }
 
+    public virtual ICollection<AsientosTemporale> AsientosTemporales { get; set; } = new List<AsientosTemporale>();
+
     public virtual ICollection<HistorialCompra> HistorialCompras { get; set; } = new List<HistorialCompra>();
 
     public virtual Horario? IdHorarioNavigation { get; set; }

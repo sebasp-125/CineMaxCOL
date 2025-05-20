@@ -23,5 +23,5 @@ public partial class Sala
 
     public virtual Cine? IdCineNavigation { get; set; }
 
-    public virtual Silla? IdSillaNavigation { get; set; }
+    public virtual ICollection<Silla> Sillas { get; set; } = new List<Silla>();
 }

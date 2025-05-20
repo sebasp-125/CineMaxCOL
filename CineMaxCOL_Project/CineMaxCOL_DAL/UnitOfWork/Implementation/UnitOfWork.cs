@@ -15,6 +15,7 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
         private IUserRepository _userRepository;
         private ISendEmail _SendEmailRepository;
         private ISelectingPositions<Funcion> _SelectingPositions;
+        private IMarketTemporalPosition_Repository<AsientosTemporale> _MarketTemporalPositions;
 
         public UnitOfWork(CineMaxColContext context)
         {
@@ -26,6 +27,8 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
         public ISelectingPositions<Funcion> _UnitSelectingPositions => _SelectingPositions ??= new SelectingPositionsRepository(_context);
 
         public ISendEmail _UnitSendEmail => _SendEmailRepository ??= new SendEmail(_context);
+
+        public IMarketTemporalPosition_Repository<AsientosTemporale> _UnitTemporalPositions => _MarketTemporalPositions ??= new MarketTemporalPosition_Repository(_context);
 
         public IDetailsSelectedMovie<T> GetDetailsMoviesAndCine<T>() where T : class
         {

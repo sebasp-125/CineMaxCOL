@@ -24,15 +24,21 @@ namespace CineMaxCOL_Web.Controllers
             _selectingPositionsServices = authServices;
         }
 
-        public async Task<IActionResult> Index(string SalaId, string IdPelicula,string identificador)
+        public IActionResult Index()
         {
-            
             return View();
         }
 
-        public async Task<IActionResult> InformationMainMovie(string SalaId, string IdPelicula,string identificador)
+        //This actions it's about almacenate or saving every positions such as 1A and the others. 19/05/2025
+        public async Task<IActionResult> TemporalMarketPosition(int position)
         {
-            var response = await _selectingPositionsServices.Service_SelectedFuncionMovieAndMoreThings(SalaId, IdPelicula,  identificador);
+
+            return Ok();
+        }
+
+        public async Task<IActionResult> InformationMainMovie(string SalaId, string IdPelicula, string identificador)
+        {
+            var response = await _selectingPositionsServices.Service_SelectedFuncionMovieAndMoreThings(SalaId, IdPelicula, identificador);
             if (response == null)
             {
                 TempData["error"] = "error";

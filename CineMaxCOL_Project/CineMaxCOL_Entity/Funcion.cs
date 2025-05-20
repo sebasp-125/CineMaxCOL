@@ -19,6 +19,8 @@ public partial class Funcion
 
     public string? IdentificadorMovies { get; set; }
 
+    public virtual ICollection<AsientosTemporale> AsientosTemporales { get; set; } = new List<AsientosTemporale>();
+
     public virtual Pelicula? IdPeliculaNavigation { get; set; }
 
     public virtual Sala? IdSalaNavigation { get; set; }

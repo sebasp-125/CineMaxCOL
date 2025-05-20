@@ -18,5 +18,8 @@ namespace CineMaxCOL_DAL.UnitOfWork.Interface
         //All relacionated Payment/BuyTickets
         IPaymentBuyTickets<T> _UnitPaymentBuyTicktes<T>() where T : class;
 
+        //Just everything about MarketPositionsTemporal
+        IMarketTemporalPosition_Repository<AsientosTemporale> _UnitTemporalPositions {get;}
+
     }
 }

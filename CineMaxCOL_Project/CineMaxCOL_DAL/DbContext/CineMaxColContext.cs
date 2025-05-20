@@ -15,6 +15,8 @@ public partial class CineMaxColContext : DbContext
     {
     }
 
+    public virtual DbSet<AsientosTemporale> AsientosTemporales { get; set; }
+
     public virtual DbSet<Cine> Cines { get; set; }
 
     public virtual DbSet<ConfiguracionCloud> ConfiguracionClouds { get; set; }
@@ -59,6 +61,31 @@ public partial class CineMaxColContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AsientosTemporale>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Asientos__3214EC07B173D994");
+
+            entity.Property(e => e.Estado)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.IdFuncion).HasColumnName("Id_Funcion");
+            entity.Property(e => e.IdSilla).HasColumnName("Id_Silla");
+            entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
+            entity.Property(e => e.ReservadoHasta).HasColumnType("datetime");
+
+            entity.HasOne(d => d.IdFuncionNavigation).WithMany(p => p.AsientosTemporales)
+                .HasForeignKey(d => d.IdFuncion)
+                .HasConstraintName("FK_HacientosTemporalesToFuncion");
+
+            entity.HasOne(d => d.IdSillaNavigation).WithMany(p => p.AsientosTemporales)
+                .HasForeignKey(d => d.IdSilla)
+                .HasConstraintName("FK_AsientosTemporalesToSilla");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.AsientosTemporales)
+                .HasForeignKey(d => d.IdUsuario)
+                .HasConstraintName("FK_HacientosTemporalesToUsuario");
+        });
+
         modelBuilder.Entity<Cine>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Cine__3214EC0760C8E44D");
@@ -308,21 +335,22 @@ public partial class CineMaxColContext : DbContext
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.Salas)
                 .HasForeignKey(d => d.IdCine)
                 .HasConstraintName("FK__Sala__Id_Cine__6D0D32F4");
-
-            entity.HasOne(d => d.IdSillaNavigation).WithMany(p => p.Salas)
-                .HasForeignKey(d => d.IdSilla)
-                .HasConstraintName("FK_SalaToSilla");
         });
 
         modelBuilder.Entity<Silla>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Silla__3214EC07A2745690");
+            entity.HasKey(e => e.Id).HasName("PK__Silla__3214EC073888FF19");
 
             entity.ToTable("Silla");
 
-            entity.Property(e => e.Codigo)
-                .HasMaxLength(10)
+            entity.Property(e => e.Fila)
+                .HasMaxLength(5)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdSalaNavigation).WithMany(p => p.Sillas)
+                .HasForeignKey(d => d.IdSala)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Silla__IdSala__7A3223E8");
         });
 
         modelBuilder.Entity<Tarjeta>(entity =>

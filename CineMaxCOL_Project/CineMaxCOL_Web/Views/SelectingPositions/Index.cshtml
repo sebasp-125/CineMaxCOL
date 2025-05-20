@@ -31,10 +31,10 @@
             <div class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2 w-full justify-center">
                 @for (int i = 0; i < capacidad; i++)
                 {
-                    <button type="submit" id="seat-@i" onclick="Selecting(@i)"
+                    <a href="@Url.Action("TemporalMarketPosition", "SelectingPositions" , new {IdFuncion = Model.Id})" id="seat-@i" onclick="Selecting(@i)"
                         class="w-6 h-6 rounded-full bg-gray-500 hover:bg-gray-200 text-xs text-white flex items-center justify-center">
                         @i
-                    </button>
+                    </a>
                 }
             </div>
         }
