@@ -1,4 +1,5 @@
-@model CineMaxCOL_Entity.Funcion
+@model CineMaxCOL_Web.Models.PuestosYReservas.DTO_PuestosYReservar
+
 
 @{
     int capacidad = 20;
@@ -26,22 +27,49 @@
         </div>
         <h2 class="text-2xl font-bold mb-6 text-center">Selecciona tu silla</h2>
 
-        @if (capacidad > 0)
+        @if (!Model.sillasPorFuncions.Any())
         {
-            <div class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2 w-full justify-center">
-                @for (int i = 0; i < capacidad; i++)
-                {
-                    <a href="@Url.Action("TemporalMarketPosition", "SelectingPositions" , new {IdFuncion = Model.Id})" id="seat-@i" onclick="Selecting(@i)"
-                        class="w-6 h-6 rounded-full bg-gray-500 hover:bg-gray-200 text-xs text-white flex items-center justify-center">
-                        @i
-                    </a>
-                }
-            </div>
+            <p>ERROR</p>
         }
         else
         {
-            <p class="text-red-600 font-semibold">No hay información de capacidad de la sala.</p>
+            @foreach (var item in Model.sillasPorFuncions)
+            {
+                var color = item.Estado == "Reservado" ? "bg-red-500" :
+                item.Estado == "Temporal" ? "bg-yellow-300" :
+                "bg-green-500";
+                <a href="@Url.Action("ReservarTemporalmente" , "SelectingPositions" , new 
+                {
+                    idFuncion = item.IdFuncion,
+                    IdSillaPorFuncion = (int)item.IdSillaNavigation.Id
+                })" class="border p-2 m-1 rounded text-white @color">
+                    @($"{item.IdSillaNavigation.Fila}{item.IdSillaNavigation.Numero}")
+                </a>
+            }
+
         }
+
+        @* 
+    <div class="grid grid-cols-10 gap-2">
+@foreach (var asiento in Model)
+{
+    var btnClass = asiento.Estado switch
+    {
+        "Libre" => "bg-gray-500 hover:bg-gray-300",
+        "Temporal" => "bg-yellow-500 cursor-not-allowed",
+        "Comprado" => "bg-red-600 cursor-not-allowed",
+        _ => "bg-gray-500"
+    };
+
+    <form method="post" asp-action="ReservarTemporalmente">
+        <input type="hidden" name="IdSillaPorFuncion" value="@asiento.Id" />
+        <button type="submit" class="w-6 h-6 rounded-full text-white @btnClass"
+                @(asiento.Estado != "Libre" ? "disabled" : "")>
+            @asiento.IdSillaNavigation.Fila@asiento.IdSillaNavigation.Numero
+        </button>
+    </form>
+}
+</div> *@
 
         <div class="mt-10 w-full space-y-2">
             <a href="@Url.Action("Index", "PaymentdGetAway")" class="btn btn-success w-full">Pagar</a>
@@ -49,37 +77,44 @@
         </div>
 
         <div class="collapse bg-base-100 border border-base-300">
-        <input type="radio" name="my-accordion-1" checked="checked" />
-        <div class="collapse-title font-semibold text-center">Información sobre @Model.IdPeliculaNavigation?.Titulo</div>
-        <div class="collapse-content text-sm">
-            <div class="max-w-md mx-auto my-6">
-                <div class="card shadow-xl bg-base-100">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl font-bold">Función #@Model.Id</h2>
-                        <div class="space-y-2">
-                            <p><span class="font-semibold">Sala:</span> @Model.IdSalaNavigation?.Nombre</p>
-                            <p><span class="font-semibold">Película:</span> @Model.IdPeliculaNavigation?.Titulo</p>
-                            <p><span class="font-semibold">Fecha y hora:</span> @Model.FechaHora?.ToString("g")</p>
-                            <p><span class="font-semibold">Precio:</span> $@Model.Precio?.ToString("F2")</p>
-                            <p><span class="font-semibold">Identificador:</span> @Model.IdentificadorMovies</p>
-                            <p><span class="font-semibold">Creado el:</span> @Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
-                            <p>
-                                <span>Seleccionadas: </span>
-                                <span id="reservesAccount"></span>
-                            </p>
-                            <p>
-                                <span>Total a pagar: </span>
-                                <span id="AllPayme"></span>
-                            </p>
+            <input type="radio" name="my-accordion-1" checked="checked" />
+            <div class="collapse-title font-semibold text-center">Información sobre
+                @Model.funcionDto.IdPeliculaNavigation?.Titulo</div>
+            <div class="collapse-content text-sm">
+                <div class="max-w-md mx-auto my-6">
+                    <div class="card shadow-xl bg-base-100">
+                        <div class="card-body">
+                            <h2 class="card-title text-2xl font-bold">Función #@Model.funcionDto.Id</h2>
+                            <div class="space-y-2">
+                                <p><span class="font-semibold">Sala:</span> @Model.funcionDto.IdSalaNavigation?.Nombre
+                                </p>
+                                <p><span class="font-semibold">Película:</span>
+                                    @Model.funcionDto.IdPeliculaNavigation?.Titulo</p>
+                                <p><span class="font-semibold">Fecha y hora:</span>
+                                    @Model.funcionDto.FechaHora?.ToString("g")</p>
+                                <p><span class="font-semibold">Precio:</span> $@Model.funcionDto.Precio?.ToString("F2")
+                                </p>
+                                <p><span class="font-semibold">Identificador:</span>
+                                    @Model.funcionDto.IdentificadorMovies</p>
+                                <p><span class="font-semibold">Creado el:</span>
+                                    @Model.funcionDto.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
+                                <p>
+                                    <span>Seleccionadas: </span>
+                                    <span id="reservesAccount"></span>
+                                </p>
+                                <p>
+                                    <span>Total a pagar: </span>
+                                    <span id="AllPayme"></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 
@@ -121,7 +156,7 @@
         const seatDisplay = document.getElementById("reservesAccount");
         seatDisplay.textContent = seats.join(", ");
 
-        const precio = parseFloat('@Model.Precio'.replace(',', '.'));
+        @* const precio = parseFloat('@Model.Precio'.replace(',', '.')); *@
         const total = seats.length * precio;
         document.getElementById("AllPayme").textContent = "$" + total.toFixed(2);
     }

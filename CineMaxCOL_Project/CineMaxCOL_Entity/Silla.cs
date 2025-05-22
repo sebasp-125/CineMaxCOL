@@ -16,4 +16,6 @@ public partial class Silla
     public virtual ICollection<AsientosTemporale> AsientosTemporales { get; set; } = new List<AsientosTemporale>();
 
     public virtual Sala IdSalaNavigation { get; set; } = null!;
+
+    public virtual ICollection<SillasPorFuncion> SillasPorFuncions { get; set; } = new List<SillasPorFuncion>();
 }

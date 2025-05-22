@@ -47,6 +47,8 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<Silla> Sillas { get; set; }
 
+    public virtual DbSet<SillasPorFuncion> SillasPorFuncions { get; set; }
+
     public virtual DbSet<Tarjeta> Tarjetas { get; set; }
 
     public virtual DbSet<TipoPago> TipoPagos { get; set; }
@@ -351,6 +353,29 @@ public partial class CineMaxColContext : DbContext
                 .HasForeignKey(d => d.IdSala)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Silla__IdSala__7A3223E8");
+        });
+
+        modelBuilder.Entity<SillasPorFuncion>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__SillasPo__3214EC0720CE2CCA");
+
+            entity.ToTable("SillasPorFuncion");
+
+            entity.Property(e => e.Estado)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("Libre");
+            entity.Property(e => e.ReservadoHasta).HasColumnType("datetime");
+
+            entity.HasOne(d => d.IdFuncionNavigation).WithMany(p => p.SillasPorFuncions)
+                .HasForeignKey(d => d.IdFuncion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SillasPorFuncion_Funcion");
+
+            entity.HasOne(d => d.IdSillaNavigation).WithMany(p => p.SillasPorFuncions)
+                .HasForeignKey(d => d.IdSilla)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SillasPorFuncion_Silla");
         });
 
         modelBuilder.Entity<Tarjeta>(entity =>

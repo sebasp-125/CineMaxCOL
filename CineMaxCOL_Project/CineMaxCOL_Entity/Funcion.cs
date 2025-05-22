@@ -26,4 +26,6 @@ public partial class Funcion
     public virtual Sala? IdSalaNavigation { get; set; }
 
     public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();
+
+    public virtual ICollection<SillasPorFuncion> SillasPorFuncions { get; set; } = new List<SillasPorFuncion>();
 }
