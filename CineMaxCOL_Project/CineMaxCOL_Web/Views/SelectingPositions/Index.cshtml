@@ -1,9 +1,13 @@
 @model CineMaxCOL_Web.Models.PuestosYReservas.DTO_PuestosYReservar
 
-
 @{
     int capacidad = 20;
 }
+
+        @foreach(var item in Model.sillasPorFuncions){
+                    <h1>@item.IdFuncion + @Model.funcionDto.Id</h1>
+                break;
+                }
 
 <div class="bg-gray-100 min-h-screen py-10">
     <div class="bg-white max-w-4xl mx-auto p-6 rounded-lg shadow-md">
@@ -29,7 +33,7 @@
 
         @if (!Model.sillasPorFuncions.Any())
         {
-            <p>ERROR</p>
+            <p>Por este momento tenemos problemas...</p>
         }
         else
         {
@@ -41,35 +45,13 @@
                 <a href="@Url.Action("ReservarTemporalmente" , "SelectingPositions" , new 
                 {
                     idFuncion = item.IdFuncion,
-                    IdSillaPorFuncion = (int)item.IdSillaNavigation.Id
+                    IdSillaPorFuncion = item.IdSillaNavigation.Id
                 })" class="border p-2 m-1 rounded text-white @color">
                     @($"{item.IdSillaNavigation.Fila}{item.IdSillaNavigation.Numero}")
                 </a>
             }
-
         }
 
-        @* 
-    <div class="grid grid-cols-10 gap-2">
-@foreach (var asiento in Model)
-{
-    var btnClass = asiento.Estado switch
-    {
-        "Libre" => "bg-gray-500 hover:bg-gray-300",
-        "Temporal" => "bg-yellow-500 cursor-not-allowed",
-        "Comprado" => "bg-red-600 cursor-not-allowed",
-        _ => "bg-gray-500"
-    };
-
-    <form method="post" asp-action="ReservarTemporalmente">
-        <input type="hidden" name="IdSillaPorFuncion" value="@asiento.Id" />
-        <button type="submit" class="w-6 h-6 rounded-full text-white @btnClass"
-                @(asiento.Estado != "Libre" ? "disabled" : "")>
-            @asiento.IdSillaNavigation.Fila@asiento.IdSillaNavigation.Numero
-        </button>
-    </form>
-}
-</div> *@
 
         <div class="mt-10 w-full space-y-2">
             <a href="@Url.Action("Index", "PaymentdGetAway")" class="btn btn-success w-full">Pagar</a>

@@ -37,21 +37,21 @@ namespace CineMaxCOL_Web.Controllers
 
 
         //This actions it's about almacenate or saving every positions such as 1A and the others. 19/05/2025
-        public async Task<IActionResult> ReservarTemporalmente(int idFuncionget , int IdSillaPorFuncionget)
+        public async Task<IActionResult> ReservarTemporalmente(int idFuncion , int IdSillaPorFuncion)
         {
-
+            Console.WriteLine("Soy Andres" + IdSillaPorFuncion);
             var destruc = new SillasPorFuncion
             {
-                IdFuncion = 5,
+                IdFuncion = idFuncion,
                 Estado = "Temporal",
-                IdSilla = 404,
+                IdSilla = IdSillaPorFuncion,
                 ReservadoHasta = DateTime.Now.AddMinutes(5),
                 IdUsuario = 28
             };
 
             await _context.SillasPorFuncions.AddAsync(destruc);
             await _context.SaveChangesAsync();
-            return Ok(destruc);
+            return Ok("Index");
         }
 
 
