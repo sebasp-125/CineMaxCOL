@@ -35,23 +35,46 @@ namespace CineMaxCOL_Web.Controllers
             return View();
         }
 
-
         //This actions it's about almacenate or saving every positions such as 1A and the others. 19/05/2025
-        public async Task<IActionResult> ReservarTemporalmente(int idFuncion , int IdSillaPorFuncion)
+        public async Task<IActionResult> ReservarTemporalmente(int idFuncion, int IdSillaPorFuncion)
         {
-            Console.WriteLine("Soy Andres" + IdSillaPorFuncion);
-            var destruc = new SillasPorFuncion
+            try
             {
-                IdFuncion = idFuncion,
-                Estado = "Temporal",
-                IdSilla = IdSillaPorFuncion,
-                ReservadoHasta = DateTime.Now.AddMinutes(5),
-                IdUsuario = 28
-            };
+                var destruc = new SillasPorFuncion
+                {
+                    IdFuncion = idFuncion,
+                    Estado = "Temporal",
+                    IdSilla = IdSillaPorFuncion,
+                    ReservadoHasta = DateTime.Now.AddSeconds(10),
+                    IdUsuario = 28
+                };
+                await _context.SillasPorFuncions.AddAsync(destruc);
+                await _context.SaveChangesAsync();
+                return Ok(destruc);
+            }
+            catch(Exception e)
+            {
+                TempData["error"] = $"Tenemos problemas con el puesto seleccionado {IdSillaPorFuncion} - {e.Message}";
+                return Ok(e);
+            }
+        }
 
-            await _context.SillasPorFuncions.AddAsync(destruc);
-            await _context.SaveChangesAsync();
-            return Ok("Index");
+        public async Task UpdateEverythingSeats()
+        {
+            try
+            {
+                var ahora = DateTime.Now;
+                foreach (var sillaTemp in _context.SillasPorFuncions.Where(x => x.Estado == "Temporal" && x.ReservadoHasta < ahora))
+                {
+                    _context.SillasPorFuncions.Remove(sillaTemp);
+                }
+                await _context.SaveChangesAsync();
+                TempData["success"] = "Actualizado con exito";
+            }
+            catch
+            {
+                TempData["error"] = "Tenemos problemas para actulizar nuestros sistemas";
+            }
         }
 
 
@@ -95,9 +118,6 @@ namespace CineMaxCOL_Web.Controllers
 
             return View("Index", destruct);
         }
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -95,7 +95,6 @@
     </footer> 
 </body>
 </html>
-
 @{
     bool isSuccess = TempData["success"] != null;
     string message = isSuccess ? TempData["success"]?.ToString() : TempData["error"]?.ToString();
@@ -108,7 +107,7 @@
 
 @if (message != null)
 {
-    <dialog id="@modalId" class="modal modal-open">
+    <dialog id="@modalId" class="modal">
         <div class="modal-box @alertClass">
             <div class="flex items-center gap-3">
                 @Html.Raw(icon)
@@ -124,9 +123,12 @@
     </dialog>
 
     <script>
-        setTimeout(() => {
-            const modal = document.getElementById('@modalId');
-            if (modal) modal.close();
-        }, 4000);
+        const modal = document.getElementById('@modalId');
+        if (modal) {
+            modal.showModal(); // abre el modal correctamente
+            setTimeout(() => {
+                modal.close(); // cierra después de 4 segundos
+            }, 4000);
+        }
     </script>
 }

@@ -1,14 +1,5 @@
 @model CineMaxCOL_Web.Models.PuestosYReservas.DTO_PuestosYReservar
 
-@{
-    int capacidad = 20;
-}
-
-        @foreach(var item in Model.sillasPorFuncions){
-                    <h1>@item.IdFuncion + @Model.funcionDto.Id</h1>
-                break;
-                }
-
 <div class="bg-gray-100 min-h-screen py-10">
     <div class="bg-white max-w-4xl mx-auto p-6 rounded-lg shadow-md">
         <div class="w-full h-6 bg-gray-400 mt-8 text-center font-semibold flex items-center justify-center rounded">
@@ -43,19 +34,26 @@
                 item.Estado == "Temporal" ? "bg-yellow-300" :
                 "bg-green-500";
                 <a href="@Url.Action("ReservarTemporalmente" , "SelectingPositions" , new 
-                {
-                    idFuncion = item.IdFuncion,
-                    IdSillaPorFuncion = item.IdSillaNavigation.Id
-                })" class="border p-2 m-1 rounded text-white @color">
-                    @($"{item.IdSillaNavigation.Fila}{item.IdSillaNavigation.Numero}")
-                </a>
-            }
+                   {
+                       idFuncion = item.IdFuncion,
+                       IdSillaPorFuncion = item.IdSillaNavigation.Id,
+                   })" class=" btn border p-2 m-1 rounded text-white @color">
+            @($"{item.IdSillaNavigation.Fila}{item.IdSillaNavigation.Numero}")
+        </a>
+                }
         }
-
 
         <div class="mt-10 w-full space-y-2">
             <a href="@Url.Action("Index", "PaymentdGetAway")" class="btn btn-success w-full">Pagar</a>
             <button class="btn btn-error w-full" onclick="Abandonar()">Abandonar</button>
+        </div>
+
+        <div class="text-center bg-amber-200 p-5 m-5 ">
+            <h2>Tienes <strong>5 minutos</strong> para terminar la compra</h2>
+            <form asp-action="UpdateEverythingSeats" asp-controller="SelectingPositions">
+                <button class="btn btn-success">Actualizar puestos</button>
+            </form>
+            <span class="text-gray-700">Eliminara las sillas las cuales tengan el plazo vencido</span>
         </div>
 
         <div class="collapse bg-base-100 border border-base-300">
@@ -76,14 +74,8 @@
                                     @Model.funcionDto.FechaHora?.ToString("g")</p>
                                 <p><span class="font-semibold">Precio:</span> $@Model.funcionDto.Precio?.ToString("F2")
                                 </p>
-                                <p><span class="font-semibold">Identificador:</span>
-                                    @Model.funcionDto.IdentificadorMovies</p>
-                                <p><span class="font-semibold">Creado el:</span>
-                                    @Model.funcionDto.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
                                 <p>
-                                    <span>Seleccionadas: </span>
-                                    <span id="reservesAccount"></span>
-                                </p>
+                                    <span class="font-semibold">Identificador:</span>
                                 <p>
                                     <span>Total a pagar: </span>
                                     <span id="AllPayme"></span>
@@ -92,14 +84,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
 </div>
-
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
