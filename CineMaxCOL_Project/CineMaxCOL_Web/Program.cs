@@ -47,13 +47,17 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
-//COOKIES - SESIONS
+// COOKIES - SESIONS
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(5);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// Este permite acceder al HttpContext desde cualquier servicio
+builder.Services.AddHttpContextAccessor();
+
 
 
 var app = builder.Build();
@@ -69,7 +73,7 @@ if (!app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseSession();
-app.UseHttpsRedirection(); // opcional, recomendado
+app.UseHttpsRedirection(); 
 app.UseAuthentication();  
 
 app.UseAuthorization();

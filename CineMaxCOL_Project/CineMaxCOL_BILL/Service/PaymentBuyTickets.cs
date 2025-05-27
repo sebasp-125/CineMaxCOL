@@ -44,7 +44,7 @@ namespace CineMaxCOL_BILL.Service
             return true;
         }
 
-        public async Task<Tarjeta> BringInformationLogInUserServices(int iduser)
+        public async Task<Tarjeta> BringInformationLogInUserServices_Card(int? iduser)
         {
             var service = _Unit._UnitPaymentBuyTicktes<Tarjeta>();
 
@@ -52,7 +52,7 @@ namespace CineMaxCOL_BILL.Service
             {
                 return new Tarjeta();
             }
-            var response = await service.BringInformationLogInUser(iduser);
+            var response = await service.BringInformationLogInUser(iduser.Value);
             if (response == null)
             {
                 return new Tarjeta();

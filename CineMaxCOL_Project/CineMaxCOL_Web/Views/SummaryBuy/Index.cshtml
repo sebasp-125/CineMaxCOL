@@ -1,66 +1,61 @@
 @model CineMaxCOL_Web.Models.ToSummaryPay.SummaryToPay
 
 <div class="max-w-6xl mx-auto bg-white shadow-lg border border-[#55692d] rounded-xl p-8 space-y-6">
-
-    <!-- Encabezado -->
     <div class="text-center border-b border-gray-300 pb-4">
         <h1 class="text-3xl font-bold text-[#55692d]">Factura Detallada - CineMaxCOL</h1>
         <p class="text-sm text-gray-500">Resumen de Facturación por Compra en Línea</p>
     </div>
 
-    <!-- Cuerpo Horizontal -->
     <div class="grid grid-cols-2 gap-8">
 
-        <!-- Columna: Información de la Tarjeta -->
         <div>
             <h2 class="text-xl font-semibold text-[#55692d] mb-4 border-b border-gray-200 pb-1">Información de la Tarjeta</h2>
             <div class="space-y-2">
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Nombre Titular:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.NombreTitular</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.NombreTitular ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Correo Electrónico:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.CorreoElectronico</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.CorreoElectronico ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Número Tarjeta:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.NumeroTarjeta</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.NumeroTarjeta ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Fecha Expiración:</span>
-                    @* <span class="text-gray-600">@Model.FechaExpiracion.ToString("yyyy-MM-dd")</span> *@
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.FechaExpiracion?.ToString("yyyy-MM-dd") ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Tipo Tarjeta:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.TipoTarjeta</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.TipoTarjeta ?? "No registrado"</span>
                 </div>
             </div>
         </div>
 
-        <!-- Columna: Información del Usuario -->
         <div>
             <h2 class="text-xl font-semibold text-[#55692d] mb-4 border-b border-gray-200 pb-1">Datos del Usuario</h2>
             <div class="space-y-2">
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Nombre Completo:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.FullName</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.FullName ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Correo:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.Email</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.Email ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Documento:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.Dni</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.Dni ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Rol:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.IdRolNavigation?.TipoRol</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.IdRolNavigation?.TipoRol ?? "No registrado"</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Registro:</span>
-                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.CreatedAt?.ToString("yyyy-MM-dd")</span>
+                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.CreatedAt?.ToString("yyyy-MM-dd") ?? "No registrado"</span>
                 </div>
             </div>
         </div>
@@ -70,7 +65,7 @@
     <div>
         <h2 class="text-xl font-semibold text-[#55692d] mb-4">Película y Función</h2>
         <div class="p-4 border border-dashed border-gray-300 rounded-lg text-center text-gray-500 italic">
-
+            <!-- Aquí puedes mostrar info de la película si tienes -->
         </div>
     </div>
 

@@ -8,7 +8,6 @@ namespace CineMaxCOL_Web.Models.ToSummaryPay
 {
     public class SummaryToPay
     {
-        public Tarjeta tarjetaByUsuario { get; set; }
-        public Funcion funcion { get; set; }
+        public Tarjeta UsuarioByTarjeta { get; set; }
     }
 }

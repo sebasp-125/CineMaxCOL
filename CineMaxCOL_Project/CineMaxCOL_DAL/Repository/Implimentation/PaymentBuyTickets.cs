@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Azure;
 using CineMaxCOL_DAL.Repository.Interface;
 using CineMaxCOL_Entity;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
             _dbset = _context.Set<T>();
         }
 
+
         public async Task<bool> MakeSomethingRegisterUsServices(T t)
         {
             try
@@ -30,7 +32,6 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
                 return false;
             }
         }
-
 
         //This is a specially fuction, It's about user information when heir is LogIn.
         //Just is for the user LogIn asociate information...
@@ -60,6 +61,21 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
             catch
             {
                 return new Reserva();
+            }
+        }
+
+    //Registrar modelos cuando necesistes que retorne la informacion registrada
+        public async Task<T> BringInformationLaterRegisterOurServices(T t)
+        {
+            try
+            {
+                await _dbset.AddAsync(t);
+                await _context.SaveChangesAsync();
+                return t;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

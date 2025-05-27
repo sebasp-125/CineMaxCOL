@@ -34,20 +34,18 @@ namespace CineMaxCOL_BILL.Service
             if (user != null)
             {
                 var claims = new List<Claim>
-            {
-
-            new Claim(ClaimTypes.Name, user?.FullName ?? "Error"),
-            new Claim(ClaimTypes.Email, user?.Email ?? "Error"),
-            new Claim(ClaimTypes.NameIdentifier , user?.Id.ToString() ?? Convert.ToString(0)),
-            new Claim(ClaimTypes.Role, user?.IdRolNavigation?.TipoRol ?? "Error")
-            };
+        {
+            new Claim(ClaimTypes.Name, user.FullName ?? "Error"),
+            new Claim(ClaimTypes.Email, user.Email ?? "Error"),
+            new Claim(ClaimTypes.Role, user.IdRolNavigation?.TipoRol ?? "Error"),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+        };
 
                 return (true, claims);
-            }   
+            }
 
             return (false, new List<Claim>());
         }
-
 
         public async Task<bool> RegisterUser(Usuario usuario)
         {
@@ -76,5 +74,9 @@ namespace CineMaxCOL_BILL.Service
         }
 
 
+    }
+
+    internal interface IHttpContextAccessor
+    {
     }
 }

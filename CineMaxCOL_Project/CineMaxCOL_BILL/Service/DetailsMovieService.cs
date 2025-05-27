@@ -21,6 +21,7 @@ namespace CineMaxCOL_BILL.Service
             return await _Unit.GetDetailsMoviesAndCine<Funcion>().GetCinesWithMovies(Indentificate);
         }
 
+        
         public async Task<Funcion> GetSpeacillyFuction(int id)
         {
             return await _Unit.GetDetailsMoviesAndCine<Funcion>().GetSpeciallyFuncion(id);

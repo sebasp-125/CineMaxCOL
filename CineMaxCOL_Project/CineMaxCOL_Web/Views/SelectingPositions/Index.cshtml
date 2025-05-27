@@ -1,4 +1,7 @@
 @model CineMaxCOL_Web.Models.PuestosYReservas.DTO_PuestosYReservar
+@{
+    int usuarioId;
+}
 
 <div class="bg-gray-100 min-h-screen py-10">
     <div class="bg-white max-w-4xl mx-auto p-6 rounded-lg shadow-md">
@@ -30,6 +33,7 @@
         {
             @foreach (var item in Model.sillasPorFuncions)
             {
+                usuarioId = item.IdUsuario ?? 32;
                 var color = item.Estado == "Reservado" ? "bg-red-500" :
                 item.Estado == "Temporal" ? "bg-yellow-300" :
                 "bg-green-500";
@@ -44,7 +48,7 @@
         }
 
         <div class="mt-10 w-full space-y-2">
-            <a href="@Url.Action("Index", "PaymentdGetAway")" class="btn btn-success w-full">Pagar</a>
+            <a href="@Url.Action("Index", "PaymentdGetAway" )" class="btn btn-success w-full">Pagar</a>
             <button class="btn btn-error w-full" onclick="Abandonar()">Abandonar</button>
         </div>
 

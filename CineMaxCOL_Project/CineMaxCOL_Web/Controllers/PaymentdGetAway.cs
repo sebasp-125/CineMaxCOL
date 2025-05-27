@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CineMaxCOL_BILL.Service;
@@ -9,100 +6,123 @@ using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
 using CineMaxCOL_Web.Models.ToSummaryPay;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace CineMaxCOL_Web.Controllers
 {
-    public class PaymentdGetAway : Controller
+    public class PaymentGetawayController : Controller
     {
         private readonly PaymentBuyTickets _authService;
-        private readonly DetailsMovieService _auhtDetailsService;
-
+        private readonly DetailsMovieService _detailsMovieService;
         private readonly CineMaxColContext _context;
+        private readonly IUnitOfWork _unit;
 
-        public PaymentdGetAway(PaymentBuyTickets service, CineMaxColContext context, DetailsMovieService DetailsMovieService)
+        public PaymentGetawayController(PaymentBuyTickets service, CineMaxColContext context, DetailsMovieService detailsMovieService, IUnitOfWork unit)
         {
             _authService = service;
             _context = context;
-            _auhtDetailsService = DetailsMovieService;
+            _detailsMovieService = detailsMovieService;
+            _unit = unit;
+        }
+
+        private int IdActuallyUser()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            return (userIdClaim != null && int.TryParse(userIdClaim.Value, out int id)) ? id : 0;
         }
 
         public async Task<IActionResult> Index()
         {
-
-            int idUsuario = 0;
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var parsedId))
+            try
             {
-                idUsuario = parsedId;
-            }
+                int userId = IdActuallyUser();
+                if (userId == 0)
+                {
+                    TempData["error"] = "Debe iniciar sesión para acceder a esta página.";
+                    return RedirectToAction("Login", "Account");
+                }
 
-            var BrinfInformationLogInUser = await _authService.BringInformationLogInUserServices(idUsuario);
-            if (BrinfInformationLogInUser != null)
-            {
-                return View(BrinfInformationLogInUser);
+                var userInfo = await _authService.BringInformationLogInUserServices_Card(userId);
+                if (userInfo != null)
+                {
+                    return View(userInfo);
+                }
+
+                TempData["error"] = "No se pudo obtener información del usuario.";
+                return View(new SummaryToPay());
             }
-            return View();
+            catch (Exception ex)
+            {
+                TempData["error"] = $"Ocurrió un error al cargar los datos: {ex.Message}";
+                return RedirectToAction("Error");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> RegistersPay(Tarjeta tarjeta)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                TempData["error"] = "Por favor completa todos los campos obligatorios correctamente.";
-                return View("Index", tarjeta);
-            }
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            int? idUsuario = null;
-            if (int.TryParse(userId, out var parsedId))
-            {
-                idUsuario = parsedId;
-            }
+                if (!ModelState.IsValid)
+                {
+                    TempData["error"] = "Por favor completa todos los campos obligatorios correctamente.";
+                    return View("Index", new SummaryToPay());
+                }
 
-            var response = new Tarjeta
-            {
-                IdUsuario = idUsuario,
-                NombreTitular = tarjeta.NombreTitular,
-                CorreoElectronico = tarjeta.CorreoElectronico,
-                NumeroTarjeta = tarjeta.NumeroTarjeta,
-                FechaExpiracion = tarjeta.FechaExpiracion,
-                TipoTarjeta = tarjeta.TipoTarjeta
-            };
+                var nuevaTarjeta = new Tarjeta
+                {
+                    IdUsuario = null,
+                    NombreTitular = tarjeta.NombreTitular,
+                    CorreoElectronico = tarjeta.CorreoElectronico,
+                    NumeroTarjeta = tarjeta.NumeroTarjeta,
+                    FechaExpiracion = tarjeta.FechaExpiracion,
+                    TipoTarjeta = tarjeta.TipoTarjeta
+                };
 
-            var responsePayRegister = await _authService.RegisterCardUsServices(response);
-            if (!responsePayRegister)
-            {
-                TempData["error"] = "Tenemos problemas al registrar la tarjeta.";
-                return View("Index");
+                var tarjetaRegistrada = await _unit._UnitPaymentBuyTicktes<Tarjeta>().BringInformationLaterRegisterOurServices(nuevaTarjeta);
+
+                if (tarjetaRegistrada == null)
+                {
+                    TempData["error"] = "Ocurrió un error al registrar la tarjeta. Intente nuevamente.";
+                    return View("Index", new SummaryToPay());
+                }
+
+                var resumen = new SummaryToPay
+                {
+                    UsuarioByTarjeta = await _unit._UnitPaymentBuyTicktes<Tarjeta>().BringInformationLogInUser(IdActuallyUser())
+                };
+
+                TempData["success"] = "Tarjeta registrada exitosamente.";
+                return View("~/Views/SummaryBuy/Index.cshtml", resumen);
             }
-            
-            var destruct = new SummaryToPay
+            catch (Exception ex)
             {
-                tarjetaByUsuario = await _authService.BringInformationLogInUserServices(idUsuario ?? 0),
-                funcion = await _auhtDetailsService.GetSpeacillyFuction(5)
-            };
-
-            return View("~/Views/SummaryBuy/Index.cshtml", destruct);
+                TempData["error"] = $"Error inesperado al procesar el pago: {ex.Message}";
+                return RedirectToAction("Error");
+            }
         }
-        public async Task<IActionResult> RightPersonLogIn(int idUser)
+
+        public async Task<IActionResult> RightPersonLogIn()
         {
-
-
-            var destruct = new SummaryToPay
+            try
             {
-                tarjetaByUsuario = await _authService.BringInformationLogInUserServices(idUser),
-            };
+                var resumen = new SummaryToPay
+                {
+                    UsuarioByTarjeta = await _authService.BringInformationLogInUserServices_Card(IdActuallyUser())
+                };
 
-            return View("~/Views/SummaryBuy/Index.cshtml", destruct);
+                return View("~/Views/SummaryBuy/Index.cshtml", resumen);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = $"No fue posible obtener los datos del usuario: {ex.Message}";
+                return RedirectToAction("Error");
+            }
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View("Error!");
+            return View("Error");
         }
     }
 }
-
