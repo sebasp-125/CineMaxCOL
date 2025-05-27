@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\CineMaxCOL_Web.props" />
-</Project>
