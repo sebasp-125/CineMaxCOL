@@ -1,0 +1,17 @@
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\bin\Debug\net9.0\CineMaxColBLL.deps.json
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\bin\Debug\net9.0\CineMaxColBLL.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\bin\Debug\net9.0\CineMaxColBLL.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\bin\Debug\net9.0\CineMaxColDal.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\bin\Debug\net9.0\CineMaxColEntity.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\bin\Debug\net9.0\CineMaxColEntity.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\bin\Debug\net9.0\CineMaxColDal.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxColBLL.csproj.AssemblyReference.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxColBLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxColBLL.AssemblyInfoInputs.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxColBLL.AssemblyInfo.cs
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxColBLL.csproj.CoreCompileInputs.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxC.7F8FCCA1.Up2Date
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxColBLL.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\refint\CineMaxColBLL.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\CineMaxColBLL.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColBLL\obj\Debug\net9.0\ref\CineMaxColBLL.dll

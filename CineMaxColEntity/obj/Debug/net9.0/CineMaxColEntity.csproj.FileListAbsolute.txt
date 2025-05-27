@@ -1,0 +1,14 @@
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\bin\Debug\net9.0\CineMaxColEntity.deps.json
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\bin\Debug\net9.0\CineMaxColEntity.runtimeconfig.json
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\bin\Debug\net9.0\CineMaxColEntity.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\bin\Debug\net9.0\CineMaxColEntity.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.csproj.AssemblyReference.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.AssemblyInfoInputs.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.AssemblyInfo.cs
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.csproj.CoreCompileInputs.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\refint\CineMaxColEntity.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\CineMaxColEntity.genruntimeconfig.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColEntity\obj\Debug\net9.0\ref\CineMaxColEntity.dll

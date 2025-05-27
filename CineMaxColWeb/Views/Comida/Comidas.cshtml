@@ -1,0 +1,48 @@
+@model CineMaxColWeb.Models.ComidaViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+
+<div class="bg-red-500 w-full flex flex-col">
+<div class="bg-white h-20 w-full flex justify-evenly items-center">
+    <div tabindex="-1" class="collapse bg-gray-200 w-75 left-20 absolute top-21 z-1 focus-within:collapse-open">
+            <div class="collapse-title font-semibold text-black text-center">Selecciona una Sede...</div>
+            <div class="collapse-content text-sm bg-gray-500 flex flex-col gap-2 justify-center items-center">
+
+                @foreach (var municipio in Model.Municipios)
+                {
+                    <div class="mt-2 collapse collapse-arrow bg-gray-300 w-full">
+                        <input type="checkbox" />
+                        <div class="collapse-title font-medium">
+                            @municipio.NombreMunicipio
+                        </div>
+                        <div class="collapse-content bg-gray-200">
+                            @foreach (var localidad in municipio.Ubicacions)
+                            {
+                                @foreach (var cine in localidad.Cines)
+                                {
+                                    <div class="flex justify-center items-center collapse mt-2 bg-gray-100 w-full h-10 hover:cursor-pointer">
+                                    <form class="font-medium w-full h-full" action="@Url.Action("Comidas","Comida")" method="post">
+                                        <input type="hidden" name="id" value="@cine.Id" />
+                                        <input type="hidden" name="valor" value="1" />
+                                        <button class="w-full h-full hover:cursor-pointer hover:bg-gray-400" type="submit">@cine.Nombre</button>
+                                    </form>
+                                </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+</div> 
+
+
+
+@if (Model.CineComidas != null)
+{
+    @await Html.PartialAsync("_ComidasCine", Model)
+}else{
+    <div class="h-screen w-full bg-white">
+        -imagen por el diseñador sobre información de las promos-
+    </div>
+}

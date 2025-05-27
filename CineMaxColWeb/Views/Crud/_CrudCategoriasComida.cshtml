@@ -1,0 +1,90 @@
+@model CineMaxColWeb.Models.ComidaViewModel
+
+<h1 class="w-full text-center bg-white p-2 text-xl font-bold text-[#55692d]">Categorias</h1>
+
+<div class="p-4 overflow-y-auto overflow-hidden h-screen">
+
+@*BOTON PARA AGREGAR LA CATEGORIA NUEVA*@
+    <label for="Crear_Categoria" class="bg-[#55692d] ml-8 rounded-xl text-white p-2 w-24 text-center hover:cursor-pointer">Agregar Categoria</label>
+        <input type="checkbox" id="Crear_Categoria" class="modal-toggle" />
+            <div class="modal" role="dialog">
+                <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
+                    
+                    <form action="@Url.Action("Agregar","Crud")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center p-5">
+                        <input type="hidden" asp-for="TipoEntidad" value="Categorias" />
+                        <input type="hidden" asp-for="Categoria_s.Id" value="0">
+
+                        <label class="font-bold text-center mt-10">Nombre</label>
+                        <input type="text" id="NombreCategoria" class="text-center bg-gray-300 rounded-xl" asp-for="Categoria_s.Nombre">
+
+                        <label for="subirfotocategoria" class="text-white w-46 bg-[#55692d] text-center rounded-xl p-1 hover:cursor-pointer mt-6">Selecciona una foto</label>
+                        <input type="file" name="imagen" class="hidden" id="subirfotocategoria" required>
+
+                        <input type="hidden" id="CategoriaNombreHidden" name="CategoriaNombre">
+                        <input type="hidden" name="tipo" value="Categorias"/>
+                        
+                        <button type="submit" class="btn rounded-xl mt-3 border-none bg-[#55692d] text-white">Agregar</button>
+                    </form>
+                    <div class="modal-action">
+                        <label for="Crear_Categoria" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+                    </div>
+                </div>
+            </div>
+
+    @*TODAS LAS CATEGORIAS*@
+    <div class="mt-6 grid grid-cols-3 gap-2 justify-items-center align-items-center">
+    @foreach(var categoria in Model.Categorias)
+    {
+        <div class="py-2 shadow-2xl bg-white rounded-xl text-black h-60 w-60 flex flex-col justify-between items-center">
+            <h1  class="text-center text-lg font-bold text-[#55692d]">@categoria.Nombre</h1>
+            <img src="@categoria.ImagenUrl" class="h-12 w-10">
+            <label for="EditarCategoria_id_@categoria.Id" class="text-sm bg-[#55692d] text-white rounded-xl w-24 p-1 text-center hover:cursor-pointer">Actualizar</label>
+            <a href="@Url.Action("Eliminar", "Crud", new { id = @categoria.Id, tipo = "Categorias" })" class="text-sm bg-red-700 text-white rounded-xl w-24 p-1 text-center">Eliminar</a>
+        </div>
+        
+        @*MODAL PARA EDTIAR O ELIMINAR LA CATEGORIA*@
+        <input type="checkbox" id="EditarCategoria_id_@categoria.Id" class="modal-toggle" />
+            <div class="modal" role="dialog">
+                <div class="bg-white w-120 h-110 overflow-hidden overflow-y-auto text-black rounded-xl">
+                    <form action="@Url.Action("Agregar","Crud")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center">
+                        <input type="hidden" name="TipoEntidad" value="Categorias" />
+                        <label class="bg-gray-400 w-full h-40 flex justify-center items-center"><img src="@categoria.ImagenUrl" class="w-26 h-26 rounded-xl shadow-3xl"></label>
+
+                        <label for="imagen-cambiar-categoria" class="bg-[#55692d] mt-3 w-28 text-center rounded-xl text-white p-1 hover:cursor-pointer">Cambiar Foto</label>
+                        <input type="file" name="imagen" class="hidden" id="imagen-cambiar-categoria">
+
+                        <input type="hidden" name="Categoria_s.Id" value="@categoria.Id">
+
+                        <label class="font-bold mt-4">Código: @categoria.Id</label>
+
+                        <label class="font-bold mt-4">Nombre</label>
+                        <input type="text" name="Categoria_s.Nombre" class="text-center bg-gray-300 rounded-xl" value="@categoria.Nombre">
+
+                        <input type="hidden" name="tipo" value="Categorias"/>
+                        
+                        <input type="hidden" name="Categoria_s.ImagenUrl" value="@categoria.ImagenUrl" />
+                        <input type="hidden" name="CategoriaNombre" value="@categoria.Nombre" />
+
+                        <button type="submit" class="btn rounded-xl mt-3 border-none bg-[#55692d] text-white">Actualizar</button>
+                    </form>
+                    <div class="modal-action">
+                        <label for="EditarCategoria_id_@categoria.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+                    </div>
+                </div>
+            </div>
+    }
+    </div>
+
+</div>
+
+@*SCRIPTS PARA MANDAR LOS IDENTIFICADORES QUE VAN CAMBIANDO DINÁMICAMENTE*@
+<script>
+    const nombreInput = document.getElementById('NombreCategoria');
+    const nombreHidden = document.getElementById('CategoriaNombreHidden');
+
+    nombreInput.addEventListener('input', () => {
+        nombreHidden.value = nombreInput.value;
+    });
+
+    nombreHidden.value = nombreInput.value;
+</script>

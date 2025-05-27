@@ -1,0 +1,77 @@
+@using CineMaxColEntity
+@model CineMaxColWeb.Models.ComidaViewModel
+
+<div class="flex">
+    <div class="bg-white w-1/2 h-screen flex flex-col justify-center items-center">
+    <form action="@Url.Action("Index_Comidas_Generales","Crud")" method="post" class="h-auto relative bottom-20">
+        <input type="hidden" name="tipo" value="Comidas" />
+        <button class="w-full h-full font-bold text-2xl rounded-xl btn bg-gray-500" type="submit">Crud Comidas</button>
+    </form>
+    
+    <form action="@Url.Action("Index_Comidas_Generales","Crud")" method="post" class="h-auto relative bottom-15">
+        <input type="hidden" name="tipo" value="Categorias" />
+        <button class="w-full h-full font-bold text-2xl rounded-xl btn bg-gray-500" type="submit">Crud Categorias</button>
+    </form>
+
+    <h1 class="font-bold text-2xl relative bottom-12">Elija el cine</h1>
+        <div tabindex="-1" class="collapse bg-gray-200 w-75 left-26 absolute top-110 z-1 focus-within:collapse-open">
+            <div class="collapse-title font-semibold text-black text-center">Selecciona una Sede...</div>
+                <div class="collapse-content text-sm bg-gray-500 flex flex-col gap-2 justify-center items-center">
+                    @foreach (var municipio in Model.Municipios)
+                    {
+                        <div class="mt-2 collapse collapse-arrow bg-gray-300 w-full">
+                            <input type="checkbox" />
+                            <div class="collapse-title font-medium">
+                                @municipio.NombreMunicipio
+                            </div>
+                            <div class="collapse-content bg-gray-200">
+                                @foreach (var localidad in municipio.Ubicacions)
+                                {
+                                    @foreach (var cine in localidad.Cines)
+                                    {
+                                        <div class="flex justify-center items-center collapse mt-2 bg-gray-100 w-full h-10 hover:cursor-pointer">
+                                        <form class="font-medium w-full h-full" action="@Url.Action("Index_Comidas","Crud")" method="post">
+                                            <input type="hidden" name="id" value="@cine.Id" />
+                                            <button class="w-full h-full hover:cursor-pointer hover:bg-gray-400" type="submit">@cine.Nombre</button>
+                                        </form>
+                                    </div>
+                                    }
+                                    
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+    </div>
+
+@*DEPENDIENDO DEL TIPO DE ENTIDAD SE ACTIVA UNA U OTRA VENTANA PARCIAL*@
+@if (!string.IsNullOrEmpty(Model.TipoEntidad))
+{
+    <div class="bg-gray-300 w-full h-auto">
+        @switch (Model.TipoEntidad)
+        {
+            case "CineComida":
+                @await Html.PartialAsync("_CrudComidas", Model)
+                break;
+            case "Comidas":
+                @await Html.PartialAsync("_CrudComidasGenerales", Model)
+                break;
+            case "Categorias":
+                @await Html.PartialAsync("_CrudCategoriasComida", Model)
+                break;
+            default:
+                <p>No hay vista parcial definida para esta entidad.</p>
+                break;
+        }
+    </div>
+}
+else
+{
+    <div class="w-full bg-white">
+        -imagen por el diseñador sobre información de la crud-
+    </div>
+}
+
+
+

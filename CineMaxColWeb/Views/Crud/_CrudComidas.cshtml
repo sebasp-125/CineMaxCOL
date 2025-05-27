@@ -1,0 +1,249 @@
+@using CineMaxColEntity
+@model CineMaxColWeb.Models.ComidaViewModel
+
+
+<h1 class="w-full text-center bg-white p-2 text-xl font-bold text-[#55692d]">Alimentos por Cine</h1>
+
+<div class="p-4 overflow-y-auto overflow-hidden h-screen">
+
+@*AGREGAR COMIDA A CINE*@
+<label for="AgregarComida" class="bg-[#55692d] ml-8 rounded-xl text-white p-2 w-24 text-center hover:cursor-pointer">Agregar Comida a este Cine</label>
+
+@if(Model.CineComidas!=null && Model.CineComidas.Any())
+{
+    <div class="mt-6 grid grid-cols-3 gap-2 justify-items-center align-items-center">
+        @foreach(var comida in Model.CineComidas)
+        {
+            @*DIV DE LA COMIDA*@
+            <div class="py-2 shadow-2xl bg-white rounded-xl text-black h-60 w-60 flex flex-col justify-between items-center">
+                <h1 class="text-center text-lg font-bold text-[#55692d]">@comida.IdComidaNavigation?.Nombre</h1>
+                <h1 class="text-center text-xs px-3">@comida.IdComidaNavigation?.Descripción</h1>
+                @if(comida?.IdComidaNavigation?.Categoria?.Nombre == null)
+                {
+                    <h1 class="text-sm text-red-700 font-bold">Pendiente de categoria</h1>
+                }else
+                {
+                    <h1 class="text-xs font-bold">@comida?.IdComidaNavigation?.Categoria?.Nombre</h1>
+                }
+                <img src="@comida?.IdComidaNavigation?.ImagenUrl" class="h-12 w-10">
+                <label for="EditarComidaCine_@comida.Id" class="text-sm bg-[#55692d] text-white rounded-xl w-24 p-1 text-center hover:cursor-pointer">Actualizar</label>
+                @*ELIMIDAR COMIDA DE CINE*@
+                <a href="@Url.Action("Eliminar", "Crud", new { id = @comida.Id, tipo = "CineComida"})" class="text-sm bg-red-700 text-white rounded-xl w-24 p-1 text-center">Eliminar</a>
+            </div>
+
+            
+            @*MODAL PARA EDITAR LA COMIDA*@
+            <input type="checkbox" id="EditarComidaCine_@comida.Id" class="modal-toggle" />
+                    <div class="modal" role="dialog">
+                        <div class="bg-white w-140 h-155 overflow-hidden overflow-y-auto text-black rounded-xl">
+                            <form action="@Url.Action("Agregar","Crud")" method="post" class="flex flex-col justify-center items-center">
+                                
+                                <input type="hidden" name="TipoEntidad" value="CineComida">
+                                <input type="hidden" asp-for="CineComida_s.Id" value="@comida.Id">
+                                <input type="hidden" asp-for="CineComida_s.IdCine" value="@comida.IdCine">
+                                <input type="hidden" asp-for="CineComida_s.IdComida" value="@comida.IdComida">
+                                
+                                <label class="font-bold mt-4">Nombre</label>
+                                <label class="text-gray-500">@comida.IdComidaNavigation?.Nombre</label>
+
+                                <label class="font-bold">Descripcion</label>
+                                <label class="text-gray-500">@comida.IdComidaNavigation?.Descripción</label>
+
+                                <label class="font-bold mt-4">Descripcion para el punto de venta</label>
+                                <textarea class="h-auto w-[80%] bg-gray-300 p-1 rounded-xl" name="CineComida_s.DescripcionAdicional" placeholder="@comida.DescripcionAdicional">@comida.DescripcionAdicional</textarea>
+                                
+                                <label class="font-bold mt-4">Observaciones</label>
+                                <textarea class="h-auto w-[80%] bg-gray-300 p-1 rounded-xl" name="CineComida_s.Observaciones" placeholder="@comida.Observaciones">@comida.Observaciones</textarea>
+
+                                <label class="font-bold mt-4">Cantidad</label>
+                                <input type="text" asp-for="CineComida_s.Stock" class="bg-gray-300 rounded-xl text-center" value="@comida.Stock" placeholder="@comida.Stock">
+
+                                <label class="font-bold mt-4">Precio</label>
+                                <input type="text" asp-for="CineComida_s.Precio" class="bg-gray-300 rounded-xl text-center" value="@comida.Precio" placeholder="@comida.Precio">
+
+                                <button type="submit" class="btn rounded-xl mt-3 border-none bg-[#55692d] text-white">Actualizar</button>
+                            </form>
+
+                            @{
+                                var tienePromo = comida.PromocionComida.Any(p => p.IdCineComida == comida.Id);
+                            }
+
+                            @if (tienePromo)
+                            {
+                                foreach (var promo in comida.PromocionComida.Where(p => p.IdCineComida == comida.Id))
+                                {
+                                    <label for="Editar_Promo_@promo.Id" class="btn rounded-xl mt-3 border-none bg-yellow-600 text-white relative left-[37%]">Editar Promoción</label>
+                                }
+                            }
+                            else
+                            {
+                                <label for="Promocion_@comida.Id" class="btn rounded-xl mt-3 border-none bg-[#55692d] text-white relative left-[37%]">Agregar Promoción</label>
+                            }
+                                @*MODAL PARA EDITAR LA PROMOCION*@
+                                <input type="checkbox" id="Promocion_@comida.Id" class="modal-toggle" />
+                                                    <div class="modal" role="dialog">
+                                                        <div class="bg-white w-120 h-120 overflow-hidden overflow-y-auto text-black">
+                                                            <form action="@Url.Action("Agregar","Crud")" method="post" class="flex flex-col">
+                                                                <input type="hidden" name="Promos_s.IdCineComida" value="@comida.Id">
+                                                                <label>Precio actual: @comida.Precio</label>
+                                                                <input type="text" asp-for="Promos_s.DescuentoPorcentaje" placeholder="Descuento">
+                                                                <label>Fecha de inicio</label>
+                                                                <input type="date" asp-for="Promos_s.FechaInicio">
+                                                                <label>Fecha de Final</label>
+                                                                <input type="date" asp-for="Promos_s.FechaFin">
+
+                                                                <input type="hidden" name="TipoEntidad" value="Promo">
+
+                                                                <button type="submit">Agregar</button>
+                                                            </form>
+
+                                                            <div class="modal-action">
+                                                                <label for="Promocion_@comida.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cerrar</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                            <div class="modal-action">
+                                <label for="EditarComidaCine_@comida.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cerrar</label>
+                            </div>
+                        </div>
+                    </div>
+        }
+    </div>
+
+@*PROMOCIONES, ACTUALIZAR PROMO O ELIMINAR*@
+<h1 class="w-full mt-10 text-center bg-white p-2 text-xl font-bold text-[#55692d]">Promociones por Cine</h1>
+    <div class="mt-6 grid grid-cols-3 gap-2 justify-items-center align-items-center">
+        @foreach(var comida in Model.CineComidas)
+        {
+            @foreach(var promo in comida.PromocionComida)
+            {
+                <div class="py-2 shadow-2xl bg-white rounded-xl text-black h-60 w-60 flex flex-col justify-between items-center">
+                    <h1 class="text-center text-lg font-bold text-red-700">@promo?.IdCineComidaNavigation?.IdComidaNavigation?.Nombre</h1>
+                    <h1 class="text-center text-xs px-3">@promo?.IdCineComidaNavigation?.IdComidaNavigation?.Descripción</h1>
+                    <img src="@promo?.IdCineComidaNavigation?.IdComidaNavigation?.ImagenUrl" class="w-10 h-10">
+                    <h1 class="text-xs line-through">$@promo?.IdCineComidaNavigation?.Precio</h1>
+                    <h1 class="font-bold text-red-500">$@promo?.DescuentoPorcentaje</h1>
+
+                    <label for="Editar_Promo_@promo.Id" class="text-sm bg-[#55692d] text-white rounded-xl w-24 p-1 text-center hover:cursor-pointer">Actualizar</label>
+                    <a href="@Url.Action("Eliminar", "Crud", new { id = promo.Id, tipo = "Promo"})" class="text-sm bg-red-700 text-white rounded-xl w-24 p-1 text-center">Eliminar</a>
+                </div>
+
+                <input type="checkbox" id="Editar_Promo_@promo.Id" class="modal-toggle" />
+                    <div class="modal" role="dialog">
+                        <div class="bg-white w-120 h-140 overflow-hidden overflow-y-auto text-black rounded-xl">
+                            <form action="@Url.Action("Agregar","Crud")" method="post" class="flex flex-col justify-center items-center">
+                                <input type="hidden" name="Promos_s.Id" value="@promo.Id">
+                                <input type="hidden" name="Promos_s.IdCineComida" value="@comida.Id">
+
+                                <label class="font-bold mt-4">Codigo Comida Cine</label>
+                                <label class="text-gray-500">@promo?.IdCineComidaNavigation?.IdComidaNavigation?.Id</label>
+
+                                <label class="font-bold mt-4">Nombre</label>
+                                <label class="text-gray-500">@promo?.IdCineComidaNavigation?.IdComidaNavigation?.Nombre</label>
+
+                                <label class="font-bold mt-4">Descuento Actual</label>
+
+                                <input type="text" name="Promos_s.DescuentoPorcentaje" class="text-center" placeholder="@promo?.DescuentoPorcentaje">
+
+                                <label>Fecha de inicio: @promo.FechaInicio?.ToString("yyyy-MM-dd")</label>
+                                
+                                <input type="date" name="Promos_s.FechaInicio" value="@promo.FechaInicio?.ToString("yyyy-MM-dd")">
+
+                                <label>Fecha de Final: @promo.FechaFin?.ToString("yyyy-MM-dd")</label>
+                                <input type="date" name="Promos_s.FechaFin" value="@promo.FechaFin?.ToString("yyyy-MM-dd")">
+
+                                <input type="hidden" name="TipoEntidad" value="Promo">
+
+                                <button type="submit">Actualizar</button>
+                            </form>
+                            <div class="modal-action">
+                                <label for="Editar_Promo_@promo.Id" class="btn border-none bg-[#808000] text-black">Cerrar</label>
+                            </div>
+                        </div>
+                    </div>
+            }
+        }
+    </div>
+
+    
+}else
+{
+    <div class="bg-pink-500 w-full">
+        No Hay
+    </div>
+}
+
+@*MODAL PARA AGREGAR LA COMIDA NUEVA*@
+<input type="checkbox" id="AgregarComida" class="modal-toggle" />
+        <div class="modal" role="dialog">
+            <div class="p-6 bg-gray-200 h-80 w-180 overflow-y-auto overflow-hidden rounded-xl">
+                <h1 class="font-bold w-full text-center text-xl text-[#55692d]">Alimentos Disponibles</h1>
+                <div class="mt-5 grid grid-cols-3 gap-2 justify-items-center align-items-center">
+                    @foreach(var comida in Model.Comidas)
+                    {
+                        <div class="py-2 shadow-2xl bg-white rounded-xl text-black h-56 w-50 flex flex-col justify-between items-center">
+                            <h1 class="text-center text-lg font-bold text-[#55692d]">@comida.Nombre</h1>
+                            <h1 class="text-center text-xs px-3">@comida.Descripción</h1>
+                            @if(comida?.Categoria?.Nombre == null)
+                            {
+                                    <h1 class="text-sm text-red-700 font-bold">Pendiente de categoria</h1>
+                            }else
+                            {
+                                <h1 class="text-xs font-bold">@comida?.Categoria?.Nombre</h1>
+                            }
+                            <img src="@comida?.ImagenUrl" class="h-12 w-10">
+                            <label for="Comida_@comida.Id" class="text-sm bg-[#55692d] text-white rounded-xl w-24 p-1 text-center hover:cursor-pointer">Seleccionar</label>
+                        </div>
+
+                        <input type="checkbox" id="Comida_@comida.Id" class="modal-toggle" />
+                        <div class="modal" role="dialog">
+                            <div class="bg-white w-120 h-125 overflow-hidden overflow-y-auto text-black rounded-xl">
+                                <form action="@Url.Action("Agregar","Crud")" method="post" class="flex flex-col justify-center items-center">
+                                    <input type="hidden" name="TipoEntidad" value="CineComida">
+                                    <input type="hidden" asp-for="CineComida_s.Id" value="0">
+                                    
+                                    <label class="font-bold mt-4">Nombre</label>
+                                    <h2 class="text-center text-gray-500">@comida.Nombre</h2>
+                                    
+                                    <label class="font-bold">Descripción</label>
+                                    <h2 class="text-center text-gray-500">@comida.Descripción</h2>
+                                    
+
+                                    <label class="font-bold">Precio</label>
+                                    <input type="text" class="w-[70%] bg-gray-200 rounded-xl text-center" placeholder="Ingrese el valor del producto" asp-for="CineComida_s.Precio">
+
+                                    <label class="font-bold">Cantidad</label>
+                                    <input type="text" class="w-[70%] bg-gray-200 rounded-xl text-center" placeholder="Ingrese la cantidad disponible" asp-for="CineComida_s.Stock">
+
+                                    <label class="font-bold">Descripcion</label>
+                                    <textarea asp-for="CineComida_s.DescripcionAdicional" class="w-[70%] bg-gray-200 rounded-xl p-1" placeholder="Ingrese la descripción del producto para su punto de venta"></textarea>
+
+                                    <label class="font-bold">Observaciones</label>
+                                    <textarea asp-for="CineComida_s.Observaciones" class="w-[70%] bg-gray-200 rounded-xl p-1" placeholder="Observaciones del producto en su punto de venta"></textarea>
+
+                                    <input type="hidden" asp-for="CineComida_s.IdCine" value="@ViewBag.IdCine">
+                                    
+                                    <input type="hidden" asp-for="CineComida_s.IdComida" value="@comida.Id">
+
+                                    <button type="submit" class="btn rounded-xl mt-3 border-none bg-[#55692d] text-white">Agregar</button>
+
+                                </form>
+
+                                <div class="modal-action">
+                                    <label for="Comida_@comida.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="modal-action">
+                    <label for="AgregarComida" class="btn border-none bg-[#808000] text-black">Cerrar</label>
+                </div>
+            </div>
+        </div>
+        
+</div>
+

@@ -1,0 +1,15 @@
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\bin\Debug\net9.0\CineMaxColDal.deps.json
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\bin\Debug\net9.0\CineMaxColDal.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\bin\Debug\net9.0\CineMaxColDal.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\bin\Debug\net9.0\CineMaxColEntity.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\bin\Debug\net9.0\CineMaxColEntity.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\CineMaxColDal.csproj.AssemblyReference.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\CineMaxColDal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\CineMaxColDal.AssemblyInfoInputs.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\CineMaxColDal.AssemblyInfo.cs
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\CineMaxColDal.csproj.CoreCompileInputs.cache
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\CineMaxColDal.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\refint\CineMaxColDal.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\CineMaxColDal.pdb
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDal\obj\Debug\net9.0\ref\CineMaxColDal.dll
+C:\Users\MooNu\Desktop\vscode\csharp\MVC\CineMAXCOL\CineMaxColDAL\obj\Debug\net9.0\CineMaxC.509FFA13.Up2Date

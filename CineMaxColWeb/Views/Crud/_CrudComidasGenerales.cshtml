@@ -1,0 +1,127 @@
+@model CineMaxColWeb.Models.ComidaViewModel
+
+
+<h1 class="w-full text-center bg-white p-2 text-xl font-bold text-[#55692d]">Alimentos</h1>
+
+@*AGREGAR COMIDAS NUEVAS*@
+<div class="p-4 overflow-y-auto overflow-hidden h-screen">
+<label for="Crear_Comida_General" class="bg-[#55692d] ml-8 rounded-xl text-white p-2 w-24 text-center hover:cursor-pointer">Agregar Comida</label>
+<input type="checkbox" id="Crear_Comida_General" class="modal-toggle" />
+    <div class="modal" role="dialog">
+        @*MODAL PARA INGRESAR COMIDA NUEVA*@
+        <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
+                <form action="@Url.Action("Agregar","Crud")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center p-5">
+                    <input type="hidden" asp-for="TipoEntidad" value="Comidas" />
+                    <input type="hidden" asp-for="ComidaGeneral_s.Id" value="0">
+
+                    <label for="subirfoto" class="text-white w-46 bg-[#55692d] text-center rounded-xl p-1 hover:cursor-pointer">Selecciona una foto</label>
+                    <input type="file" class="hidden" name="imagen" required id="subirfoto">
+                    
+                    <label class="font-bold text-center">Nombre</label>
+                    <input type="text" class="text-center bg-gray-300 rounded-xl" asp-for="ComidaGeneral_s.Nombre">
+
+                    <label class="font-bold text-center">Descripción Breve</label>
+                    <input type="text" class="text-center bg-gray-300 rounded-xl" asp-for="ComidaGeneral_s.Descripción">
+
+
+                    <label class="font-bold text-center" for="Comida_Categoria">Categoría:</label>
+                    <select asp-for="ComidaGeneral_s.CategoriaId" id="Comida_Categoria">
+                        @foreach (var categoria in Model.Categorias)
+                        {
+                            <option value="@categoria.Id">@categoria.Nombre</option>
+                        }
+                    </select>
+                    <input type="hidden" name="CategoriaNombre" id="categoria-nombre" />
+                    <input type="hidden" name="tipo" value="ComidaGeneral"/>
+                    <button type="submit" class="btn rounded-xl mt-3 border-none bg-[#55692d] text-white">Agregar</button>
+                </form>
+                <div class="modal-action">
+                    <label for="Crear_Comida_General" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+                </div>
+        </div>
+    </div>
+
+<div class="mt-6 grid grid-cols-3 gap-2 justify-items-center align-items-center">
+    @*DIVS DE COMIDAS PARA EDITAR O ELIMINAR*@
+@foreach(var comida in Model.Comidas)
+{
+    <div class="py-2 shadow-2xl bg-white rounded-xl text-black h-60 w-60 flex flex-col justify-between items-center">
+       <h1 class="text-center text-lg font-bold text-[#55692d]">@comida?.Nombre</h1>
+       <h1 class="text-center text-xs px-3">@comida?.Descripción</h1>
+       @if(comida?.Categoria?.Nombre == null)
+       {
+            <h1 class="text-sm text-red-700 font-bold">Pendiente de categoria</h1>
+       }else
+       {
+           <h1 class="text-xs font-bold">@comida?.Categoria?.Nombre</h1>
+       }
+       <img src="@comida?.ImagenUrl" class="h-12 w-10">
+       <label for="Comida_General_@comida?.Id" class="text-sm bg-[#55692d] text-white rounded-xl w-24 p-1 text-center hover:cursor-pointer">Actualizar</label>
+
+        @*ACCION PARA ELIMINAR*@
+        <a href="@Url.Action("Eliminar", "Crud", new { id = @comida?.Id, tipo = "Comida" })" class="text-sm bg-red-700 text-white rounded-xl w-24 p-1 text-center">Eliminar</a>
+    </div>
+    
+    @*MODALES DE COMIDAS PARA EDITAR*@
+    <input type="checkbox" id="Comida_General_@comida.Id" class="modal-toggle" />
+        <div class="modal" role="dialog">
+            <div class="bg-white w-120 h-140 overflow-hidden overflow-y-auto text-black rounded-xl">
+                <form action="@Url.Action("Agregar","Crud")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center">
+                    <input type="hidden" name="TipoEntidad" value="Comidas" />
+                    <label class="bg-gray-400 w-full h-40 flex justify-center items-center"><img src="@comida.ImagenUrl" class="w-26 h-26 rounded-xl shadow-3xl"></label>
+                    
+                    <label for="imagen-cambiar" class="bg-[#55692d] mt-3 w-28 text-center rounded-xl text-white p-1 hover:cursor-pointer">Cambiar Foto</label>
+                    <input type="file" name="imagen" class="hidden" id="imagen-cambiar">
+
+                    <input type="hidden" name="ComidaGeneral_s.Id" value="@comida.Id">
+
+                    <label class="font-bold mt-4">Código: @comida.Id</label>
+
+                    <label class="font-bold mt-4">Nombre</label>
+                    <input type="text" name="ComidaGeneral_s.Nombre" class="text-center bg-gray-300 rounded-xl" value="@comida.Nombre">
+                    <label class="font-bold">Descripción</label>
+                    <input type="text" name="ComidaGeneral_s.Descripción" class="text-center bg-gray-300" value="@comida.Descripción">
+                    <label for="Comida_Categoria" class="font-bold">Categoría:</label>
+                    <select asp-for="ComidaGeneral_s.CategoriaId" id="Comida_Categoria_@comida.Id">
+                        @foreach (var categoria in Model.Categorias)
+                        {
+                            <option value="@categoria.Id" selected="@(comida.Categoria?.Id == categoria.Id)">
+                                @categoria.Nombre
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" name="CategoriaNombre" id="categoria-nombre-@comida.Id" />
+                    <input type="hidden" name="tipo" value="ComidaGeneral"/>
+                    <input type="hidden" name="ComidaGeneral_s.ImagenUrl" value="@comida.ImagenUrl" />
+                    <button type="submit" class="btn rounded-xl mt-3 border-none bg-[#55692d] text-white">Actualizar</button>
+                </form>
+                 <div class="modal-action">
+                    <label for="Comida_General_@comida.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+                </div>
+            </div>
+        </div>
+}
+</div>
+</div>
+
+
+@*SCRIPTS PARA MANDAR IDENTIFICADORES, QUE CAMBIAN EN LA INTERACCIÓN DEL USUARIO*@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('select[id^="Comida_Categoria"]').forEach(select => {
+            let id = select.id.includes('_') ? select.id.split('_')[2] : null;
+            let hiddenInput = id
+                ? document.getElementById(`categoria-nombre-${id}`)
+                : document.getElementById('categoria-nombre'); 
+
+            if (!hiddenInput) return;
+
+            function actualizarNombreCategoria() {
+                hiddenInput.value = select.options[select.selectedIndex].text;
+            }
+
+            actualizarNombreCategoria();
+            select.addEventListener('change', actualizarNombreCategoria);
+        });
+    });
+</script>

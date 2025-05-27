@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "Selecionar posiciones";
+}
+
+<div class="flex flex-col items-center space-y-4 p-6">
+    <h2 class="text-2xl font-bold mb-4">Seleccionar Sillas</h2>
+
+    <div class="flex flex-col space-y-2">
+        <!-- Fila A -->
+        <div class="flex space-x-2">
+            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-xs font-semibold">A1
+            </div>
+            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-xs font-semibold">A2
+            </div>
+            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-xs font-semibold">A3
+            </div>
+        </div>
+
+        <!-- Fila G (con azules y un negro) -->
+        <div class="flex space-x-2 mt-4">
+            <div class="w-10 h-10 rounded-full bg-teal-300 flex items-center justify-center text-xs font-semibold">G1
+            </div>
+            <div class="w-10 h-10 rounded-full bg-teal-300 flex items-center justify-center text-xs font-semibold">G2
+            </div>
+            <div class="w-10 h-10 rounded-full bg-teal-300 flex items-center justify-center text-xs font-semibold">G3
+            </div>
+            <div
+                class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-xs font-semibold">
+                G12</div>
+        </div>
+
+        <!-- Otras filas -->
+        <!-- Copias más divs flex para otras filas H, I, etc. -->
+    </div>
+
+    <div class="w-full h-6 bg-gray-400 mt-8 text-center font-semibold flex items-center justify-center">
+        Pantalla
+    </div>
+
+    <!-- Leyenda -->
+    <div class="flex space-x-6 mt-4">
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-gray-300 rounded-full"></div>
+            <span>Disponible</span>
+        </div>
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-black rounded-full"></div>
+            <span>Seleccionado</span>
+        </div>
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-teal-300 rounded-full"></div>
+            <span>Ocupado</span>
+        </div>
+    </div>
+    <div>
+        <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Asientos seleccionados</th>
+                    <th>Precio</th>
+                    <th>Total a pagar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>F12</td>
+                    <td>$14.000</td>
+                    <td>$14.000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-20">
+        <button class="btn btn-success w-full">Pagar</button>
+        <button class="btn btn-error w-full">Abandonar</button>
+    </div>
+</div>
+</div>

@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.4",
+    "tailwindcss": "^4.1.4"
+  },
+  "scripts": {
+  "start": "concurrently \"dotnet watch run\" \"npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --watch\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "daisyui": "^5.0.28"
+  }
+}
