@@ -1,4 +1,4 @@
-@model CineMaxCOL_Entity.Tarjeta
+@model CineMaxCOL_Web.Models.ToSummaryPay.SummaryToPay
 
 <div class="max-w-6xl mx-auto bg-white shadow-lg border border-[#55692d] rounded-xl p-8 space-y-6">
 
@@ -17,15 +17,15 @@
             <div class="space-y-2">
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Nombre Titular:</span>
-                    <span class="text-gray-600">@Model.NombreTitular</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.NombreTitular</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Correo Electrónico:</span>
-                    <span class="text-gray-600">@Model.CorreoElectronico</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.CorreoElectronico</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Número Tarjeta:</span>
-                    <span class="text-gray-600">@Model.NumeroTarjeta</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.NumeroTarjeta</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Fecha Expiración:</span>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Tipo Tarjeta:</span>
-                    <span class="text-gray-600">@Model.TipoTarjeta</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.TipoTarjeta</span>
                 </div>
             </div>
         </div>
@@ -44,23 +44,23 @@
             <div class="space-y-2">
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Nombre Completo:</span>
-                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.FullName</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.FullName</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Correo:</span>
-                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.Email</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.Email</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Documento:</span>
-                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.Dni</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.Dni</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Rol:</span>
-                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.IdRolNavigation?.TipoRol</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.IdRolNavigation?.TipoRol</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-medium text-gray-800">Registro:</span>
-                    <span class="text-gray-600">@Model.IdUsuarioNavigation?.CreatedAt?.ToString("yyyy-MM-dd")</span>
+                    <span class="text-gray-600">@Model.tarjetaByUsuario.IdUsuarioNavigation?.CreatedAt?.ToString("yyyy-MM-dd")</span>
                 </div>
             </div>
         </div>
@@ -70,17 +70,16 @@
     <div>
         <h2 class="text-xl font-semibold text-[#55692d] mb-4">Película y Función</h2>
         <div class="p-4 border border-dashed border-gray-300 rounded-lg text-center text-gray-500 italic">
-            Información de la película aquí...
-            <p><strong>Título:</strong> Avengers: Endgame</p>
-            <p><strong>Horario:</strong> 7:30 PM - Sala 2</p>
-            
+
         </div>
     </div>
 
     <!-- Botón Confirmar -->
     <div class="text-right">
-        <button class="btn bg-[#55692d] hover:bg-[#44571c] text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-300">
+        <form asp-action="Index" asp-controller="ProccesPay">
+        <button type="submit" class="btn bg-[#55692d] hover:bg-[#44571c] text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-300">
             Confirmar Compra
         </button>
+        </form>
     </div>
 </div>

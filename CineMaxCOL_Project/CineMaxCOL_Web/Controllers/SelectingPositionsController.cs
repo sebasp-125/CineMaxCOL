@@ -40,43 +40,53 @@ namespace CineMaxCOL_Web.Controllers
         {
             try
             {
+                string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                int? idUsuario = null;
+                if (int.TryParse(userId, out var parsedId))
+                {
+                    idUsuario = parsedId;
+                }
                 var destruc = new SillasPorFuncion
                 {
                     IdFuncion = idFuncion,
                     Estado = "Temporal",
                     IdSilla = IdSillaPorFuncion,
                     ReservadoHasta = DateTime.Now.AddSeconds(10),
-                    IdUsuario = 28
+                    IdUsuario = idUsuario
                 };
+
                 await _context.SillasPorFuncions.AddAsync(destruc);
                 await _context.SaveChangesAsync();
-                return Ok(destruc);
+                return NoContent();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                TempData["error"] = $"Tenemos problemas con el puesto seleccionado {IdSillaPorFuncion} - {e.Message}";
-                return Ok(e);
+                TempData["error"] = $"Error por parte de CineMaxCOL {e.Message}";
+                return StatusCode(500, $"Error al reservar el asiento temporalmente: {e.Message}");
             }
         }
 
-        public async Task UpdateEverythingSeats()
+        public async Task<IActionResult> UpdateEverythingSeats()
         {
             try
             {
                 var ahora = DateTime.Now;
-                foreach (var sillaTemp in _context.SillasPorFuncions.Where(x => x.Estado == "Temporal" && x.ReservadoHasta < ahora))
-                {
-                    _context.SillasPorFuncions.Remove(sillaTemp);
-                }
+                var sillasVencidas = await _context.SillasPorFuncions
+                    .Where(x => x.Estado == "Temporal" && x.ReservadoHasta < ahora)
+                    .ToListAsync();
+
+                _context.SillasPorFuncions.RemoveRange(sillasVencidas);
                 await _context.SaveChangesAsync();
-                TempData["success"] = "Actualizado con exito";
+
+                TempData["success"] = "Puestos temporales actualizados correctamente.";
             }
             catch
             {
-                TempData["error"] = "Tenemos problemas para actulizar nuestros sistemas";
+                TempData["error"] = "Hubo un error al actualizar los puestos.";
             }
-        }
 
+            return NoContent();
+        }
 
         public async Task<IActionResult> InformationMainMovie(string SalaId, string IdPelicula, string identificador)
         {

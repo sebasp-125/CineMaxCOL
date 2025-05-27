@@ -12,6 +12,9 @@ namespace CineMaxCOL_DAL.Repository.Interface
         //All relacionated Payment/BuyTickets
         Task<bool> MakeSomethingRegisterUsServices(T t);
 
+        //This method is for unic and speaclly action, it's need a imporntatn information. 
+        Task<Reserva> MakingUpReservaUsServices(Reserva reserva);
+
         //This is a specially fuction, It's about user information when heir is LogIn.
         //Just is for the user LogIn asociate information...
         Task<Tarjeta> BringInformationLogInUser(int iduser);

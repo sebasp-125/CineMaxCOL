@@ -49,5 +49,18 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
             }
         }
 
+        public async Task<Reserva> MakingUpReservaUsServices(Reserva reserva)
+        {
+            try
+            {
+                var response = await _context.Reservas.AddAsync(reserva);
+                await _context.SaveChangesAsync();
+                return response.Entity;
+            }
+            catch
+            {
+                return new Reserva();
+            }
+        }
     }
 }

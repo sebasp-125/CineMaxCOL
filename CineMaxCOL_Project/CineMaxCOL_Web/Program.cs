@@ -55,13 +55,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-    //COOKIES - SESIONS
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(2);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
 
 var app = builder.Build();
 
@@ -73,8 +66,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
+app.UseHttpsRedirection(); // opcional, recomendado
+app.UseAuthentication();  
 
 app.UseAuthorization();
 

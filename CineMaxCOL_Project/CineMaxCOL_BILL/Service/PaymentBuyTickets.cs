@@ -24,6 +24,26 @@ namespace CineMaxCOL_BILL.Service
             return true;
         }
 
+        public async Task<Reserva> RegisterReservaServices(Reserva reserva)
+        {
+            var respose = await _Unit._UnitPaymentBuyTicktes<Reserva>().MakingUpReservaUsServices(reserva);
+            if (respose == null)
+            {
+                return null;
+            }
+            return respose;
+        }
+
+        public async Task<bool> RegisterPagoServices(Pago pago)
+        {
+            var respose = await _Unit._UnitPaymentBuyTicktes<Pago>().MakeSomethingRegisterUsServices(pago);
+            if (!respose)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task<Tarjeta> BringInformationLogInUserServices(int iduser)
         {
             var service = _Unit._UnitPaymentBuyTicktes<Tarjeta>();
@@ -51,6 +71,5 @@ namespace CineMaxCOL_BILL.Service
             }
             return true;
         }
-
     }
 }

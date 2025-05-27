@@ -34,11 +34,11 @@
                 item.Estado == "Temporal" ? "bg-yellow-300" :
                 "bg-green-500";
                 <a href="@Url.Action("ReservarTemporalmente" , "SelectingPositions" , new 
-                   {
-                       idFuncion = item.IdFuncion,
-                       IdSillaPorFuncion = item.IdSillaNavigation.Id,
-                   })" class=" btn border p-2 m-1 rounded text-white @color">
-            @($"{item.IdSillaNavigation.Fila}{item.IdSillaNavigation.Numero}")
+                    {
+                        idFuncion = item.IdFuncion,
+                        IdSillaPorFuncion = item.IdSillaNavigation.Id,
+                    })" class=" btn border p-2 m-1 rounded text-white @color">
+            @($"{item.IdSillaNavigation.Fila}{item.IdSillaNavigation.Numero} - ")
         </a>
                 }
         }
@@ -50,8 +50,8 @@
 
         <div class="text-center bg-amber-200 p-5 m-5 ">
             <h2>Tienes <strong>5 minutos</strong> para terminar la compra</h2>
-            <form asp-action="UpdateEverythingSeats" asp-controller="SelectingPositions">
-                <button class="btn btn-success">Actualizar puestos</button>
+            <form asp-action="UpdateEverythingSeats" asp-controller="SelectingPositions" >
+                <button type="submit" class="btn btn-success">Actualizar puestos</button>
             </form>
             <span class="text-gray-700">Eliminara las sillas las cuales tengan el plazo vencido</span>
         </div>
@@ -74,12 +74,6 @@
                                     @Model.funcionDto.FechaHora?.ToString("g")</p>
                                 <p><span class="font-semibold">Precio:</span> $@Model.funcionDto.Precio?.ToString("F2")
                                 </p>
-                                <p>
-                                    <span class="font-semibold">Identificador:</span>
-                                <p>
-                                    <span>Total a pagar: </span>
-                                    <span id="AllPayme"></span>
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -89,51 +83,3 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const selectedSeats = JSON.parse(localStorage.getItem("SelectedSeats")) || [];
-
-        selectedSeats.forEach(id => {
-            const btn = document.getElementById("seat-" + id);
-            if (btn) {
-                btn.classList.remove("bg-gray-500");
-                btn.classList.add("bg-blue-600");
-            }
-        });
-
-        updateSeatList(selectedSeats);
-    });
-
-    function Selecting(id) {
-        let selectedSeats = JSON.parse(localStorage.getItem("SelectedSeats")) || [];
-        const btn = document.getElementById("seat-" + id);
-
-        if (!selectedSeats.includes(id)) {
-            selectedSeats.push(id);
-            btn.classList.remove("bg-gray-500");
-            btn.classList.add("bg-blue-600");
-        } else {
-            selectedSeats = selectedSeats.filter(item => item !== id);
-            btn.classList.remove("bg-blue-600");
-            btn.classList.add("bg-gray-500");
-        }
-
-        localStorage.setItem("SelectedSeats", JSON.stringify(selectedSeats));
-        updateSeatList(selectedSeats);
-    }
-
-    function updateSeatList(seats) {
-        const seatDisplay = document.getElementById("reservesAccount");
-        seatDisplay.textContent = seats.join(", ");
-
-        @* const precio = parseFloat('@Model.Precio'.replace(',', '.')); *@
-        const total = seats.length * precio;
-        document.getElementById("AllPayme").textContent = "$" + total.toFixed(2);
-    }
-
-    function Abandonar() {
-        localStorage.removeItem("SelectedSeats");
-        location.reload();
-    }
-
-</script>

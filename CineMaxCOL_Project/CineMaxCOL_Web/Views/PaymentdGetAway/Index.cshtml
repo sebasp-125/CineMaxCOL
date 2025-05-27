@@ -18,13 +18,11 @@
             <div class="tooltip tooltip-bottom"
                 data-tip="Para agregar o cambiar esta información, debes registrar una nueva tarjeta.">
                 <button class="btn bg-[#55692d] text-white hover:bg-[#6a8035]">
-                    Hola @Model.NombreTitular 👋
+                    Hola @Model?.NombreTitular  👋 
                 </button>
             </div>
         </div>
     }
-
-
 
     <form asp-action="RegistersPay" asp-controller="PaymentdGetAway" method="post">
         <div class="collapse collapse-arrow border border-[#55692d] bg-white rounded-xl">
@@ -58,15 +56,15 @@
                         class="btn w-full
             @(validatorStatus ? "btn-disabled bg-gray-300 text-gray-600 cursor-not-allowed" : "bg-[#55692d] text-white hover:bg-[#6a8035]")"
                         @(validatorStatus ? "disabled" : "")>
-                        Agregar nueva tarjeta
+                        Agregar nueva tarjeta y generar el pago
                     </button>
-
                     @if (validatorStatus)
                     {
-                        <a href="@Url.Action("RightPersonLogIn" , "PaymentdGetAway" , new { idUser = @Model?.IdUsuario ?? 0})" class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">
-                            Continuar con el proceso
+                        <a href="@Url.Action("RightPersonLogIn", "PaymentdGetAway", new { idUser = @Model?.IdUsuario ?? 0})"
+                            class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">
+                            Pagar
                         </a>
-                    }
+                    }''
                 </div>
             </div>
         </div>

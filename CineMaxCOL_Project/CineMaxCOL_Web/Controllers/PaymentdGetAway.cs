@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CineMaxCOL_BILL.Service;
 using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
+using CineMaxCOL_Web.Models.ToSummaryPay;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -15,19 +16,21 @@ namespace CineMaxCOL_Web.Controllers
     public class PaymentdGetAway : Controller
     {
         private readonly PaymentBuyTickets _authService;
-        private readonly IUnitOfWork _Unit;
+        private readonly DetailsMovieService _auhtDetailsService;
 
-        public PaymentdGetAway(PaymentBuyTickets service, IUnitOfWork Unit)
+        private readonly CineMaxColContext _context;
+
+        public PaymentdGetAway(PaymentBuyTickets service, CineMaxColContext context, DetailsMovieService DetailsMovieService)
         {
             _authService = service;
-            _Unit = Unit;
+            _context = context;
+            _auhtDetailsService = DetailsMovieService;
         }
 
         public async Task<IActionResult> Index()
         {
 
             int idUsuario = 0;
-
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var parsedId))
             {
@@ -39,8 +42,6 @@ namespace CineMaxCOL_Web.Controllers
             {
                 return View(BrinfInformationLogInUser);
             }
-
-
             return View();
         }
 
@@ -75,16 +76,27 @@ namespace CineMaxCOL_Web.Controllers
                 TempData["error"] = "Tenemos problemas al registrar la tarjeta.";
                 return View("Index");
             }
+            
+            var destruct = new SummaryToPay
+            {
+                tarjetaByUsuario = await _authService.BringInformationLogInUserServices(idUsuario ?? 0),
+                funcion = await _auhtDetailsService.GetSpeacillyFuction(5)
+            };
 
-            return View("~/Views/SummaryBuy/Index.cshtml", response);
+            return View("~/Views/SummaryBuy/Index.cshtml", destruct);
         }
-
-        //To Page Summary
         public async Task<IActionResult> RightPersonLogIn(int idUser)
         {
-            var BrinfInformationLogInUser = await _authService.BringInformationLogInUserServices(idUser);
-            return View("~/Views/SummaryBuy/Index.cshtml", BrinfInformationLogInUser);
+
+
+            var destruct = new SummaryToPay
+            {
+                tarjetaByUsuario = await _authService.BringInformationLogInUserServices(idUser),
+            };
+
+            return View("~/Views/SummaryBuy/Index.cshtml", destruct);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -93,3 +105,4 @@ namespace CineMaxCOL_Web.Controllers
         }
     }
 }
+
