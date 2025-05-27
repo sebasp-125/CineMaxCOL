@@ -37,5 +37,7 @@ public partial class Usuario
 
     public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();
 
-    public virtual ICollection<Tarjeta> Tarjeta { get; set; } = new List<Tarjeta>();
+    public virtual ICollection<SillasPorFuncion> SillasPorFuncions { get; set; } = new List<SillasPorFuncion>();
+
+    public virtual ICollection<Tarjetum> Tarjeta { get; set; } = new List<Tarjetum>();
 }

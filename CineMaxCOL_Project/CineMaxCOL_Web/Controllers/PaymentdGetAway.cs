@@ -30,6 +30,7 @@ namespace CineMaxCOL_Web.Controllers
             return (userIdClaim != null && int.TryParse(userIdClaim.Value, out int id)) ? id : 0;
         }
 
+        [Route("Index")]
         public async Task<IActionResult> Index()
         {
             try
@@ -58,7 +59,7 @@ namespace CineMaxCOL_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegistersPay(Tarjeta tarjeta)
+        public async Task<IActionResult> RegistersPay(Tarjetum tarjeta)
         {
             try
             {
@@ -68,7 +69,7 @@ namespace CineMaxCOL_Web.Controllers
                     return View("Index", new SummaryToPay());
                 }
 
-                var nuevaTarjeta = new Tarjeta
+                var nuevaTarjeta = new Tarjetum
                 {
                     IdUsuario = null,
                     NombreTitular = tarjeta.NombreTitular,
@@ -78,7 +79,7 @@ namespace CineMaxCOL_Web.Controllers
                     TipoTarjeta = tarjeta.TipoTarjeta
                 };
 
-                var tarjetaRegistrada = await _unit._UnitPaymentBuyTicktes<Tarjeta>().BringInformationLaterRegisterOurServices(nuevaTarjeta);
+                var tarjetaRegistrada = await _unit._UnitPaymentBuyTicktes<Tarjetum>().BringInformationLaterRegisterOurServices(nuevaTarjeta);
 
                 if (tarjetaRegistrada == null)
                 {
@@ -88,7 +89,7 @@ namespace CineMaxCOL_Web.Controllers
 
                 var resumen = new SummaryToPay
                 {
-                    UsuarioByTarjeta = await _unit._UnitPaymentBuyTicktes<Tarjeta>().BringInformationLogInUser(IdActuallyUser())
+                    UsuarioByTarjeta = await _unit._UnitPaymentBuyTicktes<Tarjetum>().BringInformationLogInUser(IdActuallyUser())
                 };
 
                 TempData["success"] = "Tarjeta registrada exitosamente.";

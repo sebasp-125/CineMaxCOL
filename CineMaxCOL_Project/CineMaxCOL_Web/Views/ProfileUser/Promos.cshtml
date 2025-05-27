@@ -1,0 +1,69 @@
+<div class="breadcrumbs text-sm px-6">
+  <ul>
+    <li><a href="@Url.Action("Index","Home")">Home</a></li>
+    <li>Promos y Cupones</li>
+  </ul>
+</div>
+
+<div class="flex justify-center items-start h-screen">
+    
+    <div class="relative top-48 w-full">
+
+        <div class="w-full flex justify-center gap-x-18 relative bottom-26">
+            <button class="btn h-16 w-38 text-xl border-2 border-black text-[#808000]">CUPONES</button>
+            <h1 class="h-full text-5xl">|</h1>
+            <button class="btn h-16 w-38 text-xl border-none bg-[#808000] font-bold">PROMOS</button>
+        </div>
+
+        <div class="p-4 flex flex-col items-center">
+            <div class="mb-12 flex gap-x-6 justify-start relative left-36 w-full">
+                <button class="btn h-8 w-46 border-2 border-black text-[#808000]">CUPONES ACTIVOS</button>
+                <h1 class="h-full text-2xl">|</h1>
+                <button class="btn h-8 w-46 border-none bg-[#808000] font-bold">CUPONES VENCIDOS</button>
+            </div>
+            <table class="table-fixed w-[80%] text-black">
+                <thead>
+                <tr class="border-b-4 border-[#808000]">
+                    <th class="w-1/8">Código</th>
+                    <th class="w-1/8">Descripción</th>
+                    <th class="w-1/8">Descuento</th>
+                    <th class="w-1/8">Válido Hasta</th>
+                    <th class="w-1/8">Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-center border-b-2 border-[#808000] h-12">
+                    <td>CINE10</td>
+                    <td>10% en cualquier función</td>
+                    <td>10%</td>
+                    <td>05/05/2025</td>
+                    <td>Activo</td>
+                </tr>
+                <tr class="text-center border-b-2 border-[#808000] h-12">
+                    <td>SPA25</td>
+                    <td>25% en funciones 2D Lunes - Jueves</td>
+                    <td>25%</td>
+                    <td>10/05/2025</td>
+                    <td>Activo</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
+    </div>
+
+</div>
+<div class="flex h-64 w-full">
+    <div class="bg-[#808000] w-full p-8 px-12">
+        <h1 class="text-white font-bold text-2xl">¿CÓMO OBTENER NUEVOS CUPONES?</h1>
+        <h2 class="text-justify mt-6 font-bold">Compra 5 o más entradas en usa sola compra.</h2>
+        <h2 class="text-justify font-bold">Registrate en nuestro boletin y recibe un cupón mensual.</h2>
+        <h2 class="text-justify font-bold">Sigue nuestras redes sociales y participa en sorteos semanales</h2>
+    </div>
+
+    <div class="bg-gray-400 w-[40%] flex flex-col justify-center items-center gap-y-12">
+        <h1 class="font-bold text-xl">REDIMIR CÓDIGOS</h1>
+        <input type="text" placeholder="Ingrese su código" class="w-80 bg-gray-300 px-3"/>
+        <button class="btn w-64 border-none bg-[#808000] font-bold text-black">CANJEAR</button>
+    </div>
+</div>

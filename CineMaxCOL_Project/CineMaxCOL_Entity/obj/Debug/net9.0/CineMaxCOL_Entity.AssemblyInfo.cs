@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CineMaxCOL_Entity")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ccf7a524494dd0ad8b1f0d2a028d4ab7ab488b9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9af7168077d01cd4609b60b60e83418fd266f387")]
 [assembly: System.Reflection.AssemblyProductAttribute("CineMaxCOL_Entity")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CineMaxCOL_Entity")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

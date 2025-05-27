@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CineMaxCol_DAL.Interface;
 using CineMaxCOL_DAL.Repository.Interface;
 using CineMaxCOL_Entity;
 
@@ -19,7 +16,18 @@ namespace CineMaxCOL_DAL.UnitOfWork.Interface
         IPaymentBuyTickets<T> _UnitPaymentBuyTicktes<T>() where T : class;
 
         //Just everything about MarketPositionsTemporal
-        IMarketTemporalPosition_Repository<AsientosTemporale> _UnitTemporalPositions {get;}
+        IMarketTemporalPosition_Repository<AsientosTemporale> _UnitTemporalPositions { get; }
+
+
+        //Andres
+        IPeliculas Peliculas {get;}
+        ICineComidas CineComidas {get;}
+        IMunicipios Municipios {get;}
+        IComidas Comidas {get;}
+        ICloudinaryR CloudinaryR { get; }
+        ICategorias CategoriasComida {get;}
+        IPromociones Promociones { get; }
+        Task SaveChangesAsync();
 
     }
 }

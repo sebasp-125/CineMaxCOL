@@ -14,9 +14,9 @@ namespace CineMaxCOL_BILL.Service
         {
             _Unit = Unit;
         }
-        public async Task<bool> RegisterCardUsServices(Tarjeta tarjeta)
+        public async Task<bool> RegisterCardUsServices(Tarjetum tarjeta)
         {
-            var respose = await _Unit._UnitPaymentBuyTicktes<Tarjeta>().MakeSomethingRegisterUsServices(tarjeta);
+            var respose = await _Unit._UnitPaymentBuyTicktes<Tarjetum>().MakeSomethingRegisterUsServices(tarjeta);
             if (!respose)
             {
                 return false;
@@ -44,18 +44,18 @@ namespace CineMaxCOL_BILL.Service
             return true;
         }
 
-        public async Task<Tarjeta> BringInformationLogInUserServices_Card(int? iduser)
+        public async Task<Tarjetum> BringInformationLogInUserServices_Card(int? iduser)
         {
-            var service = _Unit._UnitPaymentBuyTicktes<Tarjeta>();
+            var service = _Unit._UnitPaymentBuyTicktes<Tarjetum>();
 
             if (service == null)
             {
-                return new Tarjeta();
+                return new Tarjetum();
             }
             var response = await service.BringInformationLogInUser(iduser.Value);
             if (response == null)
             {
-                return new Tarjeta();
+                return new Tarjetum();
             }
             return response;
         }

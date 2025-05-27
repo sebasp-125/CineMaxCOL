@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CineMaxCol_DAL.Interface;
 using CineMaxCOL_DAL.Repository.Implimentation;
 using CineMaxCOL_DAL.Repository.Interface;
 using CineMaxCOL_DAL.UnitOfWork.Interface;
@@ -48,6 +45,32 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
         {
             await _context.SaveChangesAsync();
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+
+        }
+
+
+        //Andres
+        private readonly IPeliculas? _peliculasRepository; 
+        private readonly IMunicipios? _municipioRepository;
+        private readonly ICineComidas? _cineComidasRepository;
+        private readonly ICategorias? _categoriaRepository;
+        private readonly IComidas? _comidasRepository;
+        private readonly ICloudinaryR? _cloudinaryRepository;
+        private readonly IPromociones? _promocionesRepository;
+
+        public IPeliculas Peliculas => _peliculasRepository ?? new Peliculas(_context);
+        public ICineComidas CineComidas => _cineComidasRepository ?? new CineComidas(_context);
+        public IMunicipios Municipios => _municipioRepository ?? new Municipios(_context);
+        public IComidas Comidas => _comidasRepository ?? new Comidas(_context);
+
+        public ICategorias CategoriasComida => _categoriaRepository ?? new CategoriasComida(_context);
+
+        public ICloudinaryR CloudinaryR => _cloudinaryRepository ?? new CloudinaryR(_context);
+        public IPromociones Promociones => _promocionesRepository ?? new Promociones(_context);
     }
 
 }

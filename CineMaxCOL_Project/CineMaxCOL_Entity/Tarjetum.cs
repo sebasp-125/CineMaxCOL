@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CineMaxCOL_Entity;
 
-public partial class Tarjeta
+public partial class Tarjetum
 {
     public int Id { get; set; }
 

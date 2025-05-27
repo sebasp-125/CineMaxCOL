@@ -35,18 +35,18 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
 
         //This is a specially fuction, It's about user information when heir is LogIn.
         //Just is for the user LogIn asociate information...
-        public async Task<Tarjeta> BringInformationLogInUser(int iduser)
+        public async Task<Tarjetum> BringInformationLogInUser(int iduser)
         {
             try
             {
-                return await _context.Tarjetas
+                return await _context.Tarjeta
                     .Include(x => x.IdUsuarioNavigation)
                     .Where(t => t.IdUsuario == iduser)
-                    .FirstOrDefaultAsync() ?? new Tarjeta();
+                    .FirstOrDefaultAsync() ?? new Tarjetum();
             }
             catch
             {
-                return new Tarjeta();
+                return new Tarjetum();
             }
         }
 

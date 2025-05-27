@@ -20,4 +20,6 @@ public partial class SillasPorFuncion
     public virtual Funcion IdFuncionNavigation { get; set; } = null!;
 
     public virtual Silla IdSillaNavigation { get; set; } = null!;
+
+    public virtual Usuario? IdUsuarioNavigation { get; set; }
 }

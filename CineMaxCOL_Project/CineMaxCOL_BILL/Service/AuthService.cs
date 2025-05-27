@@ -34,12 +34,12 @@ namespace CineMaxCOL_BILL.Service
             if (user != null)
             {
                 var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.FullName ?? "Error"),
-            new Claim(ClaimTypes.Email, user.Email ?? "Error"),
-            new Claim(ClaimTypes.Role, user.IdRolNavigation?.TipoRol ?? "Error"),
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-        };
+                {
+                    new Claim(ClaimTypes.Name, user.FullName ?? "Error"),
+                    new Claim(ClaimTypes.Email, user.Email ?? "Error"),
+                    new Claim(ClaimTypes.Role, user.IdRolNavigation?.TipoRol ?? "Error"),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                };
 
                 return (true, claims);
             }

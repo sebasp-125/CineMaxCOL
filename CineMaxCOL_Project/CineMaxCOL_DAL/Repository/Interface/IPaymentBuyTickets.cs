@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CineMaxCOL_Entity;
 
 namespace CineMaxCOL_DAL.Repository.Interface
@@ -17,7 +13,7 @@ namespace CineMaxCOL_DAL.Repository.Interface
 
         //This is a specially fuction, It's about user information when heir is LogIn.
         //Just is for the user LogIn asociate information...
-        Task<Tarjeta> BringInformationLogInUser(int iduser);
+        Task<Tarjetum> BringInformationLogInUser(int iduser);
 
         Task<T> BringInformationLaterRegisterOurServices(T t);
 

@@ -17,7 +17,13 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<AsientosTemporale> AsientosTemporales { get; set; }
 
+    public virtual DbSet<CategoriaComidum> CategoriaComida { get; set; }
+
     public virtual DbSet<Cine> Cines { get; set; }
+
+    public virtual DbSet<CineComidum> CineComida { get; set; }
+
+    public virtual DbSet<Comidum> Comida { get; set; }
 
     public virtual DbSet<ConfiguracionCloud> ConfiguracionClouds { get; set; }
 
@@ -39,6 +45,10 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<Precio> Precios { get; set; }
 
+    public virtual DbSet<PromocionComidum> PromocionComida { get; set; }
+
+    public virtual DbSet<Puesto> Puestos { get; set; }
+
     public virtual DbSet<Reserva> Reservas { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -49,7 +59,7 @@ public partial class CineMaxColContext : DbContext
 
     public virtual DbSet<SillasPorFuncion> SillasPorFuncions { get; set; }
 
-    public virtual DbSet<Tarjeta> Tarjetas { get; set; }
+    public virtual DbSet<Tarjetum> Tarjeta { get; set; }
 
     public virtual DbSet<TipoPago> TipoPagos { get; set; }
 
@@ -58,69 +68,91 @@ public partial class CineMaxColContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-CJE8DS1\\SQLEXPRESS;Database=CineMaxCOL;Trusted_Connection=True;TrustServerCertificate=True;");
-
+    {}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AsientosTemporale>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Asientos__3214EC07B173D994");
+            entity.HasKey(e => e.Id).HasName("PK__Asientos__3214EC0791A30E8C");
 
-            entity.Property(e => e.Estado)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.IdFuncion).HasColumnName("Id_Funcion");
-            entity.Property(e => e.IdSilla).HasColumnName("Id_Silla");
-            entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
+            entity.ToTable("AsientosTemporale");
+
+            entity.Property(e => e.Estado).HasMaxLength(50);
             entity.Property(e => e.ReservadoHasta).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdFuncionNavigation).WithMany(p => p.AsientosTemporales)
                 .HasForeignKey(d => d.IdFuncion)
-                .HasConstraintName("FK_HacientosTemporalesToFuncion");
+                .HasConstraintName("FK_AsientosTemporale_Funcion");
 
             entity.HasOne(d => d.IdSillaNavigation).WithMany(p => p.AsientosTemporales)
                 .HasForeignKey(d => d.IdSilla)
-                .HasConstraintName("FK_AsientosTemporalesToSilla");
+                .HasConstraintName("FK_AsientosTemporale_Silla");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.AsientosTemporales)
                 .HasForeignKey(d => d.IdUsuario)
-                .HasConstraintName("FK_HacientosTemporalesToUsuario");
+                .HasConstraintName("FK_AsientosTemporale_Usuario");
+        });
+
+        modelBuilder.Entity<CategoriaComidum>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3214EC07C01DD8A6");
         });
 
         modelBuilder.Entity<Cine>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cine__3214EC0760C8E44D");
+            entity.HasKey(e => e.Id).HasName("PK__Cine__3214EC073C76C052");
 
             entity.ToTable("Cine");
 
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.IdEmpleado).HasColumnName("Id_Empleado");
-            entity.Property(e => e.IdUbicacion).HasColumnName("Id_Ubicacion");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.Telefono)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Nombre).HasMaxLength(150);
+            entity.Property(e => e.Telefono).HasMaxLength(50);
 
             entity.HasOne(d => d.IdUbicacionNavigation).WithMany(p => p.Cines)
                 .HasForeignKey(d => d.IdUbicacion)
-                .HasConstraintName("FK__Cine__Id_Ubicaci__628FA481");
+                .HasConstraintName("FK_Cine_Ubicacion");
+        });
+
+        modelBuilder.Entity<CineComidum>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__CineComi__3214EC079473E86B");
+
+            entity.Property(e => e.IdCine).HasColumnName("Id_Cine");
+            entity.Property(e => e.IdComida).HasColumnName("Id_Comida");
+
+            entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.CineComida)
+                .HasForeignKey(d => d.IdCine)
+                .HasConstraintName("FK__CineComid__Id_Ci__10566F31");
+
+            entity.HasOne(d => d.IdComidaNavigation).WithMany(p => p.CineComida)
+                .HasForeignKey(d => d.IdComida)
+                .HasConstraintName("FK__CineComid__Id_Co__114A936A");
+        });
+
+        modelBuilder.Entity<Comidum>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Comida__3214EC07C99162A1");
+
+            entity.Property(e => e.Descripción).HasMaxLength(255);
+            entity.Property(e => e.ImagenUrl).HasMaxLength(200);
+            entity.Property(e => e.Nombre).HasMaxLength(100);
+
+            entity.HasOne(d => d.Categoria).WithMany(p => p.Comida)
+                .HasForeignKey(d => d.CategoriaId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK__Comida__Categori__0D7A0286");
         });
 
         modelBuilder.Entity<ConfiguracionCloud>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Configur__3214EC07F6717005");
+            entity.HasKey(e => e.Id).HasName("PK__Configur__3214EC0774780CBB");
 
             entity.ToTable("ConfiguracionCloud");
 
-            entity.Property(e => e.ApiKey).HasMaxLength(100);
-            entity.Property(e => e.ApiSecret).HasMaxLength(255);
-            entity.Property(e => e.CloudName).HasMaxLength(100);
-            entity.Property(e => e.Folder).HasMaxLength(100);
+            entity.Property(e => e.ApiKey).HasMaxLength(250);
+            entity.Property(e => e.ApiSecret).HasMaxLength(250);
+            entity.Property(e => e.CloudName).HasMaxLength(150);
+            entity.Property(e => e.Folder).HasMaxLength(150);
         });
 
         modelBuilder.Entity<ConfiguracionEmail>(entity =>
@@ -129,242 +161,215 @@ public partial class CineMaxColContext : DbContext
                 .HasNoKey()
                 .ToTable("ConfiguracionEmail");
 
-            entity.Property(e => e.Propiedad)
-                .HasMaxLength(100)
-                .HasColumnName("propiedad");
-            entity.Property(e => e.Recurso)
-                .HasMaxLength(100)
-                .HasColumnName("recurso");
-            entity.Property(e => e.Valor)
-                .HasMaxLength(255)
-                .HasColumnName("valor");
+            entity.Property(e => e.Propiedad).HasMaxLength(200);
+            entity.Property(e => e.Recurso).HasMaxLength(200);
+            entity.Property(e => e.Valor).HasMaxLength(500);
         });
 
         modelBuilder.Entity<DiasSemana>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DiasSema__3214EC0702173A08");
+            entity.HasKey(e => e.Id).HasName("PK__DiasSema__3214EC074BC36CE6");
 
             entity.ToTable("DiasSemana");
 
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            entity.Property(e => e.Nombre).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Funcion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Funcion__3214EC07B03C6C57");
+            entity.HasKey(e => e.Id).HasName("PK__Funcion__3214EC07E0DC48B8");
 
             entity.ToTable("Funcion");
 
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            entity.Property(e => e.FechaHora)
-                .HasColumnType("datetime")
-                .HasColumnName("Fecha_Hora");
-            entity.Property(e => e.IdPelicula).HasColumnName("Id_Pelicula");
-            entity.Property(e => e.IdSala).HasColumnName("Id_Sala");
-            entity.Property(e => e.IdentificadorMovies)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .HasColumnName("Identificador_Movies");
-            entity.Property(e => e.Precio).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.FechaHora).HasColumnType("datetime");
+            entity.Property(e => e.IdentificadorMovies).HasMaxLength(100);
+            entity.Property(e => e.Precio).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.IdPeliculaNavigation).WithMany(p => p.Funcions)
                 .HasForeignKey(d => d.IdPelicula)
-                .HasConstraintName("FK__Funcion__Id_Peli__6383C8BA");
+                .HasConstraintName("FK_Funcion_Pelicula");
 
             entity.HasOne(d => d.IdSalaNavigation).WithMany(p => p.Funcions)
                 .HasForeignKey(d => d.IdSala)
-                .HasConstraintName("FK__Funcion__Id_Sala__6477ECF3");
+                .HasConstraintName("FK_Funcion_Sala");
         });
 
         modelBuilder.Entity<HistorialCompra>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Historia__3214EC074D09C0D5");
+            entity.HasKey(e => e.Id).HasName("PK__Historia__3214EC07A4C29A33");
 
-            entity.Property(e => e.IdReserva).HasColumnName("Id_Reserva");
-            entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
+            entity.ToTable("HistorialCompra");
 
             entity.HasOne(d => d.IdReservaNavigation).WithMany(p => p.HistorialCompras)
                 .HasForeignKey(d => d.IdReserva)
-                .HasConstraintName("FK__Historial__Id_Re__656C112C");
+                .HasConstraintName("FK_HistorialCompra_Reserva");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.HistorialCompras)
                 .HasForeignKey(d => d.IdUsuario)
-                .HasConstraintName("FK__Historial__Id_Us__66603565");
+                .HasConstraintName("FK_HistorialCompra_Usuario");
         });
 
         modelBuilder.Entity<Horario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Horarios__3214EC078615D9CE");
+            entity.HasKey(e => e.Id).HasName("PK__Horario__3214EC07C674C621");
 
-            entity.Property(e => e.IdCine).HasColumnName("Id_Cine");
+            entity.ToTable("Horario");
 
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.Horarios)
                 .HasForeignKey(d => d.IdCine)
-                .HasConstraintName("FK__Horarios__Id_Cin__6754599E");
+                .HasConstraintName("FK_Horario_Cine");
         });
 
         modelBuilder.Entity<Municipio>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Municipi__3214EC075C3B0AD1");
+            entity.HasKey(e => e.Id).HasName("PK__Municipi__3214EC07FF993E54");
 
-            entity.Property(e => e.NombreMunicipio)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            entity.ToTable("Municipio");
+
+            entity.Property(e => e.NombreMunicipio).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Pago>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pago__3214EC07A8A2FAB4");
+            entity.HasKey(e => e.Id).HasName("PK__Pago__3214EC07F0119E92");
 
             entity.ToTable("Pago");
 
-            entity.Property(e => e.FechaPago)
-                .HasColumnType("datetime")
-                .HasColumnName("Fecha_Pago");
-            entity.Property(e => e.IdReserva).HasColumnName("Id_Reserva");
-            entity.Property(e => e.IdTipoPago).HasColumnName("Id_TipoPago");
-            entity.Property(e => e.Monto).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.FechaPago).HasColumnType("datetime");
+            entity.Property(e => e.Monto).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.IdReservaNavigation).WithMany(p => p.Pagos)
                 .HasForeignKey(d => d.IdReserva)
-                .HasConstraintName("FK__Pago__Id_Reserva__68487DD7");
+                .HasConstraintName("FK_Pago_Reserva");
 
             entity.HasOne(d => d.IdTipoPagoNavigation).WithMany(p => p.Pagos)
                 .HasForeignKey(d => d.IdTipoPago)
-                .HasConstraintName("FK__Pago__Id_TipoPag__693CA210");
+                .HasConstraintName("FK_Pago_TipoPago");
         });
 
         modelBuilder.Entity<Pelicula>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pelicula__3214EC073F5105A4");
+            entity.HasKey(e => e.Id).HasName("PK__Pelicula__3214EC07559277F0");
 
             entity.ToTable("Pelicula");
 
-            entity.Property(e => e.Clasificacion)
-                .HasMaxLength(10)
-                .IsUnicode(false);
+            entity.Property(e => e.Clasificacion).HasMaxLength(50);
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            entity.Property(e => e.Director)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.Genero)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.IdCine).HasColumnName("Id_Cine");
-            entity.Property(e => e.Identificador)
-                .HasMaxLength(5)
-                .IsUnicode(false);
-            entity.Property(e => e.ImagenUrl)
-                .HasMaxLength(300)
-                .IsUnicode(false);
-            entity.Property(e => e.Pais)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Sinopsis).HasColumnType("text");
-            entity.Property(e => e.Titulo)
-                .HasMaxLength(150)
-                .IsUnicode(false);
+            entity.Property(e => e.Director).HasMaxLength(150);
+            entity.Property(e => e.Genero).HasMaxLength(100);
+            entity.Property(e => e.Identificador).HasMaxLength(100);
+            entity.Property(e => e.ImagenUrl).HasMaxLength(300);
+            entity.Property(e => e.Pais).HasMaxLength(100);
+            entity.Property(e => e.Titulo).HasMaxLength(200);
 
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.Peliculas)
                 .HasForeignKey(d => d.IdCine)
-                .HasConstraintName("FK__Pelicula__Id_Cin__6A30C649");
+                .HasConstraintName("FK_Pelicula_Cine");
         });
 
         modelBuilder.Entity<Precio>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Precios__3214EC07422FD1DF");
+            entity.HasKey(e => e.Id).HasName("PK__Precio__3214EC079336B935");
 
-            entity.Property(e => e.HoraFin).HasColumnName("Hora_Fin");
-            entity.Property(e => e.HoraInicio).HasColumnName("Hora_Inicio");
-            entity.Property(e => e.IdDiaSemana).HasColumnName("Id_DiaSemana");
-            entity.Property(e => e.Precio1)
-                .HasColumnType("decimal(6, 2)")
-                .HasColumnName("Precio");
+            entity.ToTable("Precio");
+
+            entity.Property(e => e.Precio1).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.IdDiaSemanaNavigation).WithMany(p => p.Precios)
                 .HasForeignKey(d => d.IdDiaSemana)
-                .HasConstraintName("FK_PreciosTO_DiaSemana");
+                .HasConstraintName("FK_Precio_DiasSemana");
+        });
+
+        modelBuilder.Entity<PromocionComidum>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Promocio__3214EC079EAA05F0");
+
+            entity.Property(e => e.FechaFin).HasColumnType("datetime");
+            entity.Property(e => e.FechaInicio).HasColumnType("datetime");
+            entity.Property(e => e.IdCineComida).HasColumnName("Id_CineComida");
+
+            entity.HasOne(d => d.IdCineComidaNavigation).WithMany(p => p.PromocionComida)
+                .HasForeignKey(d => d.IdCineComida)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK__Promocion__Id_Ci__14270015");
+        });
+
+        modelBuilder.Entity<Puesto>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Puesto__3214EC0743D8FC96");
+
+            entity.ToTable("Puesto");
+
+            entity.Property(e => e.Fila).HasMaxLength(5);
+
+            entity.HasOne(d => d.IdSalaNavigation).WithMany(p => p.Puestos)
+                .HasForeignKey(d => d.IdSala)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Puesto_Sala");
         });
 
         modelBuilder.Entity<Reserva>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Reserva__3214EC07351E0685");
+            entity.HasKey(e => e.Id).HasName("PK__Reserva__3214EC07C80FD841");
 
             entity.ToTable("Reserva");
 
-            entity.Property(e => e.CantidadBoletos).HasColumnName("Cantidad_Boletos");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.FechaReserva)
-                .HasColumnType("datetime")
-                .HasColumnName("Fecha_Reserva");
-            entity.Property(e => e.IdCliente).HasColumnName("Id_Cliente");
-            entity.Property(e => e.IdFuncion).HasColumnName("Id_Funcion");
+            entity.Property(e => e.Estado).HasMaxLength(50);
+            entity.Property(e => e.FechaReserva).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdCliente)
-                .HasConstraintName("FK__Reserva__Id_Clie__6B24EA82");
+                .HasConstraintName("FK_Reserva_Usuario");
 
             entity.HasOne(d => d.IdFuncionNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdFuncion)
-                .HasConstraintName("FK__Reserva__Id_Func__6C190EBB");
+                .HasConstraintName("FK_Reserva_Funcion");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3214EC07666C6FFD");
+            entity.HasKey(e => e.Id).HasName("PK__Role__3214EC0704484E18");
 
-            entity.Property(e => e.TipoRol)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            entity.ToTable("Role");
+
+            entity.Property(e => e.TipoRol).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Sala>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Sala__3214EC07F1C1E701");
+            entity.HasKey(e => e.Id).HasName("PK__Sala__3214EC0776D6542E");
 
             entity.ToTable("Sala");
 
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            entity.Property(e => e.IdCine).HasColumnName("Id_Cine");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            entity.Property(e => e.Nombre).HasMaxLength(150);
 
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.Salas)
                 .HasForeignKey(d => d.IdCine)
-                .HasConstraintName("FK__Sala__Id_Cine__6D0D32F4");
+                .HasConstraintName("FK_Sala_Cine");
         });
 
         modelBuilder.Entity<Silla>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Silla__3214EC073888FF19");
+            entity.HasKey(e => e.Id).HasName("PK__Silla__3214EC0751C403C2");
 
             entity.ToTable("Silla");
 
-            entity.Property(e => e.Fila)
-                .HasMaxLength(5)
-                .IsUnicode(false);
+            entity.Property(e => e.Fila).HasMaxLength(5);
 
             entity.HasOne(d => d.IdSalaNavigation).WithMany(p => p.Sillas)
                 .HasForeignKey(d => d.IdSala)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Silla__IdSala__7A3223E8");
+                .HasConstraintName("FK__Silla__IdSala__282DF8C2");
         });
 
         modelBuilder.Entity<SillasPorFuncion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__SillasPo__3214EC0720CE2CCA");
+            entity.HasKey(e => e.Id).HasName("PK__SillasPo__3214EC077EC16772");
 
             entity.ToTable("SillasPorFuncion");
 
-            entity.Property(e => e.Estado)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasDefaultValue("Libre");
+            entity.Property(e => e.Estado).HasMaxLength(50);
             entity.Property(e => e.ReservadoHasta).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdFuncionNavigation).WithMany(p => p.SillasPorFuncions)
@@ -376,94 +381,72 @@ public partial class CineMaxColContext : DbContext
                 .HasForeignKey(d => d.IdSilla)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SillasPorFuncion_Silla");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.SillasPorFuncions)
+                .HasForeignKey(d => d.IdUsuario)
+                .HasConstraintName("FK_SillasPorFuncion_Usuario");
         });
 
-        modelBuilder.Entity<Tarjeta>(entity =>
+        modelBuilder.Entity<Tarjetum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tarjetas__3214EC07B6F40070");
+            entity.HasKey(e => e.Id).HasName("PK__Tarjeta__3214EC07A9D2C8CD");
 
-            entity.Property(e => e.CorreoElectronico)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.NombreTitular)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.NumeroTarjeta)
-                .HasMaxLength(19)
-                .IsUnicode(false);
-            entity.Property(e => e.TipoTarjeta)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            entity.Property(e => e.CorreoElectronico).HasMaxLength(150);
+            entity.Property(e => e.NombreTitular).HasMaxLength(200);
+            entity.Property(e => e.NumeroTarjeta).HasMaxLength(50);
+            entity.Property(e => e.TipoTarjeta).HasMaxLength(50);
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Tarjeta)
                 .HasForeignKey(d => d.IdUsuario)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_Tarjetas_Usuario");
+                .HasConstraintName("FK_Tarjeta_Usuario");
         });
 
         modelBuilder.Entity<TipoPago>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TipoPago__3214EC07A0AB2903");
+            entity.HasKey(e => e.Id).HasName("PK__TipoPago__3214EC07D44BF9B2");
 
-            entity.Property(e => e.NombreTipo)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            entity.ToTable("TipoPago");
+
+            entity.Property(e => e.NombreTipo).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Ubicacion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ubicacio__3214EC07B14557FE");
+            entity.HasKey(e => e.Id).HasName("PK__Ubicacio__3214EC07C2E6F7F1");
 
             entity.ToTable("Ubicacion");
 
-            entity.Property(e => e.Direccion)
-                .HasMaxLength(200)
-                .IsUnicode(false);
-            entity.Property(e => e.IdMunicipio).HasColumnName("Id_Municipio");
-            entity.Property(e => e.Localidad)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            entity.Property(e => e.Direccion).HasMaxLength(200);
+            entity.Property(e => e.Localidad).HasMaxLength(100);
 
             entity.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Ubicacions)
                 .HasForeignKey(d => d.IdMunicipio)
-                .HasConstraintName("FK__Ubicacion__Id_Mu__6E01572D");
+                .HasConstraintName("FK_Ubicacion_Municipio");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC07D89FA91D");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC0795194989");
+
+            entity.ToTable("Usuario");
 
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            entity.Property(e => e.Dni)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("DNI");
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.FullName)
-                .HasMaxLength(150)
-                .IsUnicode(false);
-            entity.Property(e => e.IdHorario).HasColumnName("Id_Horario");
-            entity.Property(e => e.IdMunicipio).HasColumnName("Id_Municipio");
-            entity.Property(e => e.IdRol)
-                .HasDefaultValue(2)
-                .HasColumnName("Id_Rol");
-            entity.Property(e => e.Password)
-                .HasMaxLength(200)
-                .IsUnicode(false);
+            entity.Property(e => e.Dni).HasMaxLength(50);
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.FullName).HasMaxLength(200);
+            entity.Property(e => e.Password).HasMaxLength(250);
 
             entity.HasOne(d => d.IdHorarioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdHorario)
-                .HasConstraintName("FK__Usuarios__Id_Hor__6EF57B66");
+                .HasConstraintName("FK_Usuario_Horario");
 
             entity.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdMunicipio)
-                .HasConstraintName("FK__Usuarios__Id_Mun__6FE99F9F");
+                .HasConstraintName("FK_Usuario_Municipio");
 
             entity.HasOne(d => d.IdRolNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdRol)
-                .HasConstraintName("FK__Usuarios__Id_Rol__70DDC3D8");
+                .HasConstraintName("FK_Usuario_Role");
         });
 
         OnModelCreatingPartial(modelBuilder);

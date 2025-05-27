@@ -1,15 +1,12 @@
 using CineMaxCOL_BILL.Service;
 using CineMaxCOL_DAL.Repository.Implimentation;
-using CineMaxCOL_DAL.Repository.Interface;
 using CineMaxCOL_DAL.UnitOfWork.Implementation;
 using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
 using CineMaxCOL_Web.Profiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using CineMaxCOL_Entity;
-using CineMaxCOL_Web.Models;
+using CineMaxCol_DAL.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +24,19 @@ builder.Services.AddScoped<DetailsMovieService>();
 builder.Services.AddScoped<SelectingPositionsServices>();
 builder.Services.AddScoped<PaymentBuyTickets>();
 builder.Services.AddScoped<MarketTemporalService>();
+
+//mio
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPeliculas, Peliculas>();
+builder.Services.AddScoped<ICineComidas, CineComidas>();
+builder.Services.AddScoped<IComidas, Comidas>();
+builder.Services.AddScoped<ICloudinaryR, CloudinaryR>();
+builder.Services.AddScoped<IMunicipios, Municipios>();
+builder.Services.AddScoped<IPromociones, Promociones>();
+builder.Services.AddScoped<PeliculasService>();
+builder.Services.AddScoped<CineComidaService>();
+builder.Services.AddScoped<MunicipioService>();
+builder.Services.AddScoped<CloudinaryService>();
 
 builder.Services.AddDbContext<CineMaxColContext>(opc =>
 {

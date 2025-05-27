@@ -1,0 +1,215 @@
+@using CineMaxCOL_Entity
+@model CineMaxCOL_Web.Models.Comida.ComidaViewModel
+
+@*DIV CONTENEDOR DE LAS CATEGORIAS DE PRODUCTOS*@
+<div class="bg-gray-300 w-full w-auto overflow-x-auto"> 
+        
+            @if (Model.CineComidas == null || !Model.CineComidas.Any())
+            {
+                <div class="p-5 justify-items-center align-items-center">
+                    <div class="bg-gray-400 flex flex-col justify-center items-center w-full">
+                        <p class="text-xl font-bold">No hay comida disponible.</p>
+                        <p class="text-md font-bold">¡Prueba otra sede!👋</p>
+                    </div>
+                </div>
+            }else
+            {
+                <div class="h-70 overflow-x-auto px-5 py-7 grid grid-flow-col justify-items-center align-items-center gap-5 "> @*CATEGORIAS DE PRODUCTOS*@
+                @foreach(var categoria in Model.Categorias)
+                {
+                    <label for="@categoria.Id" class="min-w-60 h-50 overflow-hidden rounded-lg shadow-lg hover:brightness-115 shadow-5xl cursor-pointer">
+                        <img src="@categoria.ImagenUrl" alt="" class="object-cover w-full h-[80%]" />
+                        <div class="bg-[#808000] flex items-center justify-center w-full h-[20%]">
+                            <h1 class="text-center text-white font-bold text-[8px] sm:text-2xl">@categoria.Nombre.ToUpper()</h1>
+                        </div>
+                    </label>
+
+                    <input type="checkbox" id="@categoria.Id" class="modal-toggle" />
+                    <div class="modal" role="dialog">
+                        <div class="bg-white rounded-xl p-9 w-200 max-h-72 overflow-y-auto ">
+                            <h1 class="text-[#808000] font-bold">@categoria.Nombre.ToUpper()</h1>
+                               @foreach (var grupoComidas in Model.CineComidas.Where(c => c.IdComidaNavigation?.Categoria?.Id == categoria.Id).GroupBy(c => c.IdComidaNavigation?.Id))
+                                {
+                                    var comida = grupoComidas
+                                        .OrderByDescending(c => c.PromocionComida != null) 
+                                        .First(); 
+
+                                    var Promo = comida.PromocionComida != null && comida.PromocionComida.Any();
+
+                                    <label for="Comida_@comida.Id" class="p-2 rounded-xl border-b flex items-center h-35 hover:cursor-pointer hover:bg-gray-300">
+                                            <h1 class="font-bold min-w-40">@comida.IdComidaNavigation?.Nombre</h1>
+                                        @if (Promo)
+                                        {
+                                            var promo = comida?.PromocionComida?.FirstOrDefault(); 
+                                            
+                                                <div class="w-full flex justify-center flex-col">
+                                                    <p>@comida?.IdComidaNavigation?.Descripción</p>
+                                                    <p class="text-sm text-red-400 line-through">$@comida?.Precio</p>
+                                                    <h3 class="font-semibold">$@promo?.DescuentoPorcentaje</h3>
+                                                </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="w-full flex justify-center flex-col">
+                                                    <p>@comida?.IdComidaNavigation?.Descripción</p>
+                                                    <p class="text-sm text-black font-semibold">$@comida?.Precio</p>
+                                            </div>
+                                        }
+                                        <div class="w-45"> 
+                                            <img src="@comida?.IdComidaNavigation?.ImagenUrl" class="object-cover w-full h-full"/>
+                                        </div>
+                                        
+                                    </label>
+
+                                    <input type="checkbox" id="Comida_@comida?.Id" class="modal-toggle" />
+                                        <div class="modal" role="dialog">
+                                            <div class="bg-white rounded-xl px-9 py-18 w-250 max-h-260 overflow-y-auto">
+
+                                                <div class="flex justify-between items-center w-full max-h-full">
+                                                    <div class="flex flex-col w-full h-full ">
+                                                        <h1 class="text-5xl text-black font-bold">
+                                                                @comida?.IdComidaNavigation?.Nombre
+                                                        </h1>
+                                                        <h1 class="text-xl mt-4 text-gray-600 font-bold">
+                                                                @comida?.IdComidaNavigation?.Descripción
+                                                        </h1>
+                                                        <h1 class="text-lg mt-4 text-black italic w-120"> 
+                                                                "@comida?.DescripcionAdicional"
+                                                        </h1>
+                                                        @if (Promo)
+                                                        {
+                                                            var promo = comida?.PromocionComida?.FirstOrDefault();
+
+                                                            <p class="text-sm mt-6 text-gray-500 line-through">
+                                                                Precio original: $@comida?.Precio.ToString()
+                                                            </p>
+                                                            <p class="text-2xl font-bold text-red-700">
+                                                                ¡Ahora en: $@promo?.DescuentoPorcentaje!
+                                                            </p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="text-xl mt-6 font-bold text-[#55692d]">
+                                                                Precio: $@comida?.Precio.ToString()
+                                                            </p>
+                                                        }
+                                                        <h1 class="font-bold mt-4 text-sm min-w-40">Disponible en tu cine: @comida?.IdCineNavigation?.Nombre (@comida?.IdCineNavigation?.IdUbicacionNavigation?.Localidad - @comida?.IdCineNavigation?.IdUbicacionNavigation?.IdMunicipioNavigation?.NombreMunicipio)</h1>
+                                                    </div>
+                                                    <div class="w-66 h-full">
+                                                        <img src="@comida?.IdComidaNavigation?.ImagenUrl" alt="" class="w-full h-[80%]">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="modal-action relative top-10">
+                                                    <label for="Comida_@comida?.Id" class="btn border-none bg-[#55692d] text-white">Cerrar</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                }
+                            
+                            <div class="modal-action">
+                                <label for="@categoria.Id" class="btn border-none bg-[#55692d] text-white">Cerrar</label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                </div>
+            }
+    </div>
+</div>
+
+@*DIV DE COMIDAS GENERALES SIN IMPORTAR LA CATEGORIA*@
+<div class="bg-red-500 w-full flex flex-col">
+    <div class="bg-white w-full h-20 flex items-center justify-center">@*TITULO*@
+        <h1 class="text-[#808000] ml-5 font-bold text-2xl">COMIDA</h1>
+    </div>
+
+    <div class="p-5 flex flex-wrap bg-gray-200 gap-8 justify-center items-center">
+        @foreach(var comida in Model.CineComidas)
+        {
+            <div class="bg-white w-68 h-67 flex flex-col justify-between items-center rounded-xl">
+                <div class="py-3 flex flex-col justify-center items-center w-full h-full rounded-xl">
+                    <h1 class="font-bold text-xl text-[#55692d]">@comida.IdComidaNavigation.Nombre</h1>
+                    <img src="@comida.IdComidaNavigation.ImagenUrl" class="w-26 h-26">
+                    <h1 class="text-center font-semibold">@comida.IdComidaNavigation.Categoria.Nombre</h1>
+                    <h1 class="text-gray-500 text-sm italic text-center px-3">@comida.IdComidaNavigation.Descripción</h1>
+                </div>
+                <div class="w-full h-[50%] flex justify-center items-center">
+                    <label for="Comida_@comida.Id" class="btn text-white bg-red-500 h-auto rounded-xl">Ver Más</label>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@*DIV PARA LAS PROMOCIONES DEL CINE*@
+<div class="bg-red-500 w-full flex flex-col">
+    <div class="bg-white w-full h-20 flex items-center">
+        <h1 class="text-[#808000] ml-5 font-bold">CMC PROMOS</h1>
+    </div>
+
+    <div class="bg-gray-300"> @*DIV CONTENEDOR DEL CARROUSEL DE PROMOS*@
+        <div class="h-76 overflow-x-auto px-5 py-3 grid grid-flow-col justify-items-center align-items-center gap-5"> @*CARROUSEL DE PROMOS*@
+            @if (!Model.CineComidas.Any(c => c.PromocionComida != null && c.PromocionComida.Any()))
+            {
+                <div class="bg-gray-400 flex flex-col justify-center items-center w-full">
+                    <p class="text-xl font-bold">No hay promociones disponibles.</p>
+                    <p class="text-md font-bold">¡Prueba otra sede!👋</p>
+                </div>
+            }
+            else
+            {
+                @foreach(var comida in Model.CineComidas)
+                {
+                    @foreach(var promos in comida.PromocionComida)
+                    {
+                        <label for="Promo_@promos.Id" class="w-70 h-65 overflow-hidden rounded-lg shadow-lg group relative bg-white hover:cursor-pointer">
+                            <img src="@promos.IdCineComidaNavigation?.IdComidaNavigation?.ImagenUrl" alt=""
+                                class="object-cover w-full h-full group-hover:brightness-40 transition duration-300"/>
+                            <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 hover:opacity-100 transition duration-300 text-black">
+                                <p class="text-md mt-1 text-white line-through">@promos.IdCineComidaNavigation?.Precio</p>
+                                <p class="text-md mt-1 text-white">@promos.DescuentoPorcentaje</p>
+                                <p class="text-md mt-1 text-white text-center">@promos.IdCineComidaNavigation?.IdComidaNavigation?.Descripción</p>
+                                <h2 class="text-lg font-bold text-white">@promos.IdCineComidaNavigation?.IdComidaNavigation?.Nombre</h2>
+                            </div> 
+                        </label>
+
+                        <input type="checkbox" id="Promo_@promos.Id" class="modal-toggle" />
+                            <div class="modal" role="dialog">
+                                <div class="bg-white rounded-xl p-9 w-280 h-100 overflow-y-auto flex flex-col gap-6">
+                                    <div class="flex h-full">
+                                        <div class="w-full">
+                                            <h1 class="text-5xl font-bold text-[#55692d]">@promos.IdCineComidaNavigation?.IdComidaNavigation?.Nombre</h1>
+                                            <p class="text-2xl mt-5 font-bold text-red-500">¡Ahora en descuento!</p>
+                                            <p class="text-3xl mt-1 font-bold text-red-700">¡A tan solo $@promos.DescuentoPorcentaje!</p>
+                                            <p class="text-md mt-2 text-gray-700 line-through">Precio de antes: @promos.IdCineComidaNavigation?.Precio</p>
+                                            <p class="text-md mt-4 font-bold text-gray-600">@promos.IdCineComidaNavigation?.IdComidaNavigation?.Descripción</p>
+                                            <p class="text-md text-gray-500 italic">"@promos.IdCineComidaNavigation?.DescripcionAdicional"</p>
+                                            
+                                            
+                                            <p class="text-lg mt-5 font-semibold text-white bg-red-800 rounded-xl p-2">Disponible desde: <span class="font-normal">@promos.FechaInicio.Value.ToShortDateString()</span> Hasta: <span class="font-normal">@promos.FechaFin.Value.ToShortDateString()</span></p>
+                                            
+                                            <p class="text-md mt-5 text-gray-700 w-full"><span class="font-bold">Válido únicamente en:</span> @promos?.IdCineComidaNavigation?.IdCineNavigation?.Nombre <span class="font-bold">(@promos?.IdCineComidaNavigation?.IdCineNavigation?.IdUbicacionNavigation?.IdMunicipioNavigation?.NombreMunicipio)</span></p>
+                                            
+                                            <p class="text-md mt-1 text-gray-700 w-full"><span class="font-bold">Dirección:</span> @promos?.IdCineComidaNavigation?.IdCineNavigation?.IdUbicacionNavigation?.Direccion <span class="font-bold">(@promos?.IdCineComidaNavigation?.IdCineNavigation?.IdUbicacionNavigation?.Localidad)</span></p>
+                                        </div>
+                                        <div class="w-[40%]">
+                                            <img src="@promos?.IdCineComidaNavigation?.IdComidaNavigation?.ImagenUrl" class="h-[80%] w-full"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-action">
+                                        <label for="Promo_@promos?.Id" class="btn border-none bg-[#55692d] text-center text-xs px-3 text-white">Cerrar</label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    } 
+                }
+        </div>
+    </div>@*FIN CONTENEDOR DE CARROUSEL DE PROMOS*@
+</div>
+
+
+ 

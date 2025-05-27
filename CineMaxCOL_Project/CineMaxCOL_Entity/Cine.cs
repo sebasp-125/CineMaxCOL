@@ -17,6 +17,8 @@ public partial class Cine
 
     public int? IdEmpleado { get; set; }
 
+    public virtual ICollection<CineComidum> CineComida { get; set; } = new List<CineComidum>();
+
     public virtual ICollection<Horario> Horarios { get; set; } = new List<Horario>();
 
     public virtual Ubicacion? IdUbicacionNavigation { get; set; }

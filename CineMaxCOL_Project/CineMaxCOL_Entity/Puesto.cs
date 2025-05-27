@@ -14,5 +14,4 @@ public partial class Puesto
     public int Columna { get; set; }
 
     public virtual Sala IdSalaNavigation { get; set; } = null!;
-
 }
