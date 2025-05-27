@@ -1,0 +1,21 @@
+@model IEnumerable<CineMaxCOL_Entity.Municipio>
+
+<div class="ml-10">
+    @foreach(var municipio in Model)
+    {
+        <h1 class="font-bold">MUNICIPIOS</h1>
+        <h1>@municipio.NombreMunicipio</h1>
+
+        <h1 class="font-bold">LOCALIDADES</h1>
+        @foreach(var localidad in municipio.Ubicacions)
+        {
+            <h1>@localidad.Localidad</h1>
+            <h1 class="font-bold">CINES</h1>
+            @foreach(var cines in localidad.Cines)
+            {
+                <h1>@cines.Nombre</h1>
+            }
+        }
+    }
+
+</div>
