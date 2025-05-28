@@ -27,8 +27,6 @@ namespace CineMaxCOL_DAL.UnitOfWork.Interface
         ICloudinaryR CloudinaryR { get; }
         ICategorias CategoriasComida {get;}
         IPromociones Promociones { get; }
-        ICineR CineR { get; }
-        IUbicacion UbicacionR { get; }
         Task SaveChangesAsync();
 
     }

@@ -24,7 +24,7 @@
         </div>
     }
 
-    <form asp-action="RegistersPay" asp-controller="PaymentdGetAway" method="post">
+    <form asp-action="RegistersPay" asp-controller="PaymentGetAway" method="post">
         <div class="collapse collapse-arrow border border-[#55692d] bg-white rounded-xl">
             <input type="radio" name="pago" checked />
             <div class="collapse-title text-[#55692d] font-semibold flex justify-between items-center">
@@ -60,11 +60,11 @@
                     </button>
                     @if (validatorStatus)
                     {
-                        <a href="@Url.Action("RightPersonLogIn", "PaymentdGetAway", new { idUser = @Model?.IdUsuario ?? 0})"
+                        <a href="@Url.Action("RightPersonLogIn", "PaymentGetAway", new { idUser = @Model?.IdUsuario ?? 0})"
                             class="btn bg-[#55692d] text-white hover:bg-[#6a8035] w-full">
                             Pagar
                         </a>
-                    }''
+                    }
                 </div>
             </div>
         </div>

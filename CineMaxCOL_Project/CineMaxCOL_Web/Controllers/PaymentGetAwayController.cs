@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CineMaxCOL_BILL.Service;
@@ -6,17 +9,18 @@ using CineMaxCOL_DAL.UnitOfWork.Interface;
 using CineMaxCOL_Entity;
 using CineMaxCOL_Web.Models.ToSummaryPay;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace CineMaxCOL_Web.Controllers
 {
-    public class PaymentGetawayController : Controller
+    public class PaymentGetAwayController : Controller
     {
         private readonly PaymentBuyTickets _authService;
         private readonly DetailsMovieService _detailsMovieService;
         private readonly CineMaxColContext _context;
         private readonly IUnitOfWork _unit;
-
-        public PaymentGetawayController(PaymentBuyTickets service, CineMaxColContext context, DetailsMovieService detailsMovieService, IUnitOfWork unit)
+        public PaymentGetAwayController(PaymentBuyTickets service, CineMaxColContext context, DetailsMovieService detailsMovieService, IUnitOfWork unit)
         {
             _authService = service;
             _context = context;
@@ -30,18 +34,12 @@ namespace CineMaxCOL_Web.Controllers
             return (userIdClaim != null && int.TryParse(userIdClaim.Value, out int id)) ? id : 0;
         }
 
-        [Route("Index")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int idFuncion)
         {
+            HttpContext.Session.SetInt32("FuncionId", idFuncion);
             try
             {
                 int userId = IdActuallyUser();
-                if (userId == 0)
-                {
-                    TempData["error"] = "Debe iniciar sesión para acceder a esta página.";
-                    return RedirectToAction("Login", "Account");
-                }
-
                 var userInfo = await _authService.BringInformationLogInUserServices_Card(userId);
                 if (userInfo != null)
                 {
@@ -49,7 +47,7 @@ namespace CineMaxCOL_Web.Controllers
                 }
 
                 TempData["error"] = "No se pudo obtener información del usuario.";
-                return View(new SummaryToPay());
+                return View();
             }
             catch (Exception ex)
             {
@@ -66,12 +64,12 @@ namespace CineMaxCOL_Web.Controllers
                 if (!ModelState.IsValid)
                 {
                     TempData["error"] = "Por favor completa todos los campos obligatorios correctamente.";
-                    return View("Index", new SummaryToPay());
+                    return View("Index", tarjeta);
                 }
 
                 var nuevaTarjeta = new Tarjetum
                 {
-                    IdUsuario = null,
+                    IdUsuario = IdActuallyUser(),
                     NombreTitular = tarjeta.NombreTitular,
                     CorreoElectronico = tarjeta.CorreoElectronico,
                     NumeroTarjeta = tarjeta.NumeroTarjeta,
@@ -79,18 +77,17 @@ namespace CineMaxCOL_Web.Controllers
                     TipoTarjeta = tarjeta.TipoTarjeta
                 };
 
-                var tarjetaRegistrada = await _unit._UnitPaymentBuyTicktes<Tarjetum>().BringInformationLaterRegisterOurServices(nuevaTarjeta);
+                await _context.Tarjeta.AddAsync(nuevaTarjeta);
+                await _context.SaveChangesAsync();
 
-                if (tarjetaRegistrada == null)
-                {
-                    TempData["error"] = "Ocurrió un error al registrar la tarjeta. Intente nuevamente.";
-                    return View("Index", new SummaryToPay());
-                }
 
                 var resumen = new SummaryToPay
                 {
-                    UsuarioByTarjeta = await _unit._UnitPaymentBuyTicktes<Tarjetum>().BringInformationLogInUser(IdActuallyUser())
+                    UsuarioByTarjeta = tarjeta,
+                    funcion = await _context.Funcions.FindAsync(1) ?? new Funcion()
                 };
+
+                Console.WriteLine(resumen.funcion.IdPeliculaNavigation.Titulo);
 
                 TempData["success"] = "Tarjeta registrada exitosamente.";
                 return View("~/Views/SummaryBuy/Index.cshtml", resumen);
@@ -98,32 +95,40 @@ namespace CineMaxCOL_Web.Controllers
             catch (Exception ex)
             {
                 TempData["error"] = $"Error inesperado al procesar el pago: {ex.Message}";
-                return RedirectToAction("Error");
+                return RedirectToAction("Index", "Home");
             }
         }
+
+
 
         public async Task<IActionResult> RightPersonLogIn()
         {
             try
             {
+                var r = await _context.Tarjeta
+                    .Include(x => x.IdUsuarioNavigation)
+                    .Where(t => t.IdUsuario == IdActuallyUser())
+                    .FirstOrDefaultAsync() ?? new Tarjetum();
+
+
                 var resumen = new SummaryToPay
                 {
-                    UsuarioByTarjeta = await _authService.BringInformationLogInUserServices_Card(IdActuallyUser())
+                    UsuarioByTarjeta = r,
+                    funcion = await _context.Funcions.FindAsync(1) ?? new Funcion()
                 };
-
                 return View("~/Views/SummaryBuy/Index.cshtml", resumen);
             }
             catch (Exception ex)
             {
                 TempData["error"] = $"No fue posible obtener los datos del usuario: {ex.Message}";
-                return RedirectToAction("Error");
+                return RedirectToAction("Privacy", "Home");
             }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View("Error");
+            return View("Error!");
         }
     }
 }

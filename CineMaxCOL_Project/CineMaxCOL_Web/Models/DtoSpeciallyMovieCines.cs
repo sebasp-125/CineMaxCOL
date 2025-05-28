@@ -10,7 +10,6 @@ namespace CineMaxCOL_Web.Models
         public string? Genero { get; set; }
         public string? Clasificacion { get; set; }
         public TimeOnly? Duracion { get; set; }
-
         public CineMaxCOL_Entity.Cine? Cine { get; set; }
     }
 }

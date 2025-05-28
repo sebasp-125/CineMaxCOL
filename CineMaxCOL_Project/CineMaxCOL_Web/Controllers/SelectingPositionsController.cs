@@ -101,6 +101,7 @@ namespace CineMaxCOL_Web.Controllers
 
             // Obtener sillas ya reservadas para esta función
             var sillasFuncion = await _context.SillasPorFuncions
+            .Include(x => x.IdUsuarioNavigation)
                 .Where(sf => sf.IdFuncion == funcion.Id)
                 .ToListAsync();
 
