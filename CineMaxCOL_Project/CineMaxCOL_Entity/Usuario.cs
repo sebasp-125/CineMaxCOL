@@ -19,8 +19,6 @@ public partial class Usuario
 
     public int? IdRol { get; set; }
 
-    public int? IdHorario { get; set; }
-
     public DateTime? CreatedAt { get; set; }
 
     public string? Password { get; set; }
@@ -28,8 +26,6 @@ public partial class Usuario
     public virtual ICollection<AsientosTemporale> AsientosTemporales { get; set; } = new List<AsientosTemporale>();
 
     public virtual ICollection<HistorialCompra> HistorialCompras { get; set; } = new List<HistorialCompra>();
-
-    public virtual Horario? IdHorarioNavigation { get; set; }
 
     public virtual Municipio? IdMunicipioNavigation { get; set; }
 

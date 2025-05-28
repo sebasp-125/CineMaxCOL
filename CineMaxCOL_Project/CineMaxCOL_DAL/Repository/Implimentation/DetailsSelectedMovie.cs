@@ -39,8 +39,7 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
         {
             if (id <= 0)
                 throw new ArgumentException("El id debe ser mayor a cero.", nameof(id));
-
-            return await _context.Funcions.FindAsync(5);
+            return await _context.Funcions.FindAsync(id);
         }
     }
 }

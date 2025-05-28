@@ -22,9 +22,9 @@ namespace CineMaxCOL_BILL.Service
         }
 
         
-        public async Task<Funcion> GetSpeacillyFuction(int id)
+        public async Task<Funcion> GetSpeacillyFuction(int ?id)
         {
-            return await _Unit.GetDetailsMoviesAndCine<Funcion>().GetSpeciallyFuncion(id);
+            return await _Unit.GetDetailsMoviesAndCine<Funcion>().GetSpeciallyFuncion(id ?? 0);
         }
     }
 }

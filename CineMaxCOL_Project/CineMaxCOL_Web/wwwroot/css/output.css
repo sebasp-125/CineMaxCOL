@@ -3228,9 +3228,6 @@
   .h-50 {
     height: calc(var(--spacing) * 50);
   }
-  .h-55 {
-    height: calc(var(--spacing) * 55);
-  }
   .h-56 {
     height: calc(var(--spacing) * 56);
   }
@@ -3341,9 +3338,6 @@
   }
   .w-28 {
     width: calc(var(--spacing) * 28);
-  }
-  .w-35 {
-    width: calc(var(--spacing) * 35);
   }
   .w-38 {
     width: calc(var(--spacing) * 38);
@@ -3551,9 +3545,6 @@
   }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -3881,9 +3872,6 @@
   .bg-\[\#808000\] {
     background-color: #808000;
   }
-  .bg-\[\#\] {
-    background-color: #;
-  }
   .bg-\[\#e3e5e8\] {
     background-color: #e3e5e8;
   }
@@ -3925,9 +3913,6 @@
   }
   .bg-pink-500 {
     background-color: var(--color-pink-500);
-  }
-  .bg-pink-600 {
-    background-color: var(--color-pink-600);
   }
   .bg-primary {
     background-color: var(--color-primary);

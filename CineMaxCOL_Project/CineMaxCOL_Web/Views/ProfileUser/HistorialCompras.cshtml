@@ -1,60 +1,66 @@
+@model List<CineMaxCOL_Entity.HistorialCompra>
+
 <div class="breadcrumbs text-sm px-6">
-  <ul>
-    <li><a href="@Url.Action("Index","Home")">Home</a></li>
-    <li>Historial de Compras</li>
-  </ul>
+    <ul>
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li>Historial de Compras</li>
+    </ul>
 </div>
 
+
+
 <div class="flex justify-center items-start h-screen">
-    
     <div class="relative top-48 w-full">
 
         <div class="w-full flex justify-center gap-x-18 relative bottom-26">
             <button class="btn h-16 w-38 text-xl border-none bg-[#808000] font-bold">PROXIMO</button>
             <h1 class="h-full text-5xl">|</h1>
             <button class="btn h-16 w-38 text-xl border-2 border-black text-[#808000]">HISTORIAL</button>
+            <h1 class="h-full text-5xl">|</h1>
+            <form asp-action="GetAll_HistorialCompras" asp-controller="ProfileUser" method="get">
+                <button type="submit" class="btn h-16 w-38 text-xl border-2 border-black text-[#808000]">CARGAR EL
+                    HISTORIAL</button>
+            </form>
         </div>
 
         <div class="p-4 flex justify-center">
             <table class="table-fixed w-[80%] text-black">
                 <thead>
-                <tr class="border-b-4 border-[#808000]">
-                    <th class="w-1/8">Fecha</th>
-                    <th class="w-1/8">Película</th>
-                    <th class="w-1/8">Sala</th>
-                    <th class="w-1/8">Asientos</th>
-                    <th class="w-1/8">Función</th>
-                    <th class="w-1/8">Cantidad</th>
-                    <th class="w-1/8">Precio</th>
-                    <th class="w-1/8">Total</th>
-                </tr>
+                    <tr class="border-b-4 border-[#808000]">
+                        <th class="w-1/8">Nombre del cliente</th>
+                        <th class="w-1/8">Correo Electronico</th>
+                        <th class="w-1/8">Estado</th>
+                        <th class="w-1/8">Precio</th>
+                        <th class="w-1/8">Nombre de la Pelicula</th>
+                        <th class="w-1/8">Identificador</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr class="text-center border-b-2 border-[#808000] h-12">
-                    <td>23/04/2025</td>
-                    <td>Karate Kid Legends</td>
-                    <td>05</td>
-                    <td>F3,F4</td>
-                    <td>6:00 PM</td>
-                    <td>2</td>
-                    <td>$14.000</td>
-                    <td>$28.000</td>
-                </tr>
-                <tr class="text-center border-b-2 border-[#808000] h-12">
-                    <td>23/04/2025</td>
-                    <td>Karate Kid Legends</td>
-                    <td>05</td>
-                    <td>F3,F4</td>
-                    <td>6:00 PM</td>
-                    <td>2</td>
-                    <td>$14.000</td>
-                    <td>$28.000</td>
-                </tr>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr class="text-center border-b-2 border-[#808000] h-12">
+                                <td>@item?.IdUsuarioNavigation?.FullName</td>
+                                <td>@item?.IdUsuarioNavigation?.Email</td>
+                                <td>@item?.IdReservaNavigation?.Estado</td>
+                                <td>@item?.IdReservaNavigation?.IdFuncionNavigation.Precio</td>
+                                <td>@item?.IdReservaNavigation?.IdFuncionNavigation.IdPeliculaNavigation.Titulo</td>
+                                <td>@item?.IdReservaNavigation?.IdFuncionNavigation.IdPeliculaNavigation.Identificador</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-red-600 font-bold py-4">
+                                Tienes que recargar el historial.
+                            </td>
+                        </tr>
+                    }
                 </tbody>
+
             </table>
-            </div>
-
-
+        </div>
     </div>
-
 </div>

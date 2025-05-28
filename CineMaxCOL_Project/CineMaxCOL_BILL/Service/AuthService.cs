@@ -62,7 +62,6 @@ namespace CineMaxCOL_BILL.Service
                     Dni = usuario.Dni,
                     Email = usuario.Email,
                     Password = passwordHasheada,
-                    IdHorario = 1
                 };
 
                 return await _Unit._UnitUserRepository.Add(newUser);

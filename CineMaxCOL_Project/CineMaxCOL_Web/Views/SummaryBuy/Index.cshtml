@@ -8,55 +8,66 @@
 
     <div class="grid grid-cols-2 gap-8">
 
+        <!-- Información de la Tarjeta -->
         <div>
             <h2 class="text-xl font-semibold text-[#55692d] mb-4 border-b border-gray-200 pb-1">Información de la Tarjeta</h2>
             <div class="space-y-2">
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Nombre Titular:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.NombreTitular ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Correo Electrónico:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.CorreoElectronico ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Número Tarjeta:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.NumeroTarjeta ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Fecha Expiración:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.FechaExpiracion?.ToString("yyyy-MM-dd") ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Tipo Tarjeta:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.TipoTarjeta ?? "No registrado"</span>
-                </div>
+                @if (Model.UsuarioByTarjeta != null)
+                {
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Nombre Titular:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.NombreTitular</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Correo Electrónico:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.CorreoElectronico</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Número Tarjeta:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.NumeroTarjeta</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Fecha Expiración:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.FechaExpiracion?.ToString("yyyy-MM-dd")</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Tipo Tarjeta:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.TipoTarjeta</span>
+                    </div>
+                }
             </div>
         </div>
 
+        <!-- Datos del Usuario -->
         <div>
             <h2 class="text-xl font-semibold text-[#55692d] mb-4 border-b border-gray-200 pb-1">Datos del Usuario</h2>
             <div class="space-y-2">
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Nombre Completo:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.FullName ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Correo:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.Email ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Documento:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.Dni ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Rol:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.IdRolNavigation?.TipoRol ?? "No registrado"</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-medium text-gray-800">Registro:</span>
-                    <span class="text-gray-600">@Model.UsuarioByTarjeta?.IdUsuarioNavigation?.CreatedAt?.ToString("yyyy-MM-dd") ?? "No registrado"</span>
-                </div>
+                @if (Model.UsuarioByTarjeta?.IdUsuarioNavigation != null)
+                {
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Nombre Completo:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.IdUsuarioNavigation.FullName</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Correo:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.IdUsuarioNavigation.Email</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Documento:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.IdUsuarioNavigation.Dni</span>
+                    </div>
+                    @if (Model.UsuarioByTarjeta.IdUsuarioNavigation.IdRolNavigation != null)
+                    {
+                        <div class="flex justify-between">
+                            <span class="font-medium text-gray-800">Rol:</span>
+                            <span class="text-gray-600">@Model.UsuarioByTarjeta.IdUsuarioNavigation.IdRolNavigation.TipoRol</span>
+                        </div>
+                    }
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-800">Registro:</span>
+                        <span class="text-gray-600">@Model.UsuarioByTarjeta.IdUsuarioNavigation.CreatedAt?.ToString("yyyy-MM-dd")</span>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -65,16 +76,23 @@
     <div>
         <h2 class="text-xl font-semibold text-[#55692d] mb-4">Película y Función</h2>
         <div class="p-4 border border-dashed border-gray-300 rounded-lg text-center text-gray-500 italic">
-            <!-- Aquí puedes mostrar info de la película si tienes -->
+            @if (Model?.funcion?.IdPeliculaNavigation?.Id != null)
+            {
+                <p>@Model.funcion.IdPeliculaNavigation.Titulo</p>
+            }else{
+                <p>Tenemos problemas</p>
+            }
         </div>
     </div>
 
     <!-- Botón Confirmar -->
     <div class="text-right">
-        <form asp-action="Index" asp-controller="ProccesPay">
-        <button type="submit" class="btn bg-[#55692d] hover:bg-[#44571c] text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-300">
-            Confirmar Compra
-        </button>
+        <form asp-action="GeneratePayReserva" asp-controller="SummaryBuy" method="post">
+            <input type="hidden" value="@Model?.funcion.Id ?? 1" name="funcionid"/>
+            <input type="hidden" value="@Model?.funcion.Precio ?? 10000" name="monto"/>
+            <button type="submit" class="btn bg-[#55692d] hover:bg-[#44571c] text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-300">
+                Confirmar Compra
+            </button>
         </form>
     </div>
 </div>

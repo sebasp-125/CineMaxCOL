@@ -68,12 +68,14 @@ public partial class CineMaxColContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {}
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-CJE8DS1\\SQLEXPRESS;Database=CineMaxCOL;Trusted_Connection=True;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AsientosTemporale>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Asientos__3214EC0791A30E8C");
+            entity.HasKey(e => e.Id).HasName("PK__Asientos__3214EC070ED0E49F");
 
             entity.ToTable("AsientosTemporale");
 
@@ -95,12 +97,12 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<CategoriaComidum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3214EC07C01DD8A6");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3214EC079680087E");
         });
 
         modelBuilder.Entity<Cine>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cine__3214EC073C76C052");
+            entity.HasKey(e => e.Id).HasName("PK__Cine__3214EC0742F97604");
 
             entity.ToTable("Cine");
 
@@ -115,23 +117,25 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<CineComidum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CineComi__3214EC079473E86B");
+            entity.HasKey(e => e.Id).HasName("PK__CineComi__3214EC07A5F451BC");
 
             entity.Property(e => e.IdCine).HasColumnName("Id_Cine");
             entity.Property(e => e.IdComida).HasColumnName("Id_Comida");
 
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.CineComida)
                 .HasForeignKey(d => d.IdCine)
-                .HasConstraintName("FK__CineComid__Id_Ci__10566F31");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_CineComid_Id_Ci_10566F31");
 
             entity.HasOne(d => d.IdComidaNavigation).WithMany(p => p.CineComida)
                 .HasForeignKey(d => d.IdComida)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__CineComid__Id_Co__114A936A");
         });
 
         modelBuilder.Entity<Comidum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comida__3214EC07C99162A1");
+            entity.HasKey(e => e.Id).HasName("PK__Comida__3214EC078BF3331E");
 
             entity.Property(e => e.Descripción).HasMaxLength(255);
             entity.Property(e => e.ImagenUrl).HasMaxLength(200);
@@ -140,12 +144,12 @@ public partial class CineMaxColContext : DbContext
             entity.HasOne(d => d.Categoria).WithMany(p => p.Comida)
                 .HasForeignKey(d => d.CategoriaId)
                 .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK__Comida__Categori__0D7A0286");
+                .HasConstraintName("FK__Comida__Categori__7E37BEF6");
         });
 
         modelBuilder.Entity<ConfiguracionCloud>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Configur__3214EC0774780CBB");
+            entity.HasKey(e => e.Id).HasName("PK__Configur__3214EC0792380B95");
 
             entity.ToTable("ConfiguracionCloud");
 
@@ -168,7 +172,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<DiasSemana>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DiasSema__3214EC074BC36CE6");
+            entity.HasKey(e => e.Id).HasName("PK__DiasSema__3214EC07399C3151");
 
             entity.ToTable("DiasSemana");
 
@@ -177,7 +181,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Funcion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Funcion__3214EC07E0DC48B8");
+            entity.HasKey(e => e.Id).HasName("PK__Funcion__3214EC072B5FF32C");
 
             entity.ToTable("Funcion");
 
@@ -197,7 +201,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<HistorialCompra>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Historia__3214EC07A4C29A33");
+            entity.HasKey(e => e.Id).HasName("PK__Historia__3214EC075FAF460D");
 
             entity.ToTable("HistorialCompra");
 
@@ -212,7 +216,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Horario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Horario__3214EC07C674C621");
+            entity.HasKey(e => e.Id).HasName("PK__Horario__3214EC078D90148F");
 
             entity.ToTable("Horario");
 
@@ -223,7 +227,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Municipio>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Municipi__3214EC07FF993E54");
+            entity.HasKey(e => e.Id).HasName("PK__Municipi__3214EC07BEF82748");
 
             entity.ToTable("Municipio");
 
@@ -232,7 +236,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Pago>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pago__3214EC07F0119E92");
+            entity.HasKey(e => e.Id).HasName("PK__Pago__3214EC07A065BE6F");
 
             entity.ToTable("Pago");
 
@@ -250,7 +254,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Pelicula>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pelicula__3214EC07559277F0");
+            entity.HasKey(e => e.Id).HasName("PK__Pelicula__3214EC071899F968");
 
             entity.ToTable("Pelicula");
 
@@ -270,7 +274,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Precio>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Precio__3214EC079336B935");
+            entity.HasKey(e => e.Id).HasName("PK__Precio__3214EC07776EFF0A");
 
             entity.ToTable("Precio");
 
@@ -283,7 +287,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<PromocionComidum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Promocio__3214EC079EAA05F0");
+            entity.HasKey(e => e.Id).HasName("PK__Promocio__3214EC07F4E016E7");
 
             entity.Property(e => e.FechaFin).HasColumnType("datetime");
             entity.Property(e => e.FechaInicio).HasColumnType("datetime");
@@ -292,12 +296,12 @@ public partial class CineMaxColContext : DbContext
             entity.HasOne(d => d.IdCineComidaNavigation).WithMany(p => p.PromocionComida)
                 .HasForeignKey(d => d.IdCineComida)
                 .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK__Promocion__Id_Ci__14270015");
+                .HasConstraintName("FK__Promocion__Id_Ci__07C12930");
         });
 
         modelBuilder.Entity<Puesto>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Puesto__3214EC0743D8FC96");
+            entity.HasKey(e => e.Id).HasName("PK__Puesto__3214EC0765A85285");
 
             entity.ToTable("Puesto");
 
@@ -311,7 +315,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Reserva>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Reserva__3214EC07C80FD841");
+            entity.HasKey(e => e.Id).HasName("PK__Reserva__3214EC07A75386E5");
 
             entity.ToTable("Reserva");
 
@@ -329,7 +333,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Role__3214EC0704484E18");
+            entity.HasKey(e => e.Id).HasName("PK__Role__3214EC077C315F60");
 
             entity.ToTable("Role");
 
@@ -338,7 +342,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Sala>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Sala__3214EC0776D6542E");
+            entity.HasKey(e => e.Id).HasName("PK__Sala__3214EC071D67106D");
 
             entity.ToTable("Sala");
 
@@ -352,7 +356,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Silla>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Silla__3214EC0751C403C2");
+            entity.HasKey(e => e.Id).HasName("PK__Silla__3214EC07DCAEF6BC");
 
             entity.ToTable("Silla");
 
@@ -360,12 +364,12 @@ public partial class CineMaxColContext : DbContext
 
             entity.HasOne(d => d.IdSalaNavigation).WithMany(p => p.Sillas)
                 .HasForeignKey(d => d.IdSala)
-                .HasConstraintName("FK__Silla__IdSala__282DF8C2");
+                .HasConstraintName("FK__Silla__IdSala__0C85DE4D");
         });
 
         modelBuilder.Entity<SillasPorFuncion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__SillasPo__3214EC077EC16772");
+            entity.HasKey(e => e.Id).HasName("PK__SillasPo__3214EC07C050EDAC");
 
             entity.ToTable("SillasPorFuncion");
 
@@ -389,7 +393,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Tarjetum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tarjeta__3214EC07A9D2C8CD");
+            entity.HasKey(e => e.Id).HasName("PK__Tarjeta__3214EC07C36335D5");
 
             entity.Property(e => e.CorreoElectronico).HasMaxLength(150);
             entity.Property(e => e.NombreTitular).HasMaxLength(200);
@@ -403,7 +407,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<TipoPago>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TipoPago__3214EC07D44BF9B2");
+            entity.HasKey(e => e.Id).HasName("PK__TipoPago__3214EC07D468689A");
 
             entity.ToTable("TipoPago");
 
@@ -412,7 +416,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Ubicacion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ubicacio__3214EC07C2E6F7F1");
+            entity.HasKey(e => e.Id).HasName("PK__Ubicacio__3214EC07887408E9");
 
             entity.ToTable("Ubicacion");
 
@@ -426,7 +430,7 @@ public partial class CineMaxColContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC0795194989");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC0732B75E6A");
 
             entity.ToTable("Usuario");
 
@@ -435,10 +439,6 @@ public partial class CineMaxColContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(150);
             entity.Property(e => e.FullName).HasMaxLength(200);
             entity.Property(e => e.Password).HasMaxLength(250);
-
-            entity.HasOne(d => d.IdHorarioNavigation).WithMany(p => p.Usuarios)
-                .HasForeignKey(d => d.IdHorario)
-                .HasConstraintName("FK_Usuario_Horario");
 
             entity.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdMunicipio)
