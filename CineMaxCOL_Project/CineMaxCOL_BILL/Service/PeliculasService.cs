@@ -12,9 +12,9 @@ namespace CineMaxCOL_BILL.Service
             _unitOfWork = IUnitOfWork;
         }
 
-        public async Task<IEnumerable<Pelicula>> TraerPeliculasPorId(int id)
+        public async Task<Pelicula> TraerPeliculasPorId(int id)
         {
-            return await _unitOfWork.Peliculas.TraerVId(id);
+            return await _unitOfWork.Peliculas.TraerPeliculaId(id);
         }
         
         public async Task<IEnumerable<Pelicula>> TraerTodasPelis()

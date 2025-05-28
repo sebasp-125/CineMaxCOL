@@ -69,6 +69,7 @@ public partial class CineMaxColContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {}
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AsientosTemporale>(entity =>
@@ -110,6 +111,7 @@ public partial class CineMaxColContext : DbContext
 
             entity.HasOne(d => d.IdUbicacionNavigation).WithMany(p => p.Cines)
                 .HasForeignKey(d => d.IdUbicacion)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK_Cine_Ubicacion");
         });
 
@@ -122,10 +124,12 @@ public partial class CineMaxColContext : DbContext
 
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.CineComida)
                 .HasForeignKey(d => d.IdCine)
-                .HasConstraintName("FK__CineComid__Id_Ci__10566F31");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_CineComid_Id_Ci_10566F31");
 
             entity.HasOne(d => d.IdComidaNavigation).WithMany(p => p.CineComida)
                 .HasForeignKey(d => d.IdComida)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__CineComid__Id_Co__114A936A");
         });
 
@@ -188,6 +192,7 @@ public partial class CineMaxColContext : DbContext
 
             entity.HasOne(d => d.IdPeliculaNavigation).WithMany(p => p.Funcions)
                 .HasForeignKey(d => d.IdPelicula)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Funcion_Pelicula");
 
             entity.HasOne(d => d.IdSalaNavigation).WithMany(p => p.Funcions)
@@ -265,6 +270,7 @@ public partial class CineMaxColContext : DbContext
 
             entity.HasOne(d => d.IdCineNavigation).WithMany(p => p.Peliculas)
                 .HasForeignKey(d => d.IdCine)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Pelicula_Cine");
         });
 
@@ -421,6 +427,7 @@ public partial class CineMaxColContext : DbContext
 
             entity.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Ubicacions)
                 .HasForeignKey(d => d.IdMunicipio)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK_Ubicacion_Municipio");
         });
 

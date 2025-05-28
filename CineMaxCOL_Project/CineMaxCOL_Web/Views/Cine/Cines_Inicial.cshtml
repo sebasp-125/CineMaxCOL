@@ -6,7 +6,7 @@
 @*AGREGAR JAVASCRIPT PARA EL CAMBIO DINAMICO DE LAS OPCIONES DESPLEGABLES*@
 
 
-<label for="Agregar_Nuevo_Cine">Agregar Nuevo Cine</label>
+<label for="Agregar_Nuevo_Cine" class="btn ml-4 bg-[#55692d] text-white rounded-xl">Agregar Nuevo Cine</label>
 <input type="checkbox" id="Agregar_Nuevo_Cine" class="modal-toggle" />
     <div class="modal" role="dialog">
         <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
@@ -46,35 +46,66 @@
 
 
 
-<div class="w-full h-260 p-4 bg-gray-200 grid grid-cols-4 gap-3 justify-items-center align-items-center overflow-y-auto">
+<div class="w-full h-screen p-4 bg-gray-200 grid grid-cols-4 gap-3 justify-items-center align-items-center overflow-y-auto ">
     @foreach(var muni in Model.Municipios_Lista)
     {
         @foreach(var locali in muni.Ubicacions)
         {
             @foreach(var cine in locali.Cines)
             {
-                <div class="bg-white w-40 h-40 rounded-xl">
-                    <label class="font-bold mt-4">Nombre</label>
-                    <h1>@cine.Nombre</h1>
-                    <h1>@cine?.IdUbicacionNavigation?.Localidad</h1>
-                    <h1>@cine?.IdUbicacionNavigation?.IdMunicipioNavigation?.NombreMunicipio</h1>
+                <div class="bg-white w-60 p-3 h-80 rounded-xl flex flex-col gap-2 justify-center items-center">
+                    <h1 class="font-bold mt-3">@cine.Nombre</h1>
+                    <h1 class="font-bold">@cine?.IdUbicacionNavigation?.Localidad</h1>
+                    <h1 class="font-bold">@cine?.IdUbicacionNavigation?.IdMunicipioNavigation?.NombreMunicipio</h1>
                     <h1>Peliculas: @cine?.Peliculas?.Count</h1>
                     <h1>Alimentos: @cine?.CineComida?.Count</h1>
-                    <label for="Actualizar_Cine_@cine.Id">Ver Más</label>
-                    <label for="Agregar_Pelicula_Cine">Agregar Pelicula</label>
+                    <label for="Actualizar_Cine_@cine.Id" class="text-sm bg-[#808000] text-white rounded-xl w-24 p-1 text-center">Ver Más</label>
+                    <label for="Ver_Peliculas_@cine.Id" class="text-sm bg-[#55692d] text-white rounded-xl w-24 p-1 text-center">Ver Peliculas</label>
+                    <label for="Agregar_Pelicula_Cine_@cine.Id" class="text-sm bg-yellow-600 text-white rounded-xl w-36 p-1 text-center">Agregar Pelicula</label>
                     <a href="@Url.Action("Eliminar", "Cine", new { id = @cine.Id, tipo = "Cines" })" class="text-sm bg-red-700 text-white rounded-xl w-24 p-1 text-center">Eliminar</a>
+                
+                
+                    <input type="checkbox" id="Ver_Peliculas_@cine.Id" class="modal-toggle" />
+                    <div class="modal" role="dialog">
+                        <div class="bg-white w-120 max-h-50 flex flex-col justify-center items-center overflow-hidden overflow-y-auto text-black rounded-xl">
+                        
+                        @if(cine.Peliculas.Count==0)
+                        {
+                            <h1 class="font-bold">No hay peliculas en este cine</h1>
+                        }else
+                        {
+                            @foreach(var pelicula in cine.Peliculas)
+                            {
+                            
+                                <h1 class="font-bold">@pelicula.Titulo</h1>
+                                <a href="@Url.Action("EliminarPeliculaCine", "Pelicula", new { id = @pelicula.Id, tipo = "Pelicula" })" class="text-sm bg-red-700 text-white rounded-xl w-29 p-1 text-center">Eliminar Pelicula</a>
+                            }
+                        }
+                        <div class="modal-action p-6">
+                            <label for="Ver_Peliculas_@cine.Id" class="btn  border-none bg-[#808000]     text-white">Cancelar</label>
+                        </div>
+                        </div>
+                        
+                    </div>
+
+                    
+                   
+                        
+                   
+                
+                
                 </div>
 
                 <input type="checkbox" id="Actualizar_Cine_@cine.Id" class="modal-toggle" />
                     <div class="modal" role="dialog">
                         <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
                             @*cambiar direccionamiento del controlador*@
-                            <form action="@Url.Action("Agregar","Cine")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center p-5">
+                            <form action="@Url.Action("Agregar","Cine")" method="post" enctype="multipart/form-data" class="flex flex-col gap-2 justify-center items-center p-5">
                                 <input type="hidden" name="Cine_s.Id" value="@cine.Id">
                                 <input type="hidden" name="tipo" value="Cines">
 
                                 <label class="font-bold mt-4">Nombre</label>
-                                <input type="text" name="Cine_s.Nombre" class="text-center" value="@cine.Nombre">
+                                <input type="text" name="Cine_s.Nombre" class="bg-gray-300 p-1 rounded-xl text-center" value="@cine.Nombre">
 
                                 <select name="Cine_s.IdUbicacion">
                                     @foreach (var municipios in Model.Municipios_Lista)
@@ -88,78 +119,87 @@
                                     }
                                 </select>
 
-                                <input type="text" name="Cine_s.Telefono" class="text-center" value="@cine.Telefono">
+                                <input type="text" name="Cine_s.Telefono" class="bg-gray-300 p-1 rounded-xl text-center" value="@cine.Telefono">
 
-                                <input type="email" name="Cine_s.Email" class="text-center" value="@cine.Email">
+                                <input type="email" name="Cine_s.Email" class="bg-gray-300 p-1 rounded-xl text-center" value="@cine.Email">
 
-                                <button type="submit">Actualizar</button>
+                                <button type="submit" class="text-sm bg-[#55692d] text-white rounded-xl w-24 p-1 text-center">Actualizar</button>
                             </form>
-                        </div>
-                        <div class="modal-action">
+                            <div class="modal-action">
                         <label for="Actualizar_Cine_@cine.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
                     </div>
+                        </div>
+                        
                     </div>
 
-            
-                <input type="checkbox" id="Agregar_Pelicula_Cine" class="modal-toggle" />
+                <input type="checkbox" id="Agregar_Pelicula_Cine_@cine.Id" class="modal-toggle" />
                     <div class="modal" role="dialog">
-                        <div class="bg-white grid grid-cols-4 gap-3 p-3">
+                        <div class="bg-white grid grid-cols-4 gap-3 p-3 rounded-xl">
                             @{
                                 var titulosMostrados = new HashSet<string>();
                             }
-                            @foreach (var pelicula in Model.Peliculas_Lista)
+                            @foreach (var peliculas in Model.Peliculas_Lista)
                             {
-                                if (titulosMostrados.Contains(pelicula.Titulo))
+                                if (titulosMostrados.Contains(peliculas.Titulo))
                                 {
                                     continue;
                                 }
 
-                                titulosMostrados.Add(pelicula.Titulo);
+                                titulosMostrados.Add(peliculas.Titulo);
 
-                                <div class="bg-red-200 w-40 h-18">
-                                    <h3 class="bg-gray-200 rounded-xl p-2 text-center">@pelicula.Titulo</h3>
-                                    <form action="@Url.Action("Agregar_Pelicula_Cine","Pelicula")" method="post">Agregar a este cine
+                                <div class="w-46 h-auto flex flex-col justify-center items-center">
+                                    <div class="bg-gray-200 h-40 font-bold mt-4 rounded-xl p-2 text-center">
+                                        <h1 class="text-xl text-[#55692d]">@peliculas.Titulo</h1>
+                                        <h1>@peliculas.Genero</h1>
+                                        <h1>@peliculas.Clasificacion</h1>    
+                                    </div>
+                                   
+                                    <form action="@Url.Action("Agregar_Pelicula_Cine","Pelicula")" method="post">
                                         <input type="hidden" name="Id" value="0">
-                                        <input type="hidden" name="Titulo" value="@pelicula.Titulo">
-                                        <input type="hidden" name="Titulo" value="@pelicula.Genero">
-                                        <input type="hidden" name="Duracion" value="@pelicula.Duracion">
-                                        <input type="hidden" name="Clasificacion" value="@pelicula.Clasificacion">
-                                        <input type="hidden" name="Sinopsis" value="@pelicula.Sinopsis">
-                                        <input type="hidden" name="Estado" value="@pelicula.Estado">
-                                        <input type="hidden" name="Pais" value="@pelicula.Pais">
-                                        <input type="hidden" name="Director" value="@pelicula.Director">
-                                        <input type="hidden" name="Titulo" value="@pelicula.Titulo">
+                                        <input type="hidden" name="Titulo" value="@peliculas.Titulo">
+                                        <input type="hidden" name="Genero" value="@peliculas.Genero">
+                                        <input type="hidden" name="Duracion" value="@peliculas.Duracion">
+                                        <input type="hidden" name="Clasificacion" value="@peliculas.Clasificacion">
+                                        <input type="hidden" name="Sinopsis" value="@peliculas.Sinopsis">
+                                        <input type="hidden" name="Estado" value="true">
+                                        <input type="hidden" name="Pais" value="@peliculas.Pais">
+                                        <input type="hidden" name="Director" value="@peliculas.Director">
                                         <input type="hidden" name="IdCine" value="@cine.Id">
-                                        <input type="hidden" name="CreatedAt" value="@pelicula.Id">
-                                        <input type="hidden" name="ImagenUrl" value="@pelicula.Id">
-                                        <input type="hidden" name="Identificador" value="@pelicula.Id">
+                                        <input type="hidden" name="CreatedAt" value="@peliculas.CreatedAt">
+                                        <input type="hidden" name="ImagenUrl" value="@peliculas.ImagenUrl">
+                                        <input type="hidden" name="Identificador" value="@peliculas.Identificador">
+
+                                        <button type="submit" class="text-xs bg-[#55692d] text-white rounded-xl w-38 p-1 text-center">Agregar a este cine</button>
                                     </form>
-                                    <p>@pelicula.Sinopsis</p>
                                 </div>
                             }
+                            <div class="modal-action">
+                            <label for="Agregar_Pelicula_Cine_@cine.Id" class="mr-6 btn border-none bg-[#808000]     text-white">Cancelar</label>
+                        </div>
                         </div>
 
-                        <div class="modal-action">
-                            <label for="Agregar_Pelicula_Cine" class="mr-6 btn border-none bg-[#808000]     text-white">Cancelar</label>
-                        </div>
+                        
                 </div>
+            
+                
                     
             }
         }
     }
-    <div class="flex justify-center gap-4 mt-6">
-    <form method="post" action="@Url.Action("Cines_Inicial","Cine")">
-        <input type="hidden" name="vista" value="municipios" />
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Municipios</button>
-    </form>
-
-    <form method="post" action="@Url.Action("Cines_Inicial","Cine")">
-        <input type="hidden" name="vista" value="localidades" />
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Localidades</button>
-    </form>
+    
 </div>
 </div>
+<div class="flex justify-center gap-4 mt-6 py-4">
+<form method="post" action="@Url.Action("Cines_Inicial","Cine")">
+    <input type="hidden" name="vista" value="municipios" />
+    <button type="submit" class="bg-[#55692d] text-white px-4 py-2 rounded">Municipios</button>
+</form>
 
+<form method="post" action="@Url.Action("Cines_Inicial","Cine")">
+    <input type="hidden" name="vista" value="localidades" />
+    <button type="submit" class="bg-[#55692d] text-white px-4 py-2 rounded">Localidades</button>
+</form>
+</div>
 
 <div class="bg-yellow-200 h-auto">
 @if (ViewBag.Vista == "municipios")

@@ -30,7 +30,17 @@ namespace CineMaxCOL_Web.Controllers
                 await _peliculaService.AgregarPelicula(entidad);
             }
 
-            return View("Cines_Inicial","Cine");
+            return RedirectToAction("Cines_Inicial","Cine");
+        }
+
+        [Route("EliminarPeliculaCine")]
+        public async Task<IActionResult> EliminarPeliculaCine(int id, string? tipo)
+        {
+
+            var peliculaEncontrada = await _peliculaService.TraerPeliculaExistente(id);
+            await _peliculaService.EliminarPelicula(peliculaEncontrada);
+
+            return RedirectToAction("Cines_Inicial", "Cine");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

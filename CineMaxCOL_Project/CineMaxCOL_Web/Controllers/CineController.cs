@@ -113,7 +113,6 @@ namespace CineMaxCOL_Web.Controllers
                     var municipioEncotrado = await _MunicipioService.TraerMunicipioExistente(id);
                     await _MunicipioService.EliminarMunicipio(municipioEncotrado);
                     break;
-
             }
 
             return RedirectToAction("Cines_Inicial");
