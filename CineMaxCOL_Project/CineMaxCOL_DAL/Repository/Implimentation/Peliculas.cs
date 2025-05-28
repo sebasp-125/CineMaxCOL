@@ -22,29 +22,41 @@ namespace CineMaxCOL_DAL.Repository.Implimentation
 
 
         // FUNCIONES SIN USO
-        public Task<Pelicula> Actualizar(Pelicula entidad)
+        public async Task<Pelicula> Actualizar(Pelicula entidad)
         {
-            throw new NotImplementedException();
+           var local = _dbcontext.Set<Pelicula>()
+            .Local
+            .FirstOrDefault(e => e.Id == entidad.Id);
+
+            if (local != null)
+            {
+                _dbcontext.Entry(local).State = EntityState.Detached;
+            }
+
+            _dbcontext.Set<Pelicula>().Update(entidad);
+            return entidad;
         }
 
-        public Task<Pelicula> Agregar(Pelicula entidad)
+        public async Task<Pelicula> Agregar(Pelicula entidad)
         {
-            throw new NotImplementedException();
+            await _dbcontext.Set<Pelicula>().AddAsync(entidad);
+            return entidad;
         }
 
-        public Task<Pelicula> Eliminar(Pelicula entidad)
+        public async Task<Pelicula> Eliminar(Pelicula entidad)
         {
-            throw new NotImplementedException();
+            _dbcontext.Set<Pelicula>().Remove(entidad);
+            return entidad;
         }
 
-        public Task<IEnumerable<Pelicula>> Traer()
+        public async Task<IEnumerable<Pelicula>> Traer()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.Set<Pelicula>().ToListAsync();
         }
 
-        public Task<Pelicula> TraerId(int id)
+        public async Task<Pelicula?> TraerPeliculaId(int id)
         {
-            throw new NotImplementedException();
+             return await _dbcontext.Set<Pelicula>().FirstOrDefaultAsync(c => c.Id == id);
         }
 
         

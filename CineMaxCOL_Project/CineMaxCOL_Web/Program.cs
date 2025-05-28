@@ -7,6 +7,7 @@ using CineMaxCOL_Web.Profiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using CineMaxCol_DAL.Interface;
+using CineMaxCOL_DAL.Repository.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,8 +31,10 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPeliculas, Peliculas>();
 builder.Services.AddScoped<ICineComidas, CineComidas>();
 builder.Services.AddScoped<IComidas, Comidas>();
+builder.Services.AddScoped<ICineR, CineR>();
 builder.Services.AddScoped<ICloudinaryR, CloudinaryR>();
 builder.Services.AddScoped<IMunicipios, Municipios>();
+builder.Services.AddScoped<IUbicacion, UbicacionR>();
 builder.Services.AddScoped<IPromociones, Promociones>();
 builder.Services.AddScoped<PeliculasService>();
 builder.Services.AddScoped<CineComidaService>();

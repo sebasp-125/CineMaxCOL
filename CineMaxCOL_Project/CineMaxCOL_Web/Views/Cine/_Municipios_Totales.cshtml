@@ -1,0 +1,61 @@
+@model CineMaxCOL_Web.Models.Cine.CineCompletoViewModel
+
+
+<label for="Agregar_Nuevo_Municipio">Agregar Nuevo Municipio</label>
+<input type="checkbox" id="Agregar_Nuevo_Municipio" class="modal-toggle" />
+    <div class="modal" role="dialog">
+        <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
+            @*cambiar direccionamiento del controlador*@
+            <form action="@Url.Action("Agregar","Cine")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center p-5">
+                <input type="hidden" name="Municipio_s.Id" value="0">
+                <input type="hidden" name="tipo" value="Municipio">
+
+                <label class="font-bold mt-4">Nombre del Municipio</label>
+                <input type="text" name="Municipio_s.NombreMunicipio" class="text-center rounded-xl bg-gray-300 p-1">
+
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
+        <label for="Agregar_Nuevo_Municipio" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+    </div>
+
+<h1>MUNICIPIOS</h1>
+<div>
+    @foreach(var municipio in Model.Municipios_Lista)
+    {
+    
+            <div class="ml-4 bg-white w-40 h-40 rounded-xl">
+                <h1>@municipio.NombreMunicipio</h1>
+                <h1>@municipio.Ubicacions?.Sum(u => u.Cines.Count)</h1>
+                <label for="Actualizar_Municipio_@municipio.Id">Ver Más</label>
+                <a href="@Url.Action("Eliminar", "Cine", new { id = @municipio.Id, tipo = "Municipio" })" class="text-sm bg-red-700 text-white rounded-xl w-24 p-1 text-center">Eliminar</a>
+            </div>
+        
+        
+
+            <input type="checkbox" id="Actualizar_Municipio_@municipio.Id" class="modal-toggle" />
+                <div class="modal" role="dialog">
+                    <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
+                        @*cambiar direccionamiento del controlador*@
+                        <form action="@Url.Action("Agregar","Cine")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center p-5">
+                            <input type="hidden" name="Municipio_s.Id" value="@municipio.Id">
+                            <input type="hidden" name="tipo" value="Municipio">
+
+                            <input type="text" name="Municipio_s.NombreMunicipio" value="@municipio.NombreMunicipio">
+                            <ul>
+                                @foreach (var ubicacion in municipio.Ubicacions)
+                                {
+                                    <li>@ubicacion.Localidad - Cines: @ubicacion.Cines.Count</li>
+                                }
+                            </ul>
+
+                            <button type="submit">Agregar</button>
+                        </form>
+                    </div>
+                    <div class="modal-action">
+                        <label for="Actualizar_Municipio_@municipio.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+                    </div>
+                </div>
+        
+    }    
+</div>

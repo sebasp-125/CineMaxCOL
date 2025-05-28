@@ -1,0 +1,78 @@
+@model CineMaxCOL_Web.Models.Cine.CineCompletoViewModel
+
+
+<label for="Agregar_Nueva_Localidad">Agregar Nueva Localidad</label>
+<input type="checkbox" id="Agregar_Nueva_Localidad" class="modal-toggle" />
+    <div class="modal" role="dialog">
+        <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
+            @*cambiar direccionamiento del controlador*@
+            <form action="@Url.Action("Agregar","Cine")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center p-5">
+                <input type="hidden" name="Ubicacion_s.Id" value="0">
+                <input type="hidden" name="tipo" value="Localidad">
+
+                <label class="font-bold mt-4">Nombre de la Localidad</label>
+                <input type="text" name="Ubicacion_s.Localidad" class="text-center rounded-xl bg-gray-300 p-1">
+                
+                <label class="font-bold mt-4">Ubicacion de la localidad</label>
+                <select name="Ubicacion_s.IdMunicipio">
+                    @foreach (var municipios in Model.Municipios_Lista)
+                    {
+                        <option value="@municipios.Id">
+                            @municipios.NombreMunicipio
+                        </option>
+                    }
+                </select>
+
+                <label class="font-bold mt-4">Direccion de la Localidad</label>
+                <input type="text" name="Ubicacion_s.Direccion" class="text-center rounded-xl bg-gray-300 p-1">
+                
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
+        <label for="Agregar_Nueva_Localidad" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+    </div>
+
+
+
+<h1>LOCALIDADES</h1>
+<div class="ml-4">
+    @foreach(var municipio in Model.Municipios_Lista)
+    {
+        @foreach(var localidad in municipio.Ubicacions)
+        {
+            <div class="bg-white w-40 h-40 rounded-xl">
+                <h1>@localidad.Localidad</h1>
+                <h1>@localidad.Direccion</h1>
+                <h1>@localidad.IdMunicipioNavigation?.NombreMunicipio</h1>
+                <label for="Actualizar_Localidad_@localidad.Id">Ver Más</label>
+                <a href="@Url.Action("Eliminar", "Cine", new { id = @localidad.Id, tipo = "Localidad" })" class="text-sm bg-red-700 text-white rounded-xl w-24 p-1 text-center">Eliminar</a>
+            </div>
+
+            <input type="checkbox" id="Actualizar_Localidad_@localidad.Id" class="modal-toggle" />
+            <div class="modal" role="dialog">
+                <div class="bg-white w-120 h-90 overflow-hidden overflow-y-auto text-black rounded-xl">
+                    @*cambiar direccionamiento del controlador*@
+                    <form action="@Url.Action("Agregar","Cine")" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center p-5">
+                        <input type="hidden" name="Ubicacion_s.Id" value="@localidad.Id">
+                        <input type="hidden" name="tipo" value="Localidad">
+                        <input type="text" name="Ubicacion_s.Localidad" value="@localidad.Localidad">
+                        <input type="text" name="Ubicacion_s.Direccion" value="@localidad.Direccion">
+
+                        <select name="Ubicacion_s.IdMunicipio">
+                            @foreach (var municipios in Model.Municipios_Lista)
+                            {
+                                <option value="@municipios.Id" selected="@(localidad?.IdMunicipioNavigation?.Id == municipios.Id)">
+                                @municipios.NombreMunicipio
+                                </option>
+                            }
+                        </select>
+                        <button type="submit">Agregar</button>
+                    </form>
+                </div>
+                <div class="modal-action">
+                    <label for="Actualizar_Localidad_@localidad.Id" class="mr-6 btn border-none bg-[#808000] text-white">Cancelar</label>
+                </div>
+            </div>
+        }
+    }    
+</div>

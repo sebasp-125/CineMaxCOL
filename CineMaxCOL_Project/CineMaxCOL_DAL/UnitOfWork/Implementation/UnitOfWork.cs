@@ -61,11 +61,15 @@ namespace CineMaxCOL_DAL.UnitOfWork.Implementation
         private readonly IComidas? _comidasRepository;
         private readonly ICloudinaryR? _cloudinaryRepository;
         private readonly IPromociones? _promocionesRepository;
+        private readonly ICineR? _cineRepository;
+        private readonly IUbicacion? _ubicacionRepository;
 
         public IPeliculas Peliculas => _peliculasRepository ?? new Peliculas(_context);
         public ICineComidas CineComidas => _cineComidasRepository ?? new CineComidas(_context);
         public IMunicipios Municipios => _municipioRepository ?? new Municipios(_context);
         public IComidas Comidas => _comidasRepository ?? new Comidas(_context);
+        public ICineR CineR => _cineRepository ?? new CineR(_context);
+        public IUbicacion UbicacionR => _ubicacionRepository ?? new UbicacionR(_context);
 
         public ICategorias CategoriasComida => _categoriaRepository ?? new CategoriasComida(_context);
 

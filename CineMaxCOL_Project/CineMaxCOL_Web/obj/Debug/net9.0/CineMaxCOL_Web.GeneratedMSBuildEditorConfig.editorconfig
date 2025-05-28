@@ -32,8 +32,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/MooNu/Desktop/CineMaxCOL/CineMaxCOL_Project/CineMaxCOL_Web/Views/Cine/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVxJbmRleC5jc2h0bWw=
+[C:/Users/MooNu/Desktop/CineMaxCOL/CineMaxCOL_Project/CineMaxCOL_Web/Views/Cine/Cines_Inicial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVxDaW5lc19JbmljaWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MooNu/Desktop/CineMaxCOL/CineMaxCOL_Project/CineMaxCOL_Web/Views/Cine/_Localidades_Totales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVxfTG9jYWxpZGFkZXNfVG90YWxlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MooNu/Desktop/CineMaxCOL/CineMaxCOL_Project/CineMaxCOL_Web/Views/Cine/_Municipios_Totales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVxfTXVuaWNpcGlvc19Ub3RhbGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/MooNu/Desktop/CineMaxCOL/CineMaxCOL_Project/CineMaxCOL_Web/Views/Comida/Comidas.cshtml]
