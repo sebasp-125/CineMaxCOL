@@ -1,5 +1,20 @@
-/bin/
-/obj/
-*.dll
-*.pdb
-*.deps.json
+# Build folders
+bin/
+obj/
+
+# VS
+*.user
+*.suo
+*.cache
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+
+# MSBuild
+*.GeneratedMSBuildEditorConfig.editorconfig
+
+# VSCode
+.vscode/
