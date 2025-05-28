@@ -2764,32 +2764,39 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MooNu\\.nuget\\packages\\": {}
+    "C:\\Users\\PERSONAL\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MooNu\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_DAL\\CineMaxCOL_DAL.csproj",
+      "projectUniqueName": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_DAL\\CineMaxCOL_DAL.csproj",
       "projectName": "CineMaxCOL_DAL",
-      "projectPath": "C:\\Users\\MooNu\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_DAL\\CineMaxCOL_DAL.csproj",
-      "packagesPath": "C:\\Users\\MooNu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MooNu\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_DAL\\obj\\",
+      "projectPath": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_DAL\\CineMaxCOL_DAL.csproj",
+      "packagesPath": "C:\\Users\\PERSONAL\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_DAL\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\MooNu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\PERSONAL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\MooNu\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Entity\\CineMaxCOL_Entity.csproj": {
-              "projectPath": "C:\\Users\\MooNu\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Entity\\CineMaxCOL_Entity.csproj"
+            "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Entity\\CineMaxCOL_Entity.csproj": {
+              "projectPath": "C:\\Users\\PERSONAL\\Desktop\\CineMaxCOL\\CineMaxCOL_Project\\CineMaxCOL_Entity\\CineMaxCOL_Entity.csproj"
             }
           }
         }
@@ -2825,7 +2832,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
