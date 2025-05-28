@@ -1,40 +1,5 @@
-# Visual Studio
-.vs/
-.vscode/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Build Folders
-bin/
-obj/
-
-# Logs
-*.log
-
-# Packages
-*.nupkg
-*.snupkg
-*.nuspec
-packages/
-
-# Rider
-.idea/
-
-# ASP.NET specific
-appsettings.Development.json
-
-# Dotnet
+/bin/
+/obj/
 *.dll
-*.exe
 *.pdb
-*.cache
-*.dbmdl
-
-# Others
-*.vspscc
-*.vssscc
-_ReSharper*/
-*.resharper
-*.DotSettings.user
+*.deps.json
